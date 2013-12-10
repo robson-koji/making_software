@@ -1,4 +1,7 @@
-#!/usr/bin/perl
+# If you will use one environment only, you need to fill the configuration file and save it as config.pl
+# To use more than one environment, you must have one config for each environment and save each if own name.
+# In this case you have to fill the file hosts.pl and set the name of each file according to it´s environment.
+
 
 
 # Path where you unpack inteliform_perl.tar.gz
