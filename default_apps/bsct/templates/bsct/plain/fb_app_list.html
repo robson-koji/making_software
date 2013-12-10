@@ -1,0 +1,88 @@
+{% extends 'bsct/fb_app_base.html' %}
+
+{% load bscttags %}
+ 
+{% block BSCT_CONTENT %}
+    <div class="container canvas">
+        <h1>  Listar {% get_verbose_name_plural object_list.model %}</h1>
+
+          <div class="col-lg-12">    
+            {% block BSCT_LIST_ITEMS %}
+        
+            {% if object_list%}
+            <table class = 'table table-striped'>
+            
+                    <thead>
+                        {% for fld, val in object_list.0.get_fields %}
+                            {% block BSCT_LIST_ITEMS_HEADER %}
+                            <th>{{ fld }}</th>
+                            {% endblock %}
+                        {% endfor %}                        
+                        <th> A&ccedil;&atilde;o </th>
+                    </thead>
+            
+                    {% for object in object_list %}
+                    <tr>
+                        {% for fld, val in object.get_fields %}
+                            {% block BSCT_LIST_ITEMS_ITEM %}
+                            <td>{{ val }}</td>
+                            {% endblock %}
+                        {% endfor %}
+                        <td>
+                            {% block BSCT_LIST_ITEMS_ACTIONS %}
+                            <a
+                                class = 'btn'
+                                href  = {% url reverso_detail object.id %}
+                            >      
+                                Ver
+                            </a>
+                            {% endblock %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+            
+            </table>
+            {% else %}
+            <p class = 'alert alert-warning'>
+                Nenhum <i>"{% get_verbose_name_plural object_list.model %}"</i> cadastrado(a).<br>
+                Clique no botão abaixo para iniciar o cadastramento.
+            </p>                    
+            {% endif %}
+            {% endblock %}
+            
+            {% block BSCT_LIST_CREATE_LINK %}
+
+
+            {% if reverso_create %}
+            <div class = 'span4'>
+            <a class = 'btn btn-primary' href  = '{% url reverso_create %}'>
+                Cadastrar novo(a) <i>"{% get_verbose_name object_list.model %}"</i> 
+            </a>
+            </div>
+            {% endif %}
+
+            
+            
+
+            {% if object_list.model.get_create_url %}
+            <div class = 'span4'>
+            <a class = 'btn btn-primary' href  = '{{object_list.model.get_create_url }}'>
+                Cadastrar novo(a) <i>"{% get_verbose_name object_list.model %}"</i> 
+            </a>
+            </div>
+            {% endif %}
+            {% endblock %}
+            
+            {% block BSCT_LIST_PAGINATION %}
+            <div class = 'span4'>
+            {% if page_obj.has_previous %}
+                <a class = 'btn btn-info' href="?page={{ page_obj.previous_page_number}}"> Anterior</a>
+            {% endif %}
+            {% if page_obj.has_next %}
+                <a class = 'btn btn-info' href="?page={{ page_obj.next_page_number}}"> Próxima</a>
+            {% endif %}
+            </div>
+            {% endblock %}
+
+        </div>
+{% endblock %}

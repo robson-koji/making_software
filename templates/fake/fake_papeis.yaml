@@ -1,0 +1,60 @@
+- model: papel_4.papel_4
+  pk: 1
+  fields:
+    created_by: 1
+    nome: Analista 
+- model: papel_4.papel_4
+  pk: 2
+  fields:
+    created_by: 1
+    nome: Auditor 
+- model: papel_4.papel_4
+  pk: 3
+  fields:
+    created_by: 1
+    nome: Administrador 
+- model: papel_4.papel_4
+  pk: 4
+  fields:
+    created_by: 1
+    nome: Arquiteto 
+- model: papel_4.papel_4
+  pk: 5
+  fields:
+    created_by: 1
+    nome: Coordenador 
+- model: papel_4.papel_4
+  pk: 6
+  fields:
+    created_by: 1
+    nome: Engenheiro 
+- model: papel_4.papel_4
+  pk: 7
+  fields:
+    created_by: 1
+    nome: Especialista 
+- model: papel_4.papel_4
+  pk: 8
+  fields:
+    created_by: 1
+    nome: Estagiário
+
+- model: papel_4.papel_4
+  pk: 9
+  fields:
+    created_by: 1
+    nome: Gerente     
+
+- model: papel_4.papel_4
+  pk: 10
+  fields:
+    created_by: 1
+    nome: Diretor     
+
+
+
+
+
+
+
+

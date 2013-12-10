@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{% block head_title %}[% base.sistema %]{% endblock head_title %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+        
+    <link rel="stylesheet" href="/static_files/inteliform/fbootstrapp-master/bootstrap.css" media="screen">
+    <link rel="stylesheet" href="/static_files/inteliform/bootswatch/bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static_files/inteliform/bootswatch/assets/css/bootswatch.min.css">
+
+        
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="/static_files/inteliform/bootswatch/bower_components/bootstrap/assets/js/html5shiv.js"></script>
+      <script src="/static_files/inteliform/bootswatch/bower_components/bootstrap/assets/js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+    
+    {% block body %}
+        <body>
+    {% block content %}
+    
+
+    <div class="topbar" data-scrollspy="scrollspy">
+      <div class="topbar-inner">
+        <div class="container canvas">
+            {% comment %}
+                {% if user.is_authenticated %}
+                    <a href='{% url "fb_app_instrucoes" %}' class="brand">[% base.sistema %]</a>
+                {% else %}
+                    <a href='{% url "fb_app_bem-vindo" %}' class="brand">[% base.sistema %]</a>
+                {% endif %}
+            {% endcomment %}
+            
+            {% if user.is_authenticated %}
+            <ul class="nav navbar-nav">
+              [% FOREACH app = base.apps %]
+                 [% NEXT UNLESS app.forms %]
+    
+                <li class="dropdown">
+                  <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="asdf">[% app.nome %] <span class="caret"></span></a>
+                  <ul class="dropdown-menu" aria-labelledby="asdf">
+                    <li><a tabindex="-1" href="{% url "fb_app_[% app.slug %]_list" %}">Listar</a></li>
+                    <li class="divider"></li>
+                    <li><a tabindex="-1" href="{% url "fb_app_[% app.slug %]_create" %}">Cadastrar</a></li>
+                  </ul>
+                </li>                    
+              [% END %]              
+            </ul>
+            <div class="pull-right">
+            <ul class="nav navbar-nav navbar-right">
+              <li class="dropdown">
+                  <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="asdf">Minha Conta<span class="caret"></span></a>
+                  <ul class="dropdown-menu" aria-labelledby="asdf">
+                    <li><a tabindex="-1" href="{% url 'fb_app_account_change_password' %}">Alterar Senha</a></li>
+                    <li class="divider"></li>
+                    <li><a tabindex="-1" href="{% url 'instrucoes' %}" target="_blank">Template Padrão</a></li>
+                    <li class="divider"></li>                    
+                    <li><a tabindex="-1" href="{% url 'fb_app_account_logout' %}">Sair</a></li>
+                  </ul>
+                </li>                    
+            </ul>
+            </div>
+
+            
+            {% else %}
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="{% url 'fb_app_account_login' %}">Login</a></li>
+            </ul>
+            {% endif %}
+        </div>
+
+      </div>
+    </div>
+    {% endblock content %}
+
+    
+    {% block BSCT_MAIN %}
+    
+    {% endblock %}
+    {% endblock body %}
+    {% block extra_body %}
+    {% endblock extra_body %}
+    <script src="/static_files/inteliform/bootswatch/bower_components/jquery/jquery.min.js"></script>
+    <script src="/static_files/inteliform/bootswatch/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/static_files/inteliform/bootswatch/assets/js/bootswatch.js"></script>    
+  </body>
+</html>

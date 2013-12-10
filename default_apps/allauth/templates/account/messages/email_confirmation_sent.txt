@@ -1,0 +1,7 @@
+{% load i18n %}
+{% blocktrans %}Confirmation e-mail sent to {{email}}.{% endblocktrans %}
+
+
+  <small>
+    Se não receber o e-mail de confirmação, verifique na caixa de spam do seu cliente de e-mail.
+  </small>
