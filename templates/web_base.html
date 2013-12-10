@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{% block head_title %}[% base.sistema %]{% endblock head_title %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+        
+    <link rel="stylesheet" href="/static_files/inteliform/bootswatch/[% base.template %]/bootstrap.css" media="screen">
+    <link rel="stylesheet" href="/static_files/inteliform/bootswatch/bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static_files/inteliform/bootswatch/assets/css/bootswatch.min.css">
+
+        
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="/static_files/inteliform/bootswatch/bower_components/bootstrap/assets/js/html5shiv.js"></script>
+      <script src="/static_files/inteliform/bootswatch/bower_components/bootstrap/assets/js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+    
+    {% block body %}
+        <body>
+    {% block content %}
+          <div class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+              <div class="navbar-header">
+                
+                <div style="position:relative; top:6px">
+                    {% if user.is_authenticated %}
+                        [% IF base.logotipo %]
+                        <a href='{% url "bem-vindo" %}flat/instrucoes/'>
+                        <img height="40px" src="/[% base.logotipo %]" style="margin-right:15px" align="left" />
+                        </a>
+                        [% ELSE %]
+                        <a href='{% url "bem-vindo" %}flat/instrucoes/' class="navbar-brand">[% base.sistema %]</a>
+                        [% END %]
+                    {% else %}
+                        [% IF base.logotipo %]
+                        <a href='{% url "bem-vindo" %}flat/bem-vindo/'>
+                        <img height="40px" src="/[% base.logotipo %]" style="margin-right:15px" align="left" />
+                        </a>
+                        [% ELSE %]
+                        <a href='{% url "bem-vindo" %}flat/bem-vindo/' class="navbar-brand">[% base.sistema %]</a>
+                        [% END %]
+                    {% endif %}
+                </div>
+
+                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+              </div>
+              
+              <div class="navbar-collapse collapse" id="navbar-main">
+                
+                {% if user.is_authenticated %}
+
+                <ul class="nav navbar-nav">
+                  [% FOREACH app = base.apps %]
+                     [% NEXT UNLESS app.forms %]
+
+                    <li class="dropdown">
+                      <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="asdf">[% app.nome %] <span class="caret"></span></a>
+                      <ul class="dropdown-menu" aria-labelledby="asdf">
+                        <li><a tabindex="-1" href="{% url "web_[% app.slug %]_list" %}">Listar</a></li>
+                        <li class="divider"></li>
+                        <li><a tabindex="-1" href="{% url "web_[% app.slug %]_create" %}">Cadastrar</a></li>
+                      </ul>
+                    </li>                    
+                    
+                  [% END %]              
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                  <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="asdf">Minha Conta<span class="caret"></span></a>
+                    <ul class="dropdown-menu" aria-labelledby="asdf">
+                      <li><a tabindex="-1" href="{% url 'account_change_password' %}">Alterar Senha</a></li>
+                      <li class="divider"></li>
+                      <li><a tabindex="-1" href="{% url 'account_logout' %}">Sair</a></li>
+                    </ul>
+                  </li>
+                </ul>
+                
+                
+                {% else %}
+                
+                <ul class="nav navbar-nav navbar-right">
+                  <li><a href="{% url 'account_login' %}">Login</a></li>
+                  <li><a href="{% url 'account_signup' %}">Cadastrar</a></li>
+                </ul>
+                
+                {% endif %}
+                
+              </div>
+            </div>
+          </div>
+
+          <div class="container">
+          [% IF base.logotipo %]
+            <div class="navbar-header">
+              <a href="#" class="navbar-brand">[% base.sistema %]</a>
+            </div>
+          [% END %]
+
+            
+
+            {% if user.is_authenticated %}
+            <small class="nav navbar-nav navbar-right" style="padding-top: 20px">Voc&ecirc; est&aacute; logado como {{ user.username|title }}! </small>
+            
+            {% endif %}
+            {% comment %}
+            <small class="nav navbar-nav navbar-right" style="padding-top: 20px">
+                  Se você já for cadastrado, efetue o login <a href={% url "account_login" %}>aqui.</a><br>
+                  Caso contrário, faça o seu cadastro <a href={% url "account_signup" %}>aqui.</a>
+            </small>
+            {% endcomment %}
+            
+          </div>             
+
+    {% endblock content %}
+
+    
+    {% block BSCT_MAIN %}
+    
+    {% endblock %}
+    {% endblock body %}
+    {% block extra_body %}
+    {% endblock extra_body %}
+    <script src="/static_files/inteliform/bootswatch/bower_components/jquery/jquery.min.js"></script>
+    <script src="/static_files/inteliform/bootswatch/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/static_files/inteliform/bootswatch/assets/js/bootswatch.js"></script>    
+  </body>
+</html>

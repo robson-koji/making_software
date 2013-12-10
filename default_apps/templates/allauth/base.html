@@ -1,0 +1,30 @@
+{% extends interface_template|default:"account_base.html" %}
+
+
+    {% block BSCT_MAIN %}
+
+    {% if messages %}
+    <div>
+      <strong>Mensagens:</strong>
+      <ul>
+	{% for message in messages %}
+	<li>{{message}}</li>
+	{% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+
+    <div align="center" class="container canvas">
+        {% block ALLAUTH_CONTENT %}
+        {% endblock %}
+    </div>
+
+
+    <p>&nbsp;</p>
+    <center>
+        <span class="label important"> Importante:  Se não receber o e-mail de confirmação, verifique na caixa de spam do seu cliente de e-mail.</span>
+    </center>
+    
+    
+    {% endblock %}

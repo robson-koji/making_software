@@ -1,0 +1,24 @@
+{% extends 'bsct/web_base.html' %}
+{% load bscttags %}
+
+{% block BSCT_CONTENT %}
+    <div class="container">
+        <div class="col-lg-12">
+            <center>
+                <div class="page-header">
+            
+                <h1>{{ flatpage.title }}</h1>
+                <p>{{ flatpage.content }}</p>
+                
+            </div>
+                {% if not user.is_authenticated %}
+                <small>
+                      Se você já for cadastrado, efetue o login <a href={% url "account_login" %}>aqui.</a><br>
+                      Caso contrário, faça o seu cadastro <a href={% url "account_signup" %}>aqui.</a>
+                </small>
+                {% endif %}
+                            
+            </center>            
+        </div>              
+    </div>
+{% endblock %}      

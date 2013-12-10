@@ -1,0 +1,192 @@
+{% extends 'bsct/fb_app_base.html' %}
+{% load bscttags %}
+
+{% block BSCT_CONTENT %}
+    <div class="container canvas">
+        <h1 id="buttons">{{object.meta.verbose_name}}</h1>
+        <div class="row">
+          <div class="col-lg-12">
+          <h2>
+              Nome: {{object.nome}}
+          </h2>                 
+          </div>
+        </div>
+        
+        
+        <div class="row">
+          <div class="col-lg-3">
+          </div>
+          <div class="col-lg-9">
+            {% block BSCT_DETAIL_FIELDS %}
+            <table class="table table-striped table-bordered table-hover">
+            
+            {% comment %}
+            Metodo get_fields estah definido nos models de cada app.
+            {% endcomment %}
+                
+            {% for name, value in object.get_fields %}
+                <tr>
+                    <td>
+                        <b> {{ name }} </b>
+                    </td>
+                    <td>
+                        {{ value }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% endblock %}
+        
+            {% block BSCT_DETAIL_ACTIONS %}
+            {% if object.get_update_url %}
+                <a class = 'btn btn-info' href  = '{{object.get_update_url}}'>
+                    Editar
+                </a>
+            {% endif %}
+            {% if object.get_delete_url %}
+                <a class = 'btn btn-warning' href  = '{{object.get_delete_url}}'>
+                    Apagar
+                </a>
+            {% endif %}
+            
+            
+            {% if object.get_list_url %}
+                <a class = 'btn' href  = '{{object.get_list_url}}'>
+                    Listar todos
+                </a>
+            {% endif %}
+            
+            {% comment %}
+            {% for object_related in object.get_related_objects %}
+                <a class = 'btn' href  = '/{{ object_related.model.meta.app_label }}/add/{{object.meta.app_label}}/{{object.id}}'>
+                    Criar novo ''{{ object_related.model.meta.verbose_name }}''
+                </a>
+            {% endfor %}    
+            
+            Metodo get_related_objects estah definido nos models de cada app.
+            Retorna todos os objetos (object_related) que utilizam-no como PK.
+            No loop abaixo monta um botao para cada object_related.
+            Esse botao direciona para a criacao de novos objetos object_related.
+            {% endcomment %}
+            {% endblock %}        
+          </div>
+        </div>
+
+            <!-- Fim Detalhe de objeto -->
+            
+        <div class="row">
+          <div class="col-lg-12">
+            <hr>
+          </div>
+        </div>
+            
+            <!-- Inicio Listagem de objetos estrangeiros-->    
+
+            
+        <div class="row">
+          <div class="col-lg-12">
+          <h2>
+              {{objeto_lista.model.meta.verbose_name_plural}}  do {{object.meta.verbose_name}}: {{object.nome}}
+          </h2>                 
+          </div>
+        </div>
+          
+        <div class="row">
+          <div class="col-lg-3">
+          </div>
+          <div class="col-lg-9">
+            {% block BSCT_LIST_ITEMS %}
+            <table class="table table-striped table-bordered table-hover">
+                    {% for object in objeto_lista %}
+                    <tr>
+                        <td> 
+                            {% block BSCT_LIST_ITEMS_ITEM %}
+                            {{object.nome}} 
+                            {% endblock %}
+                        </td>
+                        <td>
+                            {% block BSCT_LIST_ITEMS_ACTIONS %}
+                            <a
+                                class = 'btn'
+                                href  = {% url 'web_{{object.slug}}_detail' object.id %}
+                            >  
+                                View
+                            </a>
+                            {% endblock %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+            </table>
+            {% endblock %}
+            
+
+            {% block BSCT_LIST_CREATE_LINK %}
+            {% if objeto_lista.model.get_create_url %}
+                
+            <div class = 'span4'>
+            <a
+                class = 'btn btn-primary'
+                href  = '{{objeto_lista.model.get_create_url }}/{{object.meta.app_label}}/{{object.id}}'
+            >
+                Adicionar novo(a) {% get_verbose_name objeto_lista.model %} 
+            </a>
+            </div>
+            {% endif %}
+            {% endblock %}            
+          </div>
+        </div>
+
+        <iframe width='LARGURA' height='ALTURA' frameborder='2' src='http:///wysiwyg_forms/elemento/8'></iframe>
+        
+        {% comment %}
+        <div class="row clearfix">
+          <!-- Building Form. -->
+          <div class="col-lg-6">
+            <div class="clearfix">
+              <h2>Your Form</h2>
+              <hr>
+              <div id="build">
+                <form id="target" class="form-horizontal">
+                </form>
+              </div>
+            </div>
+          </div>
+          <!-- / Building Form. -->
+  
+          <!-- Components -->
+          <div class="col-lg-6">
+            <h2>Drag & Drop components</h2>
+            <hr>
+            <div class="tabbable">
+              <ul class="nav nav-tabs" id="formtabs">
+                <!-- Tab nav -->
+              </ul>
+              <form class="form-horizontal" id="components">
+                <fieldset>
+                  <div class="tab-content">
+                    <!-- Tabs of snippets go here -->
+                  </div>
+                </fieldset>
+              </form>
+            </div>
+          </div>
+          <!-- / Components -->
+        </div>
+        {% endcomment %}
+    </div>
+
+
+      <script data-main="/static_files/Bootstrap-Form-Builder-gh-pages/assets/js/main-built.js" src="/static_files/Bootstrap-Form-Builder-gh-pages/assets/js/lib/require.js" ></script>        
+
+{% endblock %}          
+
+
+
+
+
+
+
+
+
+
+
