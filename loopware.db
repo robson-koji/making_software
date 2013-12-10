@@ -1,0 +1,3251 @@
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = off;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET escape_string_warning = off;
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: account_emailaddress; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE account_emailaddress (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    email character varying(75) NOT NULL,
+    verified boolean NOT NULL,
+    "primary" boolean NOT NULL
+);
+
+
+ALTER TABLE public.account_emailaddress OWNER TO postgres;
+
+--
+-- Name: account_emailaddress_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE account_emailaddress_id_seq
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.account_emailaddress_id_seq OWNER TO postgres;
+
+--
+-- Name: account_emailaddress_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE account_emailaddress_id_seq OWNED BY account_emailaddress.id;
+
+
+--
+-- Name: account_emailaddress_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('account_emailaddress_id_seq', 18, true);
+
+
+--
+-- Name: account_emailconfirmation; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE account_emailconfirmation (
+    id integer NOT NULL,
+    email_address_id integer NOT NULL,
+    created timestamp with time zone NOT NULL,
+    sent timestamp with time zone,
+    key character varying(64) NOT NULL
+);
+
+
+ALTER TABLE public.account_emailconfirmation OWNER TO postgres;
+
+--
+-- Name: account_emailconfirmation_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE account_emailconfirmation_id_seq
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.account_emailconfirmation_id_seq OWNER TO postgres;
+
+--
+-- Name: account_emailconfirmation_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE account_emailconfirmation_id_seq OWNED BY account_emailconfirmation.id;
+
+
+--
+-- Name: account_emailconfirmation_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('account_emailconfirmation_id_seq', 16, true);
+
+
+--
+-- Name: auth_group; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE auth_group (
+    id integer NOT NULL,
+    name character varying(80) NOT NULL
+);
+
+
+ALTER TABLE public.auth_group OWNER TO postgres;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE auth_group_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE auth_group_id_seq OWNED BY auth_group.id;
+
+
+--
+-- Name: auth_group_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('auth_group_id_seq', 1, false);
+
+
+--
+-- Name: auth_group_permissions; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE auth_group_permissions (
+    id integer NOT NULL,
+    group_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_group_permissions OWNER TO postgres;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE auth_group_permissions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_group_permissions_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE auth_group_permissions_id_seq OWNED BY auth_group_permissions.id;
+
+
+--
+-- Name: auth_group_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('auth_group_permissions_id_seq', 1, false);
+
+
+--
+-- Name: auth_permission; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE auth_permission (
+    id integer NOT NULL,
+    name character varying(50) NOT NULL,
+    content_type_id integer NOT NULL,
+    codename character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.auth_permission OWNER TO postgres;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE auth_permission_id_seq
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_permission_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE auth_permission_id_seq OWNED BY auth_permission.id;
+
+
+--
+-- Name: auth_permission_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('auth_permission_id_seq', 69, true);
+
+
+--
+-- Name: auth_user; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE auth_user (
+    id integer NOT NULL,
+    password character varying(128) NOT NULL,
+    last_login timestamp with time zone NOT NULL,
+    is_superuser boolean NOT NULL,
+    username character varying(30) NOT NULL,
+    first_name character varying(30) NOT NULL,
+    last_name character varying(30) NOT NULL,
+    email character varying(75) NOT NULL,
+    is_staff boolean NOT NULL,
+    is_active boolean NOT NULL,
+    date_joined timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.auth_user OWNER TO postgres;
+
+--
+-- Name: auth_user_groups; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE auth_user_groups (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    group_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_user_groups OWNER TO postgres;
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE auth_user_groups_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_groups_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE auth_user_groups_id_seq OWNED BY auth_user_groups.id;
+
+
+--
+-- Name: auth_user_groups_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('auth_user_groups_id_seq', 1, false);
+
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE auth_user_id_seq
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE auth_user_id_seq OWNED BY auth_user.id;
+
+
+--
+-- Name: auth_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('auth_user_id_seq', 22, true);
+
+
+--
+-- Name: auth_user_user_permissions; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE auth_user_user_permissions (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    permission_id integer NOT NULL
+);
+
+
+ALTER TABLE public.auth_user_user_permissions OWNER TO postgres;
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE auth_user_user_permissions_id_seq
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.auth_user_user_permissions_id_seq OWNER TO postgres;
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE auth_user_user_permissions_id_seq OWNED BY auth_user_user_permissions.id;
+
+
+--
+-- Name: auth_user_user_permissions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('auth_user_user_permissions_id_seq', 81, true);
+
+
+--
+-- Name: django_admin_log; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE django_admin_log (
+    id integer NOT NULL,
+    action_time timestamp with time zone NOT NULL,
+    user_id integer NOT NULL,
+    content_type_id integer,
+    object_id text,
+    object_repr character varying(200) NOT NULL,
+    action_flag smallint NOT NULL,
+    change_message text NOT NULL,
+    CONSTRAINT django_admin_log_action_flag_check CHECK ((action_flag >= 0))
+);
+
+
+ALTER TABLE public.django_admin_log OWNER TO postgres;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE django_admin_log_id_seq
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_admin_log_id_seq OWNER TO postgres;
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE django_admin_log_id_seq OWNED BY django_admin_log.id;
+
+
+--
+-- Name: django_admin_log_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('django_admin_log_id_seq', 32, true);
+
+
+--
+-- Name: django_content_type; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE django_content_type (
+    id integer NOT NULL,
+    name character varying(100) NOT NULL,
+    app_label character varying(100) NOT NULL,
+    model character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.django_content_type OWNER TO postgres;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE django_content_type_id_seq
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_content_type_id_seq OWNER TO postgres;
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE django_content_type_id_seq OWNED BY django_content_type.id;
+
+
+--
+-- Name: django_content_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('django_content_type_id_seq', 23, true);
+
+
+--
+-- Name: django_flatpage; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE django_flatpage (
+    id integer NOT NULL,
+    url character varying(100) NOT NULL,
+    title character varying(200) NOT NULL,
+    content text NOT NULL,
+    enable_comments boolean NOT NULL,
+    template_name character varying(70) NOT NULL,
+    registration_required boolean NOT NULL
+);
+
+
+ALTER TABLE public.django_flatpage OWNER TO postgres;
+
+--
+-- Name: django_flatpage_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE django_flatpage_id_seq
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_flatpage_id_seq OWNER TO postgres;
+
+--
+-- Name: django_flatpage_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE django_flatpage_id_seq OWNED BY django_flatpage.id;
+
+
+--
+-- Name: django_flatpage_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('django_flatpage_id_seq', 3, true);
+
+
+--
+-- Name: django_flatpage_sites; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE django_flatpage_sites (
+    id integer NOT NULL,
+    flatpage_id integer NOT NULL,
+    site_id integer NOT NULL
+);
+
+
+ALTER TABLE public.django_flatpage_sites OWNER TO postgres;
+
+--
+-- Name: django_flatpage_sites_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE django_flatpage_sites_id_seq
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_flatpage_sites_id_seq OWNER TO postgres;
+
+--
+-- Name: django_flatpage_sites_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE django_flatpage_sites_id_seq OWNED BY django_flatpage_sites.id;
+
+
+--
+-- Name: django_flatpage_sites_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('django_flatpage_sites_id_seq', 17, true);
+
+
+--
+-- Name: django_session; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE django_session (
+    session_key character varying(40) NOT NULL,
+    session_data text NOT NULL,
+    expire_date timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.django_session OWNER TO postgres;
+
+--
+-- Name: django_site; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE django_site (
+    id integer NOT NULL,
+    domain character varying(100) NOT NULL,
+    name character varying(50) NOT NULL
+);
+
+
+ALTER TABLE public.django_site OWNER TO postgres;
+
+--
+-- Name: django_site_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE django_site_id_seq
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.django_site_id_seq OWNER TO postgres;
+
+--
+-- Name: django_site_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE django_site_id_seq OWNED BY django_site.id;
+
+
+--
+-- Name: django_site_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('django_site_id_seq', 6, true);
+
+
+--
+-- Name: elemento_choices_grupo_permissoes; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE elemento_choices_grupo_permissoes (
+    id integer NOT NULL,
+    choice_desc character varying(300)
+);
+
+
+ALTER TABLE public.elemento_choices_grupo_permissoes OWNER TO postgres;
+
+--
+-- Name: elemento_choices_grupo_permissoes_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE elemento_choices_grupo_permissoes_id_seq
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.elemento_choices_grupo_permissoes_id_seq OWNER TO postgres;
+
+--
+-- Name: elemento_choices_grupo_permissoes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE elemento_choices_grupo_permissoes_id_seq OWNED BY elemento_choices_grupo_permissoes.id;
+
+
+--
+-- Name: elemento_choices_grupo_permissoes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('elemento_choices_grupo_permissoes_id_seq', 5, true);
+
+
+--
+-- Name: elemento_choices_todos_permissoes; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE elemento_choices_todos_permissoes (
+    id integer NOT NULL,
+    todos_choice_desc character varying(300)
+);
+
+
+ALTER TABLE public.elemento_choices_todos_permissoes OWNER TO postgres;
+
+--
+-- Name: elemento_choices_todos_permissoes_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE elemento_choices_todos_permissoes_id_seq
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.elemento_choices_todos_permissoes_id_seq OWNER TO postgres;
+
+--
+-- Name: elemento_choices_todos_permissoes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE elemento_choices_todos_permissoes_id_seq OWNED BY elemento_choices_todos_permissoes.id;
+
+
+--
+-- Name: elemento_choices_todos_permissoes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('elemento_choices_todos_permissoes_id_seq', 5, true);
+
+
+--
+-- Name: elemento_elemento; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE elemento_elemento (
+    id integer NOT NULL,
+    created_by_id integer NOT NULL,
+    slug character varying(50) NOT NULL,
+    sistema_id integer NOT NULL,
+    nome character varying(30) NOT NULL,
+    descricao_curta character varying(100),
+    descricao_completa text,
+    eh_usuario boolean NOT NULL,
+    visibilidade character varying(20),
+    permission_create_id character varying(50),
+    permission_read_id character varying(50),
+    permission_update_id character varying(50),
+    permission_delete_id character varying(50),
+    grupo character varying(20),
+    posicao_menu integer,
+    validade boolean NOT NULL,
+    qt_elementos boolean NOT NULL
+);
+
+
+ALTER TABLE public.elemento_elemento OWNER TO postgres;
+
+--
+-- Name: elemento_elemento_grupo_permissoes; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE elemento_elemento_grupo_permissoes (
+    id integer NOT NULL,
+    elemento_id integer NOT NULL,
+    choices_grupo_permissoes_id integer NOT NULL
+);
+
+
+ALTER TABLE public.elemento_elemento_grupo_permissoes OWNER TO postgres;
+
+--
+-- Name: elemento_elemento_grupo_permissoes_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE elemento_elemento_grupo_permissoes_id_seq
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.elemento_elemento_grupo_permissoes_id_seq OWNER TO postgres;
+
+--
+-- Name: elemento_elemento_grupo_permissoes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE elemento_elemento_grupo_permissoes_id_seq OWNED BY elemento_elemento_grupo_permissoes.id;
+
+
+--
+-- Name: elemento_elemento_grupo_permissoes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('elemento_elemento_grupo_permissoes_id_seq', 49, true);
+
+
+--
+-- Name: elemento_elemento_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE elemento_elemento_id_seq
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.elemento_elemento_id_seq OWNER TO postgres;
+
+--
+-- Name: elemento_elemento_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE elemento_elemento_id_seq OWNED BY elemento_elemento.id;
+
+
+--
+-- Name: elemento_elemento_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('elemento_elemento_id_seq', 12, true);
+
+
+--
+-- Name: elemento_elemento_todos_permissoes; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE elemento_elemento_todos_permissoes (
+    id integer NOT NULL,
+    elemento_id integer NOT NULL,
+    choices_todos_permissoes_id integer NOT NULL
+);
+
+
+ALTER TABLE public.elemento_elemento_todos_permissoes OWNER TO postgres;
+
+--
+-- Name: elemento_elemento_todos_permissoes_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE elemento_elemento_todos_permissoes_id_seq
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.elemento_elemento_todos_permissoes_id_seq OWNER TO postgres;
+
+--
+-- Name: elemento_elemento_todos_permissoes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE elemento_elemento_todos_permissoes_id_seq OWNED BY elemento_elemento_todos_permissoes.id;
+
+
+--
+-- Name: elemento_elemento_todos_permissoes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('elemento_elemento_todos_permissoes_id_seq', 12, true);
+
+
+--
+-- Name: relacionamentos_relacionamentos; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE relacionamentos_relacionamentos (
+    id integer NOT NULL,
+    created_by_id integer NOT NULL,
+    sistema_id integer NOT NULL,
+    elemento_id integer,
+    tipo_relacionamento character varying(50) NOT NULL,
+    relates_to_id character varying(50) NOT NULL,
+    obrigatorio boolean NOT NULL
+);
+
+
+ALTER TABLE public.relacionamentos_relacionamentos OWNER TO postgres;
+
+--
+-- Name: relacionamentos_relacionamentos_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE relacionamentos_relacionamentos_id_seq
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.relacionamentos_relacionamentos_id_seq OWNER TO postgres;
+
+--
+-- Name: relacionamentos_relacionamentos_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE relacionamentos_relacionamentos_id_seq OWNED BY relacionamentos_relacionamentos.id;
+
+
+--
+-- Name: relacionamentos_relacionamentos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('relacionamentos_relacionamentos_id_seq', 33, true);
+
+
+--
+-- Name: sistema_sistema; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE sistema_sistema (
+    id integer NOT NULL,
+    created_by_id integer NOT NULL,
+    slug character varying(50) NOT NULL,
+    logotipo character varying(100),
+    nome character varying(30) NOT NULL,
+    descricao_curta character varying(100),
+    boas_vindas text,
+    instrucoes text,
+    template text NOT NULL,
+    data_criacao timestamp with time zone NOT NULL,
+    data_alteracao timestamp with time zone NOT NULL
+);
+
+
+ALTER TABLE public.sistema_sistema OWNER TO postgres;
+
+--
+-- Name: sistema_sistema_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE sistema_sistema_id_seq
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.sistema_sistema_id_seq OWNER TO postgres;
+
+--
+-- Name: sistema_sistema_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE sistema_sistema_id_seq OWNED BY sistema_sistema.id;
+
+
+--
+-- Name: sistema_sistema_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('sistema_sistema_id_seq', 27, true);
+
+
+--
+-- Name: socialaccount_socialaccount; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE socialaccount_socialaccount (
+    id integer NOT NULL,
+    user_id integer NOT NULL,
+    provider character varying(30) NOT NULL,
+    uid character varying(255) NOT NULL,
+    last_login timestamp with time zone NOT NULL,
+    date_joined timestamp with time zone NOT NULL,
+    extra_data text NOT NULL
+);
+
+
+ALTER TABLE public.socialaccount_socialaccount OWNER TO postgres;
+
+--
+-- Name: socialaccount_socialaccount_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE socialaccount_socialaccount_id_seq
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.socialaccount_socialaccount_id_seq OWNER TO postgres;
+
+--
+-- Name: socialaccount_socialaccount_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE socialaccount_socialaccount_id_seq OWNED BY socialaccount_socialaccount.id;
+
+
+--
+-- Name: socialaccount_socialaccount_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('socialaccount_socialaccount_id_seq', 1, true);
+
+
+--
+-- Name: socialaccount_socialapp; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE socialaccount_socialapp (
+    id integer NOT NULL,
+    provider character varying(30) NOT NULL,
+    name character varying(40) NOT NULL,
+    client_id character varying(100) NOT NULL,
+    key character varying(100) NOT NULL,
+    secret character varying(100) NOT NULL
+);
+
+
+ALTER TABLE public.socialaccount_socialapp OWNER TO postgres;
+
+--
+-- Name: socialaccount_socialapp_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE socialaccount_socialapp_id_seq
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.socialaccount_socialapp_id_seq OWNER TO postgres;
+
+--
+-- Name: socialaccount_socialapp_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE socialaccount_socialapp_id_seq OWNED BY socialaccount_socialapp.id;
+
+
+--
+-- Name: socialaccount_socialapp_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('socialaccount_socialapp_id_seq', 1, true);
+
+
+--
+-- Name: socialaccount_socialapp_sites; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE socialaccount_socialapp_sites (
+    id integer NOT NULL,
+    socialapp_id integer NOT NULL,
+    site_id integer NOT NULL
+);
+
+
+ALTER TABLE public.socialaccount_socialapp_sites OWNER TO postgres;
+
+--
+-- Name: socialaccount_socialapp_sites_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE socialaccount_socialapp_sites_id_seq
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.socialaccount_socialapp_sites_id_seq OWNER TO postgres;
+
+--
+-- Name: socialaccount_socialapp_sites_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE socialaccount_socialapp_sites_id_seq OWNED BY socialaccount_socialapp_sites.id;
+
+
+--
+-- Name: socialaccount_socialapp_sites_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('socialaccount_socialapp_sites_id_seq', 1, true);
+
+
+--
+-- Name: socialaccount_socialtoken; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE socialaccount_socialtoken (
+    id integer NOT NULL,
+    app_id integer NOT NULL,
+    account_id integer NOT NULL,
+    token text NOT NULL,
+    token_secret character varying(200) NOT NULL,
+    expires_at timestamp with time zone
+);
+
+
+ALTER TABLE public.socialaccount_socialtoken OWNER TO postgres;
+
+--
+-- Name: socialaccount_socialtoken_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE socialaccount_socialtoken_id_seq
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.socialaccount_socialtoken_id_seq OWNER TO postgres;
+
+--
+-- Name: socialaccount_socialtoken_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE socialaccount_socialtoken_id_seq OWNED BY socialaccount_socialtoken.id;
+
+
+--
+-- Name: socialaccount_socialtoken_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('socialaccount_socialtoken_id_seq', 1, true);
+
+
+--
+-- Name: wysiwyg_forms_choice; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE wysiwyg_forms_choice (
+    id integer NOT NULL,
+    field_id integer NOT NULL,
+    slug character varying(50) NOT NULL,
+    label character varying(250) NOT NULL,
+    "position" integer NOT NULL
+);
+
+
+ALTER TABLE public.wysiwyg_forms_choice OWNER TO postgres;
+
+--
+-- Name: wysiwyg_forms_choice_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE wysiwyg_forms_choice_id_seq
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.wysiwyg_forms_choice_id_seq OWNER TO postgres;
+
+--
+-- Name: wysiwyg_forms_choice_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE wysiwyg_forms_choice_id_seq OWNED BY wysiwyg_forms_choice.id;
+
+
+--
+-- Name: wysiwyg_forms_choice_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('wysiwyg_forms_choice_id_seq', 89, true);
+
+
+--
+-- Name: wysiwyg_forms_field; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE wysiwyg_forms_field (
+    id integer NOT NULL,
+    form_id integer NOT NULL,
+    slug character varying(50) NOT NULL,
+    label character varying(250) NOT NULL,
+    help_text text NOT NULL,
+    type character varying(250) NOT NULL,
+    "position" integer NOT NULL,
+    required boolean NOT NULL,
+    widget character varying(250) NOT NULL
+);
+
+
+ALTER TABLE public.wysiwyg_forms_field OWNER TO postgres;
+
+--
+-- Name: wysiwyg_forms_field_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE wysiwyg_forms_field_id_seq
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.wysiwyg_forms_field_id_seq OWNER TO postgres;
+
+--
+-- Name: wysiwyg_forms_field_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE wysiwyg_forms_field_id_seq OWNED BY wysiwyg_forms_field.id;
+
+
+--
+-- Name: wysiwyg_forms_field_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('wysiwyg_forms_field_id_seq', 159, true);
+
+
+--
+-- Name: wysiwyg_forms_form; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE wysiwyg_forms_form (
+    id integer NOT NULL,
+    created_by_id integer NOT NULL,
+    elemento_id integer NOT NULL,
+    slug character varying(50) NOT NULL,
+    name character varying(250) NOT NULL,
+    revision character varying(250) NOT NULL,
+    description text NOT NULL
+);
+
+
+ALTER TABLE public.wysiwyg_forms_form OWNER TO postgres;
+
+--
+-- Name: wysiwyg_forms_form_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE wysiwyg_forms_form_id_seq
+    INCREMENT BY 1
+    NO MAXVALUE
+    NO MINVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.wysiwyg_forms_form_id_seq OWNER TO postgres;
+
+--
+-- Name: wysiwyg_forms_form_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE wysiwyg_forms_form_id_seq OWNED BY wysiwyg_forms_form.id;
+
+
+--
+-- Name: wysiwyg_forms_form_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('wysiwyg_forms_form_id_seq', 55, true);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY account_emailaddress ALTER COLUMN id SET DEFAULT nextval('account_emailaddress_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY account_emailconfirmation ALTER COLUMN id SET DEFAULT nextval('account_emailconfirmation_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY auth_group ALTER COLUMN id SET DEFAULT nextval('auth_group_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY auth_group_permissions ALTER COLUMN id SET DEFAULT nextval('auth_group_permissions_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY auth_permission ALTER COLUMN id SET DEFAULT nextval('auth_permission_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY auth_user ALTER COLUMN id SET DEFAULT nextval('auth_user_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY auth_user_groups ALTER COLUMN id SET DEFAULT nextval('auth_user_groups_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY auth_user_user_permissions ALTER COLUMN id SET DEFAULT nextval('auth_user_user_permissions_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY django_admin_log ALTER COLUMN id SET DEFAULT nextval('django_admin_log_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY django_content_type ALTER COLUMN id SET DEFAULT nextval('django_content_type_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY django_flatpage ALTER COLUMN id SET DEFAULT nextval('django_flatpage_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY django_flatpage_sites ALTER COLUMN id SET DEFAULT nextval('django_flatpage_sites_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY django_site ALTER COLUMN id SET DEFAULT nextval('django_site_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY elemento_choices_grupo_permissoes ALTER COLUMN id SET DEFAULT nextval('elemento_choices_grupo_permissoes_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY elemento_choices_todos_permissoes ALTER COLUMN id SET DEFAULT nextval('elemento_choices_todos_permissoes_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY elemento_elemento ALTER COLUMN id SET DEFAULT nextval('elemento_elemento_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY elemento_elemento_grupo_permissoes ALTER COLUMN id SET DEFAULT nextval('elemento_elemento_grupo_permissoes_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY elemento_elemento_todos_permissoes ALTER COLUMN id SET DEFAULT nextval('elemento_elemento_todos_permissoes_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY relacionamentos_relacionamentos ALTER COLUMN id SET DEFAULT nextval('relacionamentos_relacionamentos_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sistema_sistema ALTER COLUMN id SET DEFAULT nextval('sistema_sistema_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY socialaccount_socialaccount ALTER COLUMN id SET DEFAULT nextval('socialaccount_socialaccount_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY socialaccount_socialapp ALTER COLUMN id SET DEFAULT nextval('socialaccount_socialapp_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY socialaccount_socialapp_sites ALTER COLUMN id SET DEFAULT nextval('socialaccount_socialapp_sites_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY socialaccount_socialtoken ALTER COLUMN id SET DEFAULT nextval('socialaccount_socialtoken_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY wysiwyg_forms_choice ALTER COLUMN id SET DEFAULT nextval('wysiwyg_forms_choice_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY wysiwyg_forms_field ALTER COLUMN id SET DEFAULT nextval('wysiwyg_forms_field_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY wysiwyg_forms_form ALTER COLUMN id SET DEFAULT nextval('wysiwyg_forms_form_id_seq'::regclass);
+
+
+--
+-- Data for Name: account_emailaddress; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY account_emailaddress (id, user_id, email, verified, "primary") FROM stdin;
+17	1	robson.koji@gmail.com	t	t
+18	22	rbsnkjmr@gmail.com	t	t
+\.
+
+
+--
+-- Data for Name: account_emailconfirmation; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY account_emailconfirmation (id, email_address_id, created, sent, key) FROM stdin;
+15	17	2013-10-16 16:07:49.179219-03	2013-10-16 16:07:49.189945-03	12e91f123864e052a6c48f459695551c1733259c186d0dacc9640f9eaac8dde4
+16	18	2013-10-17 10:55:20.395741-03	2013-10-17 10:55:20.40816-03	d47710cecca710d2dca2914d10246080d445e70e65bc85e27acc4cd10a2f46d4
+\.
+
+
+--
+-- Data for Name: auth_group; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY auth_group (id, name) FROM stdin;
+\.
+
+
+--
+-- Data for Name: auth_group_permissions; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY auth_group_permissions (id, group_id, permission_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: auth_permission; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY auth_permission (id, name, content_type_id, codename) FROM stdin;
+1	Can add permission	1	add_permission
+2	Can change permission	1	change_permission
+3	Can delete permission	1	delete_permission
+4	Can add group	2	add_group
+5	Can change group	2	change_group
+6	Can delete group	2	delete_group
+7	Can add user	3	add_user
+8	Can change user	3	change_user
+9	Can delete user	3	delete_user
+10	Can add content type	4	add_contenttype
+11	Can change content type	4	change_contenttype
+12	Can delete content type	4	delete_contenttype
+13	Can add session	5	add_session
+14	Can change session	5	change_session
+15	Can delete session	5	delete_session
+16	Can add site	6	add_site
+17	Can change site	6	change_site
+18	Can delete site	6	delete_site
+19	Can add email address	7	add_emailaddress
+20	Can change email address	7	change_emailaddress
+21	Can delete email address	7	delete_emailaddress
+22	Can add email confirmation	8	add_emailconfirmation
+23	Can change email confirmation	8	change_emailconfirmation
+24	Can delete email confirmation	8	delete_emailconfirmation
+25	Can add social app	9	add_socialapp
+26	Can change social app	9	change_socialapp
+27	Can delete social app	9	delete_socialapp
+28	Can add social account	10	add_socialaccount
+29	Can change social account	10	change_socialaccount
+30	Can delete social account	10	delete_socialaccount
+31	Can add social token	11	add_socialtoken
+32	Can change social token	11	change_socialtoken
+33	Can delete social token	11	delete_socialtoken
+34	Can add log entry	12	add_logentry
+35	Can change log entry	12	change_logentry
+36	Can delete log entry	12	delete_logentry
+37	Can add Sistema	13	add_sistema
+38	Can change Sistema	13	change_sistema
+39	Can delete Sistema	13	delete_sistema
+40	Can add Elemento	14	add_elemento
+41	Can change Elemento	14	change_elemento
+42	Can delete Elemento	14	delete_elemento
+43	Can add form	15	add_form
+44	Can change form	15	change_form
+45	Can delete form	15	delete_form
+46	Can add field	16	add_field
+47	Can change field	16	change_field
+48	Can delete field	16	delete_field
+49	Can add choice	17	add_choice
+50	Can change choice	17	change_choice
+51	Can delete choice	17	delete_choice
+52	Can add flat page	18	add_flatpage
+53	Can change flat page	18	change_flatpage
+54	Can delete flat page	18	delete_flatpage
+55	Can add Relacionamentos	19	add_relacionamentos
+56	Can change Relacionamentos	19	change_relacionamentos
+57	Can delete Relacionamentos	19	delete_relacionamentos
+64	Can add choices_grupo_permissoes	22	add_choices_grupo_permissoes
+65	Can change choices_grupo_permissoes	22	change_choices_grupo_permissoes
+66	Can delete choices_grupo_permissoes	22	delete_choices_grupo_permissoes
+67	Can add choices_todos_permissoes	23	add_choices_todos_permissoes
+68	Can change choices_todos_permissoes	23	change_choices_todos_permissoes
+69	Can delete choices_todos_permissoes	23	delete_choices_todos_permissoes
+\.
+
+
+--
+-- Data for Name: auth_user; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY auth_user (id, password, last_login, is_superuser, username, first_name, last_name, email, is_staff, is_active, date_joined) FROM stdin;
+22	pbkdf2_sha256$10000$HIwxNooKCBmx$uuD43h7NhmBOCwayWvdxR7w9h+5+CPS+JYacDpVtgJ4=	2013-10-17 10:55:41.007699-03	f	asdf			rbsnkjmr@gmail.com	f	t	2013-10-17 10:55:20.245816-03
+1	pbkdf2_sha256$10000$AfxobUgxMQTL$v4ti9C6iDbCc5KakbdJyyv1u2ctAYPmavZoMlV58VJ0=	2013-12-02 23:27:57.367213-02	t	robson			robson.koji@gmail.com	t	t	2013-09-06 18:44:30-03
+\.
+
+
+--
+-- Data for Name: auth_user_groups; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY auth_user_groups (id, user_id, group_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: auth_user_user_permissions; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY auth_user_user_permissions (id, user_id, permission_id) FROM stdin;
+28	1	1
+29	1	2
+30	1	3
+31	1	4
+32	1	5
+33	1	6
+34	1	7
+35	1	8
+36	1	9
+37	1	10
+38	1	11
+39	1	12
+40	1	13
+41	1	14
+42	1	15
+43	1	16
+44	1	17
+45	1	18
+46	1	19
+47	1	20
+48	1	21
+49	1	22
+50	1	23
+51	1	24
+52	1	25
+53	1	26
+54	1	27
+55	1	28
+56	1	29
+57	1	30
+58	1	31
+59	1	32
+60	1	33
+61	1	34
+62	1	35
+63	1	36
+64	1	37
+65	1	38
+66	1	39
+67	1	40
+68	1	41
+69	1	42
+70	1	43
+71	1	44
+72	1	45
+73	1	46
+74	1	47
+75	1	48
+76	1	49
+77	1	50
+78	1	51
+79	1	52
+80	1	53
+81	1	54
+\.
+
+
+--
+-- Data for Name: django_admin_log; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY django_admin_log (id, action_time, user_id, content_type_id, object_id, object_repr, action_flag, change_message) FROM stdin;
+1	2013-09-25 09:58:24.355871-03	1	3	1	robson	2	Modificado password e is_superuser.
+2	2013-09-25 10:03:31.933836-03	1	3	1	robson	2	Modificado password, is_superuser e user_permissions.
+3	2013-09-25 10:04:43.849576-03	1	3	1	robson	2	Modificado password e user_permissions.
+4	2013-09-25 10:19:56.149533-03	1	3	1	robson	2	Modificado password, is_superuser e user_permissions.
+5	2013-10-09 23:16:23.023372-03	1	6	2	192.168.43.100:8091	1	
+6	2013-10-09 23:16:26.714384-03	1	18	1	/asdf/ -- Título 	1	
+7	2013-10-09 23:31:49.149837-03	1	18	1	/inteliform/asdf/ -- Título 	2	Changed url.
+8	2013-10-09 23:33:15.236658-03	1	18	1	/pages/asdf/ -- Título 	2	Changed url.
+9	2013-10-09 23:33:55.205391-03	1	18	1	/asdf/ -- Título 	2	Changed url.
+10	2013-10-09 23:42:26.438502-03	1	6	3	localhost:8091	1	
+11	2013-10-09 23:42:31.815421-03	1	18	1	/asdf/ -- Título 	2	Changed sites.
+12	2013-10-09 23:47:16.000349-03	1	18	1	/asdf/ -- Título 	2	Changed content.
+13	2013-10-09 23:50:52.614126-03	1	6	3	192.168.2.145:8091	2	Changed domain.
+14	2013-10-09 23:51:32.312044-03	1	18	1	/asdf/ -- Título 	2	Changed sites.
+15	2013-10-09 23:55:36.888596-03	1	6	3	192.168.2.145:8091	3	
+16	2013-10-09 23:55:36.892837-03	1	6	2	192.168.43.100:8091	3	
+17	2013-10-09 23:55:55.190051-03	1	6	1	example.com	2	No fields changed.
+18	2013-10-10 00:01:46.27721-03	1	18	1	/asdf/ -- Título 	2	Changed sites.
+19	2013-10-11 18:45:16.555953-03	1	3	1	robson	2	Modificado password e user_permissions.
+20	2013-10-11 18:46:58.209859-03	1	9	1	Inteliform	1	
+21	2013-10-16 18:14:54.538623-03	1	6	4	http://projetos.inteliform.com.br	1	
+22	2013-10-16 18:15:04.484475-03	1	6	4	http://projetos.inteliform.com.br/asdf/	2	Modificado domain.
+23	2013-10-17 23:34:40.969421-03	1	6	5	192.168.2.145:8091	1	
+24	2013-10-17 23:34:45.854346-03	1	18	2	/flat/intrucoes/ -- intrucoes	1	
+25	2013-10-17 23:35:43.379392-03	1	18	3	/flat/bem-vindo/ -- Bem Vindo	1	
+26	2013-10-17 23:48:04.654776-03	1	18	2	/inteliform/flat/intrucoes/ -- intrucoes	2	Changed url.
+27	2013-10-17 23:49:08.925638-03	1	6	6	192.168.43.100:8091	1	
+28	2013-10-17 23:49:17.426174-03	1	18	2	/inteliform/flat/intrucoes/ -- intrucoes	2	Changed sites.
+29	2013-10-17 23:49:53.910898-03	1	18	2	/flat/intrucoes/ -- intrucoes	2	Changed url.
+30	2013-10-17 23:52:31.396579-03	1	18	3	/flat/bem-vindo/ -- Bem Vindo	2	Changed sites.
+31	2013-10-17 23:53:07.979178-03	1	6	5	192.168.2.145:8091/inteliform	2	Changed domain.
+32	2013-10-17 23:53:18.88074-03	1	6	6	192.168.43.100:8091/inteliform	2	Changed domain.
+\.
+
+
+--
+-- Data for Name: django_content_type; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY django_content_type (id, name, app_label, model) FROM stdin;
+1	permission	auth	permission
+2	group	auth	group
+3	user	auth	user
+4	content type	contenttypes	contenttype
+5	session	sessions	session
+6	site	sites	site
+7	email address	account	emailaddress
+8	email confirmation	account	emailconfirmation
+9	social app	socialaccount	socialapp
+10	social account	socialaccount	socialaccount
+11	social token	socialaccount	socialtoken
+12	log entry	admin	logentry
+13	Sistema	sistema	sistema
+14	Elemento	elemento	elemento
+15	form	wysiwyg_forms	form
+16	field	wysiwyg_forms	field
+17	choice	wysiwyg_forms	choice
+18	flat page	flatpages	flatpage
+19	Relacionamentos	relacionamentos	relacionamentos
+22	choices_grupo_permissoes	elemento	choices_grupo_permissoes
+23	choices_todos_permissoes	elemento	choices_todos_permissoes
+\.
+
+
+--
+-- Data for Name: django_flatpage; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY django_flatpage (id, url, title, content, enable_comments, template_name, registration_required) FROM stdin;
+1	/asdf/	Título 	Conteúdo\r\nasdfasdf\r\n\r\nasdf\r\nadf	f		f
+2	/flat/intrucoes/	intrucoes	Intruções de uso do InteliForm	f		f
+3	/flat/bem-vindo/	Bem Vindo	Página de bem vindo ao InteliForm	f		f
+\.
+
+
+--
+-- Data for Name: django_flatpage_sites; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY django_flatpage_sites (id, flatpage_id, site_id) FROM stdin;
+8	1	1
+15	2	6
+17	3	6
+14	2	1
+16	3	1
+\.
+
+
+--
+-- Data for Name: django_session; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY django_session (session_key, session_data, expire_date) FROM stdin;
+yq18998y8yagr8yeyykidjw1bjwiviyf	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 10:42:39.969021-03
+pgz0yxvlbzh3zek5o2cf108pro2vl27m	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-09-21 01:21:24.197848-03
+ji2ohmwfu1h70sg9mnkcilgxupv89sfw	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-09-22 00:20:57.420319-03
+89cr3t0tti9a39qirj85p4vs49algxd0	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-09-22 11:57:27.410882-03
+iet0ak4s4wjxxagohsdibmmtelr4idlp	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-09-22 20:49:06.791915-03
+acdc99tv94w8vzfxzh3huz6d9c7cp7zt	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-09-22 20:54:51.195386-03
+w5f8h4g3nhzdqtjnn3xetawi117fk5of	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-09-23 11:53:14.30216-03
+8aji8onktmwke1ua8rzwzy87ywk73nxu	MjAxNDEwZjY3ZDdiZTI2Njc1N2VkOWFmNmIwODkxMGM2NmY5NDI3ZjqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVCV9tZXNzYWdlc3EDXXEEKGNkamFuZ28uY29udHJpYi5tZXNzYWdlcy5zdG9yYWdlLmJhc2UKTWVzc2FnZQpxBSmBcQZ9cQcoVQpleHRyYV90YWdzcQhOVQdtZXNzYWdlcQlYFgAAAFZvY8OqIHNhaXUgZG8gc2lzdGVtYS5xClUFbGV2ZWxxC0sZdWJoBSmBcQx9cQ0oaAhYAAAAAGgJWCEAAABTdWNjZXNzZnVsbHkgc2lnbmVkIGluIGFzIHJvYnNvbi5xDmgLSxl1YmVVEl9hdXRoX3VzZXJfYmFja2VuZHEPVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEQVQ1fYXV0aF91c2VyX2lkcRFLAXUu	2013-09-23 16:32:51.064099-03
+7pwicifriakj0dr8wz5ld58wyfcbw29r	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-09-25 11:05:55.813548-03
+o7p6481j22lg4p8lnq13wrrkh8faf4co	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-09-26 23:59:02.896648-03
+r4yivivmvo67opfch7kz7o1k15tw4ecz	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-09-27 10:07:46.306311-03
+0i90z60r2lyvz14o0d0krgldinnp49to	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-09-27 19:17:25.153259-03
+msstapquvcwagthrrqe9cyi9z2r9l0v4	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-02 19:03:26.128096-03
+7tjd7hofdlfcynfdkuli49amiuxu1f0m	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-02 20:08:15.272832-03
+uljdo9j5qjdivckiifymwzytiqlpidg0	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-05 01:42:31.357762-03
+f9fj7ygpocp9fzyp43okkbwhzbjv2omc	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 10:35:59.516864-03
+eu2z70xgl60dnus627x34m4magqnwt3y	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 10:36:01.552263-03
+uxo533x6ea2yyt9n2p972snk1h0i3yc7	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 10:36:02.658009-03
+unwjaz7s0sz1fs12g56akn6ibe6m0xyj	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 10:36:02.751882-03
+yc5hsdwn9ca10d1317dr5pwu3rxltaw2	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 10:36:06.598042-03
+t5kooum1hkv7cwp8o82p60nziqdkqwgo	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-05 10:36:10.418058-03
+4pxhw3qqe9hyqv3xprd5jrqhz7p2b86t	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 10:36:19.758299-03
+daqej2xlrktv880abwzjst8dd8y6qm70	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 10:37:32.41416-03
+lcrdwu49q16qnor3h9filvxn4v0yldt5	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 10:37:35.435128-03
+ul3d4oac76e7ge1qc64codkszmltm5e7	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 10:37:38.208638-03
+lol4rtjjxhky8zee5vl0wzyi2v6iedgc	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 10:37:39.531097-03
+p24smxtasqfk3no68xkqtggusa1sn509	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 10:37:41.122078-03
+wmtzo2kmvpijdsamsgb5jgy3xj308smq	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 10:38:36.779877-03
+2xswrmnxh3uxlw3elh7ga5pnnazfgfww	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 10:38:40.583797-03
+yja4cmuqrgdns28qdhoqg2zlau2otxzc	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 10:40:58.831047-03
+tbapb8banffus68ohrlj2adacogwonel	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-05 10:41:03.591279-03
+ceir0lbpj30cefz5r9e7g8uealtujsjs	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 10:41:10.437708-03
+h7fogjmryzk5vot7qs6lpy91t6pet4r4	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 10:41:16.814575-03
+2bkekmnxs51v40qpn9vummjm0phvdna7	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 10:41:16.883612-03
+ypacmequflkkpk05x91ffka4iss95prk	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-05 10:41:19.655084-03
+4ajt03llv1s44u1masrkw3gfwtamqhtv	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 10:41:19.766036-03
+9od0oygaa9i52o0d80td127pbnx3szj8	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 10:41:19.835647-03
+eo4c3i0k7m6h0h519kdk4zwv2ar4ekxm	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-07 09:46:40.586115-03
+4xawfla13s6lu4d3qkkqxykwsmlz8m5s	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-05 10:41:21.265669-03
+wp404kbwqamoo8os9kp149k8cq2erxtr	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 10:42:40.023192-03
+x6vo4441bwy1u2jmk5yybu3822jg7np7	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 10:41:21.345027-03
+q1j938z0iuqwr0ydsakwveyj5w294s6c	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 10:41:21.721825-03
+l5aqto1ciut6b630mt50l4f3s6vn13sg	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 10:41:25.874566-03
+uae62vwqhofxnnoja0iuo3f03tycyr8h	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 10:41:31.144688-03
+hfop4tr553rsv7tnk6xokdc8w4zg7g1r	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 10:41:31.200351-03
+2m8os9lc1fzzadz41fif6xahf4ji5qwy	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 10:42:27.887181-03
+2kp7xtfr2f0hdrvoh9ms2gseqjt97bnz	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-05 10:42:29.845564-03
+yic6dmz61fboeslhnk1f5fato2c99kh3	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-06 01:43:50.534506-03
+rqgye2j20a5yo65eds0p2bv9t7dku8g0	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 10:42:29.956752-03
+hs7iyr9n41gthv22svxwfpyc6mcmmypq	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 12:05:26.746683-03
+wyxt0ibbxcfw714ymu988jvay9zazwci	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 10:42:30.024028-03
+p718ms8x28db1x1sgjvhx154way76qpd	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 10:42:35.769201-03
+9jd7059cw07saoh2ez5yktn3wyrugc0c	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 12:21:40.063155-03
+to8gypcip1uhjob3xyjv1seabvxk75qr	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 12:23:01.931684-03
+piq31c0v14axdc9ejsmnvzz23vbdkm37	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 12:23:09.586034-03
+u7zgko0rgwhqfe89iwz2gugctqvihheb	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-05 11:55:35.480917-03
+ctd5fk1tk9zp5mcz141k2kfmdn9xt5j8	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 11:55:35.515905-03
+4m2vn8ezrcd8oxkrhvwz44bjsdfurhbd	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 11:55:35.572576-03
+cqlrbnahurbaxupytk179gbpf2jg681k	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 11:55:39.767519-03
+fxo3ivrz979uwse7xks6ix3hvavv08mk	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 12:23:15.9622-03
+24aqmhu5rhkm7z89rh5n9ktwo0s3mmby	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-05 11:55:42.154243-03
+e1w4si48rn0q355dlmsas2dpo618zg0n	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 11:55:48.214946-03
+ha8rmkqe7m03iel9418khj34kz9lxhxt	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 11:55:48.29781-03
+vtbejl1n7s3si89i8nrluwop8qtkldog	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-05 11:55:50.206432-03
+h92lrgcekagx5no6q3w5hruztaq13sau	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 11:55:50.235399-03
+ap3rlwlr6sq6s47kuxqr4rpqclisk8ry	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 11:55:50.30722-03
+mz89w7h1d1f3qfv40ei53a8fq7arw97b	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 12:26:33.74926-03
+3dkuhqbaoyp51jx9u3dirdhfu6xg1xf1	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-05 11:55:52.833237-03
+z9e5fsj8uc1uk245y2zptn3hryb446cc	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 11:55:52.869996-03
+k15jru5f6wjf34wky5m8qmq85ln91h7p	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 11:55:52.922073-03
+2lkzd9tf207sf7cf2vx3brnmdxp2fs7o	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 11:55:55.581403-03
+fntf8b3pq1uubcp8f6ijl5p5ur0nfh9t	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 12:27:30.083003-03
+mllozmd9iev6diun0lcb95oe9o2asa3o	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-05 11:55:59.125576-03
+ev3g6p4hv05mn2cccyt20xwckw55barc	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 12:28:17.555171-03
+71i6wspv5i9dsvzg8igtf8l5uxvhinct	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 11:56:15.70717-03
+fmaljtx225hcfjzmfexfhfnenj0ahzx8	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 12:28:20.220202-03
+hhue92och3ywaxxji62ifpdku7tzw134	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 12:28:28.417072-03
+j2yui2xblb9nrpf3kam0dgcwipin7s4x	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-05 11:56:17.58012-03
+juxyr7ya2vi7wjq8tjomet1kwrp0j7bq	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 12:28:32.814649-03
+dzhxaucqa4v4l7d3wc5mcwlhxwqtuwv3	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 11:56:22.263883-03
+u0d4b9is6ygsfkcoyc9xndv5q2bk88lp	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 12:28:34.601219-03
+wjbnxun8bgzf9q0gy98eo2kec1xupcro	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-05 12:29:10.369636-03
+9a9su4m0oo1607usvbbxl7rznytal5q1	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-05 18:18:10.041379-03
+vgn6921wi5076fnagyzeg4y8zhcxpom5	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-05 12:01:00.360692-03
+zcryqazpayww90huj11dh3x8flvo0eeg	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-11 10:45:32.732809-03
+nu9m7dmvkgljqd652h5c26bxqknekz1f	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-07 09:46:40.648244-03
+3jcrm6nxizs73xyvfv6vqth4pv7jq4o6	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-07 09:46:49.421105-03
+qa0xitlgn8w5vfhbkws9rabchngypk1r	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-22 01:12:38.274538-02
+1i9o71214nrfbeqn9rxldzcv1a81nech	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-07 09:46:56.211723-03
+mq903fdg926ab95oz70f23n3aevngk6z	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-06 00:05:49.308414-03
+5ehxki5qde63kgscbt6enuqr8lrcjt8s	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-07 09:46:57.458562-03
+wpdwncpqwr5zmp24lzidp55bm80a9sgv	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-06 00:36:52.318246-03
+67it2vcac1b212next04ekwpsn3xkd5b	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-07 09:47:38.856699-03
+8t20l8gd53grrx2wnpjv7mxilnmld9ai	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-06 01:44:07.427666-03
+a91pol8ignjctmeaoasn3r6i7x1vz355	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-06 01:44:07.743547-03
+upzi79b3fd7ewr5lenuyjgft4yw29rf5	ZmI3ZWU5NmIzZTczMGM1Mzg4NjAzYTY1MTRjZjllZjNiZmNhYTkwYzqAAn1xAShVEl9hdXRoX3VzZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEDVQ1fYXV0aF91c2VyX2lkcQRLAXUu	2013-10-07 09:53:07.845419-03
+qktmka3r9nsd002twdx7iorldahhla9q	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-06 01:44:15.825531-03
+43e0dj96ewl8e154tcthyjncima1eud8	ZmI3ZWU5NmIzZTczMGM1Mzg4NjAzYTY1MTRjZjllZjNiZmNhYTkwYzqAAn1xAShVEl9hdXRoX3VzZXJfYmFja2VuZHECVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEDVQ1fYXV0aF91c2VyX2lkcQRLAXUu	2013-10-07 10:35:02.616841-03
+7nner575qvvgn4apn4uc86srxbf0s94m	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-06 01:44:28.411501-03
+hkq8u8d3wkqpkfn6yeaif6wj9451tciq	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-06 01:44:28.613508-03
+3g8lgw7ge5ccex781ncxkdte6g3tusls	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-07 11:13:17.035858-03
+ijh793fryo9alnc0x9fdjv2ro078lwiq	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-06 01:44:54.729479-03
+pte8caalv5yqvjlr10aa3avgufci1sca	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-06 01:44:57.478414-03
+my2z3b860r5uxdbp6ize2qun7179uz4q	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-07 11:15:05.640466-03
+9beekamq7dixjjphtd16ljjz8gu8zo9d	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-06 01:45:13.805542-03
+tgxa4sh4864niht5pltduvu30l217g4p	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-06 01:45:17.893378-03
+m23hru3acjn56uat6c0ktjvzay0ftpy6	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-09 14:27:07.74608-03
+dak7ty36x9xtn27q1bt8b33nyd52oz4f	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-06 01:45:19.693549-03
+nws3z2ddtmjw7wyeqe6tl42vrv9yrgeg	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-07 11:15:12.582976-03
+fns6y3bm0ou0zmrp5024chh7tjgq0voe	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-06 01:45:29.866449-03
+4cf4u15ta0l0huos863g0tfjwpiep4h8	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-06 21:30:06.036093-03
+wbuf64agcsswpnxotqjjx5q7w9kmhtop	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-07 11:15:20.462373-03
+hj0p0ngmr2uck3ybz6lyec2zsvxiop0t	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-09 14:27:09.74993-03
+rhw76mqx5i1mngmcubbkablhflutt41d	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-07 11:15:22.240973-03
+28yq7ta10z2jrwc12vrbed2b68hh01k6	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-07 11:15:53.952745-03
+amw5o9qar1raet6ipz68muu6lvs1t5ht	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-09 14:27:34.004313-03
+dlyvbis13iu4xox4fu0aoirxb6t6qr7h	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-07 11:17:00.751313-03
+cq3rki5jz684ox2ac0i8tcs4bsblcr7d	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-07 11:17:05.937004-03
+ihhu6ef5hs8y8cnv9cpkt19qf9s573lj	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-07 11:17:07.818074-03
+r090swsleu2s00mlwtycjlog0fju43md	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-09 14:50:42.104121-03
+j4z3uiq53o0686g1x3315jzy8tzb7myj	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-09 14:50:54.539027-03
+n19ahzcmuypqne5i1lrvof55x5s4z0f7	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-07 14:31:29.292805-03
+vzin4iey1iibty200b435naycsyaqmlr	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-09 14:50:57.005637-03
+jqe6zg1yg6flln2xnd83wtfv1vk3f3et	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-09 14:51:02.444706-03
+yaog72xppk59vfw0ixjugtbguhg6ea6d	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-09 15:06:12.118273-03
+1vddud0cgbetzqumzd0exdtk73twibi3	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-07 21:58:22.955797-03
+nes4o722johq5rfaijarq18d961px440	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-07 09:46:45.01626-03
+f1s05yms8lmvha8iqy3nv5b7pzl2h6p0	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-07 09:46:56.192446-03
+ksev48lsz51x0w8g4uy7hg310xyroxi4	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-07 09:46:56.244951-03
+d94z9kktzpz56a2stkijzi3t0uj4s3a4	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-07 09:46:59.175028-03
+xqdydaaqnch7cmktup2f88showvthf2i	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-06 01:43:50.456776-03
+walkmqs9e8fm19v96ep5twtydxy2992r	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-06 01:44:07.638733-03
+47lu30k1i8nqsz05tmg7o4jzyjhx5azv	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-06 01:44:15.588004-03
+6pu4xvbk9qe3a6v9z7g7gb0919b8bkdo	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-07 11:13:16.975508-03
+03jfh5vav5442zx63aiya66vppug2tas	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-06 01:44:15.882101-03
+qd8wz4e65nztdnnhdsszo8gjr2hws6oa	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-06 01:44:28.517514-03
+s2y3tgfsoi2kuzak737x3fqekeumhvju	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-07 11:14:56.354858-03
+ds7uj1fyuq6ym1srmt40tcuf6rh4h9i3	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-06 01:44:36.891421-03
+wuunk05km87w4iwrw89j2felayhu8i2p	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-06 01:44:54.819464-03
+vse6q8ti47pje5pe2h172fhicwtza891	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-07 11:15:07.694828-03
+cpcb9206ztkzudxibx7wdzkyqlnfizy5	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-06 01:45:13.726094-03
+uas3swtsiaw37a9z0g7ym2aklirdqgdm	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-06 01:45:17.324336-03
+h1wcr6quezwsib8d9iu4a9198vlak2i3	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-07 11:15:12.602259-03
+461iomwl8oun7thgxa38ugk6htmx7uuq	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-06 01:45:19.142811-03
+x6ezb3wcthk86tkepfrwoagw7acwoc60	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-07 11:15:21.449437-03
+23kojmq60potvnbgktc4ncbkvkkb0mz1	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-06 01:45:29.803957-03
+qpkbb7zhphqw10ceyy62yjguaz9pcfx4	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-06 01:45:29.931248-03
+lrz8xny6n7a623yvp83qpibnrsth1rc2	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-07 11:15:48.620637-03
+qeqf575lz5i3cfvtlj2nlpaf1ovxrts1	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-07 11:16:01.461597-03
+d84j49m2rybpz8xq3aegektzwm8nyusx	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-07 11:17:05.914478-03
+bukt47ecf7lcql8hhi93kdacxbjla5pm	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-07 00:39:33.467415-03
+81spygnxpgfz23k1y4h99xh6kuv355hg	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-07 11:17:05.990864-03
+f84mbkw94osbgg8frmuma1csv2ej3zvv	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-07 11:17:51.012907-03
+v3kfg2cjx6q2jjyuph69vy727kiqaqbn	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-07 15:01:19.645012-03
+axbi82n97q0i3f489sk85zo38bykylt8	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-08 14:51:50.316777-03
+7m1ssrn8q8q5xgyb2pcmo8nxrblzh8xc	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-08 18:04:01.262578-03
+d993lcaosx2yc6gcayjdrksvgjlyqvco	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-08 18:04:07.920794-03
+d0jfbaghkjg5xckcks61vp4a2f5dmdft	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-08 18:04:07.950754-03
+lcc7pb1jqra8ua061kjprekj4q9toptt	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-08 18:04:15.230825-03
+yyc6pxqbkoy4wewtqaalt9h9forpq7ty	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-08 18:04:17.670348-03
+qxqpkyxlsdqqvgluzjqr55yhybsbeflr	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-08 18:04:21.980257-03
+fvur2qe62auqnaouguk894fquztko50g	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-08 18:04:22.000314-03
+hnh52ciws5j58ss931uro19vxycxevqa	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-08 18:04:22.032638-03
+cr0zru2ugsxac8use45kqe718qgcx3bh	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-08 18:04:35.292618-03
+8vhe9v3g4cd9aov1ptd9z6p506qt73dq	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-08 18:04:40.967564-03
+4u4mj4x2s5uri8pv6fqzf6ot6f8qpo9m	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-08 18:04:40.989477-03
+5bp3vhcu5qek6h2m09sg6d0k2zacvr36	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-08 18:04:41.042517-03
+vrqfxccfwcb85qgzvjjx2cgl7dm8k082	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-08 18:06:47.206653-03
+pn9yaki0vqve3c5hqkzcrr3s3tsunccw	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-08 22:56:20.496143-03
+9k6z5x3eosrev73ciozhdw264i7q078h	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-16 22:30:37.990047-03
+3jxaux074nurzsy52f7fpdujh41xixje	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-09 10:39:35.085824-03
+nhj9fpsgajykl9yjyz5730x0wr3zuloo	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-09 14:27:08.865541-03
+m9mnzbhfqqxrf2rqpy3ies4b2imse1pc	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-09 14:27:29.85157-03
+kgxxd8gqca43z28ppzmng44561nmohcm	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-09 14:27:37.532192-03
+hsw40rhxgfqmj7ygg1e5675kw3f7m342	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-09 14:28:25.030273-03
+re60j73mi3g0v34jci3vkvr7sv7fcsy9	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-09 18:05:53.974755-03
+pvny6cgqbmn947v433i54tojhoms5ron	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-11 10:39:35.17597-03
+sed1mnbg83hmf7lwkl07aa3wdd14qh3t	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-11 10:39:35.237601-03
+dkjqv1h3ocg4ci9g6s7n1nwe2qal9zsp	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-11 10:39:40.785695-03
+1m626v4zvz6uwbytgta1d1nvo5q95m3b	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-11 10:39:40.806351-03
+fnmf9bekc8boakj3v6kq7ns92qi6q8xh	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-11 10:39:40.860543-03
+xyftblcuexpdjvmtr6ugy8ajp99wabot	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-11 10:39:47.319952-03
+30mnkhtdvjnnh8fvdlcdklbco734hf9b	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-11 10:39:47.339002-03
+kuh1oif7stma8krb8tedjwpfwj7cr6lj	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-11 10:39:47.373801-03
+95pwmhr5u01xnx2kv4z7yvpthnea01t8	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-11 10:39:52.334892-03
+lu9vwv3avblf6fjb2abejg1zzgx3ai9n	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-11 10:39:54.806848-03
+8v4a1z7hzxhoi8y8aj2svgahshmepyy9	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-11 10:39:54.869191-03
+slezyloiu73o9nmkrdlu0mqjczwf2c7m	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-11 10:39:59.964623-03
+mcv6sypj9vn14m94ct4o347q6agovh1i	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-11 10:39:59.984311-03
+htn21okid38jamgrg6zw1kj5dzg6wpok	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-11 10:40:00.026142-03
+f433muuyacsveoyl36yes81gz4mg1r56	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-11 10:40:15.829191-03
+4zo7t1sph0yzxd1nlybgadghxfwohx8o	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-11 10:40:20.698703-03
+b742w4mf1hukuonisz09d0q34rwrgqfs	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-11 10:40:20.717048-03
+30abzax1qbxxz0rk01yog8g5b3gs6q73	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-11 10:40:20.763045-03
+zatca94noasm1t486b02kcgdqi6c8hap	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-11 10:41:00.403462-03
+vovvk3xmkok4ab5kjb4sgfj8oljdogdt	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-11 10:41:02.60578-03
+nwdstz0r2ourepqecwvi9w34rl24sqq6	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-11 10:41:07.09551-03
+mgap74u3bzsz3l50pw47l1dobalkpjw6	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-11 10:41:07.114176-03
+rf3lzri4bzlssz9ck5hy6gx3wwcbpiga	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-11 10:41:07.166458-03
+ugho5mzaso8iwca52jbb5ypde9r2w135	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-11 10:41:15.744438-03
+4mr44a5suzl72g87vxy9ix01vqbhzuuy	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-11 10:44:01.861696-03
+1mk95nr4kvrukvb52c11klvve4da1ur3	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-11 10:44:07.768771-03
+p5jz3a55ro79cbjd5gh180g7wyvrjbjw	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-11 10:44:07.787967-03
+caybnx9199idytby4vhfwdjvzo65ga0p	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-11 10:44:07.829251-03
+35wr0sdyeks0xka6kzx4umyw77g3gw06	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-11 10:44:20.112847-03
+0eif22wdbaeadc9q5ypb6ckf9mvovoij	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-11 10:44:25.130239-03
+3z3pzfow1yaoz3oki91x32lcpnjo15pr	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-11 10:44:25.151142-03
+mm3gk7yuitbq8rssd2i3wr25qzmb9dxg	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-11 10:44:25.203014-03
+6j19os1cqhoqv2wgtv71dfo8wxzyzfxl	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-11 10:44:45.494487-03
+wipwro5fr4cx4wb5lboozojpqkaw5yfl	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-11 10:44:45.526092-03
+z8yxougw9gpc6htza92wr8alq80j7ngb	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-11 10:44:58.393237-03
+nwty4k96iw3qzd9xs27uc1fccvysnhoi	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-11 10:44:58.413706-03
+76j3zygzmg14027hmslmhdmodk3ibg6g	NTY5N2U3MDg0NzQwNTI2ZTc4NDk0MDUwYmQwZTZjM2MyNjU5YTRkMDqAAn1xAShVDV9hdXRoX3VzZXJfaWRxAksBVRJfYXV0aF91c2VyX2JhY2tlbmRxA1UpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmRxBFgPAAAAX3Nlc3Npb25fZXhwaXJ5cQVLAFUIdGVtcGxhdGVxBlgGAAAAZmxhdGx5cQd1Lg==	2013-10-22 13:06:10.978412-02
+dzxk2dszzi1d4bubkm3919w66r7vq0sr	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-11 10:44:58.466304-03
+oyaeggbm9wdd6rm51yyonqvwwt62qmgj	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-11 10:45:32.708892-03
+9uft7qnvdjktks0fx35aklgwgyqes7dq	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-11 10:44:59.293478-03
+5ra7ithmwwc7bgrfdz0epl9qq5wlfkra	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-11 10:45:11.005038-03
+yjsfazlq5sigfrf6j52o6it1bsc6clxt	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-11 10:45:32.785895-03
+382fpbeej9cwthbeeml1hbos965cmglv	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-11 10:45:13.608081-03
+vbf62ksxpc6dv727ddngspgtdsrui894	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-11 10:45:13.67112-03
+h2naexu2as7tdjsxwsuzdk8yfzd4i097	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-11 10:46:28.775165-03
+tekedoxxgfx3veomcf5993286lnf6iml	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-11 10:45:19.041842-03
+4r9o9ogkaabh4xl9gtrwxiyffz3kwmnb	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-11 10:47:31.414464-03
+ild2jk8hunqw4q3qh5zh5sr6zjmi5abo	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-11 10:45:19.060704-03
+5t4gt1gqqbqabt4t5auv05jpsgcplzum	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-11 10:45:19.096944-03
+66kltm74rmfa8jsfmv26mfm4l42v1rt3	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-11 10:47:32.974371-03
+1d3m8upgkgkwjbio19wkyreqjzn8w6q6	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-11 10:47:33.853617-03
+khhnz9luf93bdcteph3btw9edtbuztvh	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-11 10:47:34.797749-03
+z887qbjrqmvma5tzct96dyop2f2pgrpf	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-11 10:47:34.868008-03
+gjcf3k6z71wpr2nbz4ltz2278ia9qey5	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-11 10:47:39.165743-03
+zopvkh3oejbm5qjjx5q4eywdmhgin2cu	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-11 10:47:39.184419-03
+m194xozhgl2gb8atm1nlw3us65j1858v	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-11 10:47:39.23-03
+hoq1542i6ljb1o18xsuy7eu3rdr50le5	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-17 21:30:12.473559-03
+y7r2fthicz5qfi865b2f37tjzea4q2lu	OGI4NTAzM2M4MGU1YWY5Yzg2YzE0YWU5MzkxNTY5ZDI1MmM1NTA1NDqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAVUIdGVtcGxhdGVxBlgGAAAAYW1lbGlhcQd1Lg==	2013-10-17 21:53:13.81604-03
+ftgz6hd8b5l7yi5p88zjeb7d1ixevb2e	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-17 22:03:28.031331-03
+2ncaj6w475kbcf6h152nn4n75s1ckii7	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-17 22:09:09.132466-03
+l9bqan2ncyw338vx0r57y92pyeumkdll	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-17 22:16:16.884133-03
+qp75i729usqfx7aaa4ovn6nj3ju2p115	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-17 22:18:52.711106-03
+ye38u5l62ibxsu4zhoib0rv9fnpjp4ma	NmJlZjgxY2RjNDg4MmFiODkxZDQ0YTQwMmI1ZTM3MGY0Zjc2NGYwMjqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAnUu	2013-10-12 02:00:38.438809-03
+dcrfwktzqzsrbt1w70miyoyxkpu06stz	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-12 15:56:45.130771-03
+zca9t2nyycilyyozd7irt8rqirvikftf	ZGYwOWI0MjYxYzc2NmNlOWI2M2VlMWI5ZTc2ZmU3ZGUwMWE5MmY3MjqAAn1xAS4=	2013-10-17 22:21:37.012592-03
+hznje8krsw810vrd2we114v45zyal3iw	OWExYmMyY2RkNDM1Njc3MmNiMzVhNjBhM2EwM2MxN2RkNTIyNmVkYzqAAn1xAShVDV9hdXRoX3VzZXJfaWRxAksBVRJfYXV0aF91c2VyX2JhY2tlbmRxA1UpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmRxBFgPAAAAX3Nlc3Npb25fZXhwaXJ5cQVLAFUIdGVtcGxhdGVxBlUGZmxhdGx5cQd1Lg==	2013-10-17 22:21:53.643672-03
+ya8ougv6melpz99l5bi50szg4qwjfcvv	NmJlZjgxY2RjNDg4MmFiODkxZDQ0YTQwMmI1ZTM3MGY0Zjc2NGYwMjqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAnUu	2013-10-13 19:49:37.511042-03
+6u3cmuhjf94cf93nx8anso3tzcyxjbbx	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-18 00:11:46.254933-03
+dblen746scqcdnn80d407bmaqd1lbgo9	OWExYmMyY2RkNDM1Njc3MmNiMzVhNjBhM2EwM2MxN2RkNTIyNmVkYzqAAn1xAShVDV9hdXRoX3VzZXJfaWRxAksBVRJfYXV0aF91c2VyX2JhY2tlbmRxA1UpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmRxBFgPAAAAX3Nlc3Npb25fZXhwaXJ5cQVLAFUIdGVtcGxhdGVxBlUGZmxhdGx5cQd1Lg==	2013-10-18 10:35:20.006856-03
+fwg19tdho8db5z6psu9n1bowxwb6qv9v	MmUwMmYyNmEzZjE3ODFlOWM2NmNjMTc4MjdlMGVlOGNhMmMwNDJmMzqAAn1xAShVDV9hdXRoX3VzZXJfaWRxAksBVRJfYXV0aF91c2VyX2JhY2tlbmRxA1UpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmRxBFgPAAAAX3Nlc3Npb25fZXhwaXJ5cQVLAFUIdGVtcGxhdGVxBlgGAAAAdW5pdGVkcQd1Lg==	2013-10-19 17:36:24.726738-03
+k7az20jlufcn1cnshh6jeph2yilb4uia	NTY5N2U3MDg0NzQwNTI2ZTc4NDk0MDUwYmQwZTZjM2MyNjU5YTRkMDqAAn1xAShVDV9hdXRoX3VzZXJfaWRxAksBVRJfYXV0aF91c2VyX2JhY2tlbmRxA1UpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmRxBFgPAAAAX3Nlc3Npb25fZXhwaXJ5cQVLAFUIdGVtcGxhdGVxBlgGAAAAZmxhdGx5cQd1Lg==	2013-10-22 02:14:21.806498-02
+f42f3w7auhky9mdhlgqgb92pns23nmcl	OWExYmMyY2RkNDM1Njc3MmNiMzVhNjBhM2EwM2MxN2RkNTIyNmVkYzqAAn1xAShVDV9hdXRoX3VzZXJfaWRxAksBVRJfYXV0aF91c2VyX2JhY2tlbmRxA1UpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmRxBFgPAAAAX3Nlc3Npb25fZXhwaXJ5cQVLAFUIdGVtcGxhdGVxBlUGZmxhdGx5cQd1Lg==	2013-10-24 02:30:49.807315-02
+kw5qwps4nhks70ukkqutjb6r7li2x8ry	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-11-04 20:17:42.344608-02
+n156h2u8kcvvqze0cclkxfohp07cerp8	OGVjNzZhMjQwMDVjOTU5ZTBjM2IxYzg3MDBlYzgwMTY1MzU1N2EyYzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAVUIdGVtcGxhdGVxBlgGAAAAdW5pdGVkcQd1Lg==	2013-10-25 00:23:17.39424-02
+zz1qq6mbb5905pzcmrztykwleafknksf	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-25 01:00:35.781127-02
+ryztnqc1mnja36azfbqft8niz2v6d76t	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-25 01:35:42.922486-02
+o76xyqan1ffczsnmaavw6l0v3l0qn92m	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-25 10:57:52.534735-02
+17pry3403dvtyibsl6lntyw9ylnz3ikp	OWExYmMyY2RkNDM1Njc3MmNiMzVhNjBhM2EwM2MxN2RkNTIyNmVkYzqAAn1xAShVDV9hdXRoX3VzZXJfaWRxAksBVRJfYXV0aF91c2VyX2JhY2tlbmRxA1UpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmRxBFgPAAAAX3Nlc3Npb25fZXhwaXJ5cQVLAFUIdGVtcGxhdGVxBlUGZmxhdGx5cQd1Lg==	2013-10-28 00:05:42.405899-02
+se0jvgg6dyc9ixmhmgwj81tscyowzhnj	Y2M5Mjk0YTcwMDlkYjA5NzY2MmJhMzBlNzNiOTkxM2QwZmZkOTFmNTqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVFmFjY291bnRfdmVyaWZpZWRfZW1haWxxA05VEl9hdXRoX3VzZXJfYmFja2VuZHEEVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEFVQ1fYXV0aF91c2VyX2lkcQZLAVUTc29jaWFsYWNjb3VudF9zdGF0ZXEHfXEIVQdwcm9jZXNzcQlVBWxvZ2lucQpzWAwAAABkcVhEVldmTUJ5QVWGcQt1Lg==	2013-11-04 22:48:55.26802-02
+z01j8xmpam2k6wil5knje79y0m2ec6vm	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-11-05 22:36:44.278026-02
+pxv49xckbct6y8u7epmxgudp05vlfza0	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-11-07 00:40:16.51371-02
+8hx2luq090s2mfn2c8p0w3jv3ikcp0ex	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-11-08 19:34:29.115989-02
+drm3g7qplortxzlp417w3len5w4l8vxa	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-11-08 22:37:42.576611-02
+r928nbf5zmilbf982cwrf4oriciifzyh	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-10-31 19:20:28.346132-02
+ao6jhyljvib9rquegmndjcfjg41f620c	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-11-09 18:28:06.737734-02
+6dpyikjnq5iskd49uzzpzfuk7ekvgcbx	NTAwYzUxNGVlYzcxMmI3NTkyYTJiNzBiYTNmYjEzYTkyNzBjMDJmMTqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAVUIdGVtcGxhdGVxBlgIAAAAY2VydWxlYW5xB3Uu	2013-11-10 20:28:58.630064-02
+kj5dgrfwfmf5ouvnd79k42fw5x93j51c	OWExYmMyY2RkNDM1Njc3MmNiMzVhNjBhM2EwM2MxN2RkNTIyNmVkYzqAAn1xAShVDV9hdXRoX3VzZXJfaWRxAksBVRJfYXV0aF91c2VyX2JhY2tlbmRxA1UpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmRxBFgPAAAAX3Nlc3Npb25fZXhwaXJ5cQVLAFUIdGVtcGxhdGVxBlUGZmxhdGx5cQd1Lg==	2013-11-11 23:58:05.237752-02
+5h03z2arghk0igv2bomjd5h0tfbzfzq3	MTExODQyMjIzNDE2MWRkM2IyODc4ZGU5OGZhOGE5NzA5NTU3NzYyZjqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAVUIdGVtcGxhdGVxBlgFAAAAc2xhdGVxB3Uu	2013-11-12 01:31:12.613405-02
+hvl1awghb4gafjk2wk40i6e63rd3wvwk	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-11-12 11:01:46.82089-02
+q7bgzgw6msox5n3n642c6nx36y086zoh	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-11-14 10:30:56.927419-02
+hoii0qqwqgvmtpj1lgf0fyf6epcmqqlx	ZjZiMzIwNjg2OTcyZjFkYmM1ZGI5ZjdmZGE2MWM5MTI5MTEzYzQ5NTqAAn1xAShVDV9hdXRoX3VzZXJfaWRxAksBVRJfYXV0aF91c2VyX2JhY2tlbmRxA1UpZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmRxBFgPAAAAX3Nlc3Npb25fZXhwaXJ5cQVLAFUIdGVtcGxhdGVxBlgFAAAAc2xhdGVxB3Uu	2013-11-14 15:53:22.984181-02
+neq3mv6od4vle9pp3lxhlj7p3l4dely6	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-11-14 21:47:46.572727-02
+2hdguk5hnmp0vyrkwxgkvjg0v8zzc0yz	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-11-16 12:53:56.313213-02
+0y8c7hnynsz31f5jvg6a4rf6j2b5jk6s	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-11-17 19:38:33.196778-02
+cf97abom06p7oibicvy3i2vdid31f7ub	YWRjN2NlZjFkODg3NGRkNmViNmEwOGY4NjljOGY2N2RiMGJlNjI3YzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAXUu	2013-11-18 22:01:42.353234-02
+57fl8lwhpx8kurzbfjvugus87kro5pog	YzM4OTM3MDFlZTQ0OWFiYTViZDQ2ZDRmYWUyMWQ1Zjg3NmYzZjMyNzqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAVUIdGVtcGxhdGVxBlgIAAAAc3BhY2VsYWJxB3Uu	2013-11-23 00:17:39.003465-02
+kkx3vzx0947175uve9hz0six4y82t9ps	NDIxMzk4YWVhNjZjNzMyYjVkZTg0Zjk4ZmJhODU0NTYxMjdkZGE3NDqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBVEl9hdXRoX3VzZXJfYmFja2VuZHEDVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEEVQ1fYXV0aF91c2VyX2lkcQVLAVUIdGVtcGxhdGVxBlgHAAAAam91cm5hbHEHdS4=	2013-11-28 19:13:32.765156-02
+gk3336b22xcw90cfdalkzgsn689e6c36	OWEyZWE5MTliMDRlYWJjMTMxY2UyNzdhNWMxYzAwNGMwNWYzMjQ0YjqAAn1xAShYDwAAAF9zZXNzaW9uX2V4cGlyeXECSwBYCgAAAHRlc3Rjb29raWVxA1gGAAAAd29ya2VkcQRVEl9hdXRoX3VzZXJfYmFja2VuZHEFVSlkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZHEGVQ1fYXV0aF91c2VyX2lkcQdLAXUu	2013-12-16 23:27:57.387734-02
+\.
+
+
+--
+-- Data for Name: django_site; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY django_site (id, domain, name) FROM stdin;
+4	http://projetos.inteliform.com.br/asdf/	InteliForm
+5	192.168.2.145:8091/inteliform	192.168.2.145:8091
+6	192.168.43.100:8091/inteliform	192.168.43.100:8091
+1	192.168.43.100:8091	192.168.43.100:8091
+\.
+
+
+--
+-- Data for Name: elemento_choices_grupo_permissoes; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY elemento_choices_grupo_permissoes (id, choice_desc) FROM stdin;
+1	Criar
+2	Ver
+3	Editar
+4	Excluir
+5	Sem Permissões
+\.
+
+
+--
+-- Data for Name: elemento_choices_todos_permissoes; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY elemento_choices_todos_permissoes (id, todos_choice_desc) FROM stdin;
+1	Criar
+2	Ver
+3	Editar
+4	Excluir
+5	Sem Permissões
+\.
+
+
+--
+-- Data for Name: elemento_elemento; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY elemento_elemento (id, created_by_id, slug, sistema_id, nome, descricao_curta, descricao_completa, eh_usuario, visibilidade, permission_create_id, permission_read_id, permission_update_id, permission_delete_id, grupo, posicao_menu, validade, qt_elementos) FROM stdin;
+4	1	papel_4	25	Papel			f	staff_only	\N	\N	\N	\N		\N	f	f
+12	1	trabalho_12	27	Trabalho		<b>Você é um jornalista freelance que não recebeu pelo seu trabalho?</b><br>\r\nÉ hora de dar nome aos bois.  Conte-nos o quanto devem-lhe e o trabalho que foi feito. Isso será adicionado automaticamente ao site. Você poderá marcar quando for resolvido.	f	\N	\N	\N	\N	\N		\N	f	f
+7	1	tecnologias_7	25	Tecnologias			f	staff_only	\N	\N	\N	\N		\N	f	f
+5	1	projetos_5	25	Projetos			f	superuser_only	\N	\N	\N	\N		\N	f	f
+2	1	profissionais_2	25	Profissionais	Perfil profissional	O preenchimento dos conhecimentos técnicos e da sua atuação profissional é importante para que todos os envolvidos nos projetos conheçam o seu perfil.	t	\N	\N	\N	\N	\N	Time	\N	f	f
+1	1	tarefas_1	25	Tarefas			f	\N	\N	profissionais_2	profissionais_2	profissionais_2	Time	\N	f	f
+6	1	conhecimentos_6	25	Conhecimentos			f	staff_only	\N	profissionais_2	\N	\N		\N	f	f
+9	1	perfil_do_investidor_9	26	Perfil do Investidor		\r\n        <p><b>Como você lida com as expectativas financeiras</b></p>\r\n        \r\n            <p><b>Conservador -</b> Visa segurança em seus investimentos e opta por aplicações com riscos mínimos de perdas. Opera com: Ações, Tesouro Direto, BTC e IPO. <br><br><b>Moderado -</b> Procura caminhos seguros para seus investimentos e que, ao mesmo tempo, forneçam melhor rentabilidade, estando disposto a correr riscos medianos. Opera com: Ações, Tesouro Direto, BTC, IPO, Conta Margem, Venda a Descoberto e Opções. <br> <br><b>Agressivo -</b> Busca ganhos acima da média para seus investimentos e está disposto acorrer riscos na mesma proporção. Opera com: Ações, Tesouro Direto, BTC, IPO, Conta Margem, Venda a Descoberto, Opções, BM&F e Termo</p>	t	\N	\N	\N	\N	\N		2	f	t
+8	1	dados_pessoais_8	26	Dados Pessoais		Verificamos os seus dados para evitar duplicação de identidades e para conhecermos você melhor.\r\n	t	\N	\N	\N	\N	\N		1	f	t
+10	1	dados_de_patrimonio_10	26	Dados de Patrimônio		Como estão distribuídos os seus investimentos e as suas receitas\r\n	t	\N	\N	\N	\N	\N		3	f	t
+11	1	endereco_residencial_11	26	Endereço Residencial			t	\N	\N	\N	\N	\N		4	f	t
+\.
+
+
+--
+-- Data for Name: elemento_elemento_grupo_permissoes; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY elemento_elemento_grupo_permissoes (id, elemento_id, choices_grupo_permissoes_id) FROM stdin;
+34	4	5
+47	2	5
+48	1	1
+49	1	2
+\.
+
+
+--
+-- Data for Name: elemento_elemento_todos_permissoes; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY elemento_elemento_todos_permissoes (id, elemento_id, choices_todos_permissoes_id) FROM stdin;
+6	7	2
+9	5	2
+10	2	2
+12	12	2
+\.
+
+
+--
+-- Data for Name: relacionamentos_relacionamentos; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY relacionamentos_relacionamentos (id, created_by_id, sistema_id, elemento_id, tipo_relacionamento, relates_to_id, obrigatorio) FROM stdin;
+31	1	25	14	3	equipes_17	t
+5	1	19	6	2	criancas_2	t
+6	1	19	6	2	promocoes_5	t
+28	1	25	19	3	equipes_17	t
+8	1	19	11	2	produtos_7	f
+9	1	19	11	2	promocoes_5	f
+7	1	19	11	3	criancas_2	t
+14	1	25	2	3	papel_4	t
+29	1	25	2	3	conhecimentos_6	t
+23	1	25	2	3	tecnologias_7	t
+16	1	25	13	3	profissionais_14	f
+21	1	25	2	3	projetos_5	f
+22	1	25	1	2	projetos_5	t
+33	1	25	1	2	profissionais_2	f
+\.
+
+
+--
+-- Data for Name: sistema_sistema; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY sistema_sistema (id, created_by_id, slug, logotipo, nome, descricao_curta, boas_vindas, instrucoes, template, data_criacao, data_alteracao) FROM stdin;
+26	1	trasys_trading_system_26	logos/trasys-trading-system/trasys.png	trasys - Trading System	Cadastro do Investidor	Seja bem-vindo ao nosso sistema, cadastre-se para ter acesso. <br>\r\nVocê terá controle total sobre as suas informações e poderá criar, editar e excluir os seus conteúdos quando desejar.	<p>Esse sistema foi inteiramente desenvolvido através do InteliForm. Para continuar testando o sistema, navegue nos itens do menu acima. \r\n</p>\r\n<p>\r\nTodos os formulários preenchidos são armazenados em uma base de dados, e podem ser acessados pela interface administrativa, gerada automaticamente pelo <a href="http://www.inteliform.com.br" target="_blank">InteliForm.</a>\r\n<br>\r\nPara acessar a interface administrativa, clique <a href="http://projetos.inteliform.com.br/trasys_3/administrativo/" target="_blank">aqui</a>.\r\n<br>\r\nUsuário: <b> teste</b><br>\r\nSenha: <b>teste</b>\r\n</p>	spacelab	2013-11-08 19:17:20.672386-02	2013-11-09 00:29:03.641815-02
+21	1	facebook_21		Facebook	Teste para o Facebook Apps	Seja bem-vindo ao nosso sistema, cadastre-se para ter acesso. <br>\r\nVocê terá controle total sobre as suas informações e poderá criar, editar e excluir os seus conteúdos quando desejar.	Seja bem-vindo ao nosso sistema. <br>\r\nPara navegar, clique nos itens do menu acima.	flatly	2013-10-13 23:05:42.386758-03	2013-10-13 23:05:42.400713-03
+23	22	asdf_23		asdf	asdf	Seja bem-vindo ao nosso sistema, cadastre-se para ter acesso. <br>\r\nVocê terá controle total sobre as suas informações e poderá criar, editar e excluir os seus conteúdos quando desejar.	Seja bem-vindo ao nosso sistema. <br>\r\nPara navegar, clique nos itens do menu acima.	flatly	2013-10-17 10:55:59.265002-03	2013-10-17 10:55:59.279174-03
+24	1	inteliform_24		InteliForm		Seja bem-vindo ao nosso sistema, cadastre-se para ter acesso. <br>\r\nVocê terá controle total sobre as suas informações e poderá criar, editar e excluir os seus conteúdos quando desejar.	Seja bem-vindo ao nosso sistema. <br>\r\nPara navegar, clique nos itens do menu acima.	cerulean	2013-10-24 18:42:24.712683-02	2013-10-24 18:42:24.732211-02
+19	1	catavento_fotografia_19	logos/asdf/catavento.png	Catavento Fotografia		O Catavento Fotografia Infantil é especializado em fotografar crianças, com produções, fantasias, acessórios, e profissionais especializadas.\r\n\r\nBuscamos sempre a qualidade, desde a produção de cenários, a diversificação na composição fotográfica, tempo de atendimento, o cuidado no tratamento da imagem, gerando um produto exclusivo e de alta qualidade. Com produções exclusivas e diferenciadas, estamos sempre investindo em acessórios e buscando o que há de melhor.\r\n\r\nPriorizamos no nosso trabalho: o bem-estar da criança, independente da idade, respeitando seu tempo para adaptação ao ambiente.\r\n\r\nCadastre-se para acessar as nossas promoções. \r\n	Seja bem-vindo!<br>\r\nClique nos itens do menu acima para navegar no sistema.	cerulean	2013-10-10 18:04:08.989636-03	2013-10-27 20:29:01.093002-02
+25	1	gerenciador_de_tarefas_25	logos/gerenciador-de-tarefas/gerenciador_tarefas.png	Gerenciador de Tarefas		Seja bem-vindo ao nosso sistema, cadastre-se para ter acesso. <br>\r\nVocê terá controle total sobre as suas informações e poderá criar, editar e excluir os seus conteúdos quando desejar.	Seja bem-vindo ao nosso sistema. <br>\r\nPara navegar, clique nos itens do menu acima.	slate	2013-10-28 23:58:05.219879-02	2013-10-31 15:53:33.812239-02
+27	1	pague_me_por_favor_27		Pague-me por favor	Quando o publisher não paga-lhe, deixe o mundo saber	<p>\r\nEsse site é uma versão brasileira do <a href="http://www.beaconreader.com/pay-me-please">PAY ME PLEASE</a> \r\n</p>\r\n\r\n<p>\r\nSegue a história desse sistema. Eu tenho uma ferramenta de monitoramento de mídias sociais o <a href="http://www.brawler.com.br">Brawler - Brazilian Crawler</a>. Eu uso o Brawler para alimentar uma fan page no Facebook chamada Multiplicador de Trampos. Essa página reposta ofertas de empregos, freelas etc, para profissionais de comunicação.<br>\r\nAtravés do Brawler, eu cheguei ao perfil do <a href="https://www.facebook.com/cado.rocha">Ricardo Rocha</a>, com o post sobre o "PAY ME PLEASE" e resolvi desenvolver o "PAGUE-ME POR FAVOR".\r\n</p> \r\n\r\n<p>\r\nEsse sistema foi feito através do <a href="http://www.inteliform.com.br">InteliForm</a>, outra ferramenta minha que uso para desenvolver sistemas. <br>\r\nEu desenvolvi esse sistema no InteliForm para testá-lo, porque ele está em fase de desenvolvimento e testes. O tempo gasto para desenvolver o "PAGUE-ME POR FAVOR" foi de 1 hora.\r\n</p>\r\n\r\n<p>\r\nFaçam bom uso, não me responsabilizo por qualquer informação postada aqui, porém informações suspeitas ou inconsistentes serão apagadas.\r\n</p>	Seja bem-vindo ao PAGUE-ME POR FAVOR. <br>\r\nPara navegar, clique nos itens do menu acima.	journal	2013-11-14 19:20:30.707841-02	2013-11-14 20:01:04.681201-02
+\.
+
+
+--
+-- Data for Name: socialaccount_socialaccount; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY socialaccount_socialaccount (id, user_id, provider, uid, last_login, date_joined, extra_data) FROM stdin;
+\.
+
+
+--
+-- Data for Name: socialaccount_socialapp; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY socialaccount_socialapp (id, provider, name, client_id, key, secret) FROM stdin;
+1	facebook	Inteliform	235437346610908		723f348235a7d1accf6e29e50013e951
+\.
+
+
+--
+-- Data for Name: socialaccount_socialapp_sites; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY socialaccount_socialapp_sites (id, socialapp_id, site_id) FROM stdin;
+1	1	1
+\.
+
+
+--
+-- Data for Name: socialaccount_socialtoken; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY socialaccount_socialtoken (id, app_id, account_id, token, token_secret, expires_at) FROM stdin;
+\.
+
+
+--
+-- Data for Name: wysiwyg_forms_choice; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY wysiwyg_forms_choice (id, field_id, slug, label, "position") FROM stdin;
+76	144	solteiro	Solteiro	0
+62	86	conservador	Conservador	0
+63	86	moderado	Moderado	1
+59	84	onetoonefield	OneToOneField	0
+60	84	foreignkey	ForeignKey	1
+61	84	manytomanyfield	ManyToManyField	2
+64	86	agressivo	Agressivo	2
+73	133	basico	Básico	0
+74	133	intermediario	Intermediário	1
+75	133	avancado	Avançado	2
+77	144	separado_judicialmente	Separado Judicialmente	1
+78	144	viuvoa	Viuvo(a)	2
+79	144	divorciadoa	Divorciado(a)	3
+80	144	casadoa_com_brasileiroa_natoa	Casado(a) com brasileiro(a) nato(a)	4
+81	144	casadoa_com_brasileiroa_naturalizadoa	Casado(a) com brasileiro(a) naturalizado(a)	5
+82	144	casadoa_com_estrangeiroa	Casado(a) com estrangeiro(a)	6
+83	144	uniao_estavel	União estável	7
+86	148	sim	Sim	0
+87	148	nao	Não	1
+88	149	sim	Sim	0
+89	149	nao	Não	1
+84	151	sim	Sim	0
+85	151	nao	Não	1
+34	49	mae	Mãe	0
+35	49	pai	Pai	1
+41	49	irmao	Irmã(o)	2
+42	49	avoo	Avó(ô)	3
+43	49	tiao	Tia(o)	4
+44	49	primao	Prima(o)	5
+45	49	baba	Babá	6
+58	49	outros	Outros	7
+\.
+
+
+--
+-- Data for Name: wysiwyg_forms_field; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY wysiwyg_forms_field (id, form_id, slug, label, help_text, type, "position", required, widget) FROM stdin;
+138	54	aplicacoes_financeiras	Aplicações Financeiras		CharField	0	t	TextInput
+139	54	bens_imoveis	Bens Imóveis		CharField	1	t	TextInput
+140	54	salario	Salário		CharField	2	t	TextInput
+112	51	papel	Papel		CharField	0	t	TextInput
+141	54	outros_rendimentos	Outros Rendimentos		CharField	3	t	TextInput
+159	55	pendencia_resolvida	Pendência resolvida	Clique aqui se a pendência foi resolvida.	BooleanField	7	t	CheckboxInput
+113	51	descricao	Descrição		CharField	1	f	Textarea
+119	45	esforco_em_horas_realizado	Esforço em horas (realizado)	Digite somente números	IntegerField	6	f	TextInput
+121	23	nome	Nome		CharField	0	t	TextInput
+83	38	nome	Nome		CharField	0	t	TextInput
+145	38	numero_de_documento	Número de documento		CharField	4	t	TextInput
+146	38	orgao_emissor	Orgão Emissor		CharField	5	t	TextInput
+150	38	instituicao_que_trabalha	Instituição que trabalha		CharField	9	t	TextInput
+152	55	nome	Nome	Você deve digitar o seu nome se você quiser que ele apareça. Não é obrigatório.	CharField	0	f	TextInput
+153	55	e_mail	e-mail	Você deve digitar o seu e-mail se quiser que ele apareça. Não é obrigatório.	EmailField	1	f	TextInput
+91	42	cep	CEP	Digite somente números\n	IntegerField	0	t	TextInput
+92	42	logradouro	Logradouro		CharField	1	t	TextInput
+93	42	numero	Número		CharField	2	t	TextInput
+94	42	complemento	Complemento		CharField	3	f	Textarea
+157	55	descricao_do_trabalho	Descrição do trabalho		CharField	3	t	Textarea
+155	55	valor	Valor	Quanto devem-lhe?	CharField	4	t	TextInput
+95	42	bairro	Bairro		CharField	4	t	Textarea
+85	39	tipos_de_relacionamentos	Tipos de relacionamentos		MultipleChoiceField	0	t	CheckboxSelectMultiple
+142	38	nome_da_mae	Nome da Mãe		CharField	1	t	TextInput
+143	38	nome_do_pai	Nome do Pai		CharField	2	t	TextInput
+144	38	estado_civil	Estado Civil		ChoiceField	3	t	Select
+147	38	data_emissao	Data Emissão		CharField	6	t	TextInput
+148	38	opera_por_conta_propria	Opera por conta própria		ChoiceField	7	t	Select
+99	46	nome	Nome		CharField	0	t	TextInput
+122	52	titulo	Título		CharField	0	t	TextInput
+124	33	titulo	Título		CharField	0	t	TextInput
+129	33	descricao_do_projeto	Descrição do Projeto		CharField	1	f	Textarea
+130	33	stakeholders	Stakeholders	Liste os principais interessados e beneficiados por esse projeto.	CharField	2	f	Textarea
+131	33	data_de_inicio	Data de início		DateField	3	t	DateInput
+132	33	data_prevista_de_finalizacao	Data prevista de finalização		DateField	4	t	DateInput
+123	53	apelido	Apelido		CharField	0	t	TextInput
+100	45	nome	Nome		CharField	0	t	TextInput
+114	45	descricao	Descrição		CharField	1	t	Textarea
+115	45	data_de_inicio	Data de início		DateField	2	t	DateInput
+116	45	data_termino_previsto	Data término (previsto)		DateField	3	t	DateInput
+117	45	data_terminio_realizado	Data términio (realizado)		DateField	4	f	DateInput
+118	45	esforco_em_horas_previsto	Esforço em horas (previsto)	Digite somente números	IntegerField	5	t	TextInput
+105	49	nome	Nome		CharField	0	t	TextInput
+106	49	atribuicoes	Atribuições	Descreva as atribuições da equipe.	CharField	1	f	Textarea
+86	40	perfil_do_investidor	Perfil do Investidor		ChoiceField	0	t	Select
+104	48	etapa	Etapa		CharField	0	t	TextInput
+107	48	descricao	Descrição		CharField	1	f	Textarea
+149	38	e_pessoa_vinculada	É pessoa vinculada	Vinculada à alguma corretora de valores mobiliários.	ChoiceField	8	t	Select
+151	38	autorizo_a_transmissao_de_ordens_por_meio_de_repre	Autorizo a transmissão de ordens por meio de representante legal ou procurador		ChoiceField	10	t	Select
+98	47	nome	Nome		CharField	0	t	TextInput
+108	47	descricao	Descrição	Detalhe o projeto	CharField	1	f	Textarea
+109	47	data_de_inicio	Data de início		DateField	2	t	DateInput
+133	40	conhecimento_financeiro	Conhecimento Financeiro		ChoiceField	1	t	Select
+110	50	conhecimento	Conhecimento		CharField	0	t	TextInput
+111	50	descricao	Descrição		CharField	1	f	Textarea
+125	34	nome	Nome		CharField	0	t	TextInput
+126	36	nome	Nome		CharField	0	t	TextInput
+134	42	cidade	Cidade		CharField	5	t	TextInput
+135	42	estado	Estado		CharField	6	t	TextInput
+136	42	telefone	Telefone	Digite somente números	IntegerField	7	t	TextInput
+137	42	celular	Celular	Digite somente números	CharField	8	t	TextInput
+154	55	midia	Mídia	Quem deve para você?	CharField	2	t	TextInput
+158	55	dias_atrasados	Dias atrasados	Números de dias em atraso no pagamento. Digite somente números.	IntegerField	5	t	TextInput
+156	55	link_para_o_trabalho	Link para o trabalho	Se for um trabalho online e você quiser identificá-lo, digite a URL.	URLField	6	f	TextInput
+\.
+
+
+--
+-- Data for Name: wysiwyg_forms_form; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY wysiwyg_forms_form (id, created_by_id, elemento_id, slug, name, revision, description) FROM stdin;
+40	1	9	perfil_do_investidor	Perfil do Investidor	5-06bc3cbc91564e0087246235c7e09828	Essa descrição não é apresentada no seu sistema. Se você quiser pode utilizá-la para armazenar algum tipo de instrução referente a esse formulário para o seu próprio uso.
+49	1	17	equipe	Equipe	7-86095396693d4a038cc8afda84bb8799	Essa descrição não é apresentada no seu sistema. Se você quiser pode utilizá-la para armazenar algum tipo de instrução referente a esse formulário para o seu próprio uso.
+52	1	1	tarefas	Tarefas	2-59d2f1e920904503bce297b59f792e53	Essa descrição não é apresentada no seu sistema. Se você quiser pode utilizá-la para armazenar algum tipo de instrução referente a esse formulário para o seu próprio uso.
+36	1	7	tecnologias	Tecnologias	4-c61f8afb7ae04522a6aec9b0e736be02	Essa descrição não é apresentada no seu sistema. Se você quiser pode utilizá-la para armazenar algum tipo de instrução referente a esse formulário para o seu próprio uso.
+39	1	9	titulo_do_formulario_relacionamentos	Título do formulário Relacionamentos	0-2456462eecbe410cba323493cd755341	Essa descrição não é apresentada no seu sistema. Se você quiser pode utilizá-la para armazenar algum tipo de instrução referente a esse formulário para o seu próprio uso.
+46	1	14	profissional	Profissional	1-e824d89ec82946648cde5ea2335498ac	Essa descrição não é apresentada no seu sistema. Se você quiser pode utilizá-la para armazenar algum tipo de instrução referente a esse formulário para o seu próprio uso.
+48	1	16	etapas	Etapas	6-6bbd24f0bb484bf982a19c412a11cd8d	
+51	1	19	papel	Papel	1-30d0f6abce4d4d9ab8d5e79f2c0bc477	Essa descrição não é apresentada no seu sistema. Se você quiser pode utilizá-la para armazenar algum tipo de instrução referente a esse formulário para o seu próprio uso.
+47	1	15	projeto	Projeto	4-0e1ed1b4bb6c488d9a137b09838eb54b	Essa descrição não é apresentada no seu sistema. Se você quiser pode utilizá-la para armazenar algum tipo de instrução referente a esse formulário para o seu próprio uso.
+50	1	18	conhecimentos	Conhecimentos	1-f9b937edbaf542e3a1659086296b67c7	Essa descrição não é apresentada no seu sistema. Se você quiser pode utilizá-la para armazenar algum tipo de instrução referente a esse formulário para o seu próprio uso.
+45	1	13	tarefa	Tarefa	4-af1a757c847142fbaf48978dba5b1554	Essa descrição não é apresentada no seu sistema. Se você quiser pode utilizá-la para armazenar algum tipo de instrução referente a esse formulário para o seu próprio uso.
+33	1	5	projeto	Projeto	12-c0342369def747f6a7fe51eea0538667	Essa descrição não é apresentada no seu sistema. Se você quiser pode utilizá-la para armazenar algum tipo de instrução referente a esse formulário para o seu próprio uso.
+23	1	4	papel	Papel	22-3684188d8b0a4ba087bcf38bdc5d3050	
+34	1	6	conhecimentos	Conhecimentos	3-ce51d3ab2c5e4033b247772470a6a2e1	Essa descrição não é apresentada no seu sistema. Se você quiser pode utilizá-la para armazenar algum tipo de instrução referente a esse formulário para o seu próprio uso.
+53	1	2	profissional	Profissional	2-886a3ab11ab04126b286eac5f33573bd	Essa descrição não é apresentada no seu sistema. Se você quiser pode utilizá-la para armazenar algum tipo de instrução referente a esse formulário para o seu próprio uso.
+54	1	10	dados_de_patrimonio	Dados de Patrimônio	1-e99b43998bcc4a47aa0708a4f8fb08c4	Essa descrição não é apresentada no seu sistema. Se você quiser pode utilizá-la para armazenar algum tipo de instrução referente a esse formulário para o seu próprio uso.
+38	1	8	dados_pessoais	Dados Pessoais	10-98ac6e958c484e9f96c9e878a578ff66	Essa descrição não é apresentada no seu sistema. Se você quiser pode utilizá-la para armazenar algum tipo de instrução referente a esse formulário para o seu próprio uso.
+42	1	11	endereco_residencial	Endereço Residencial	7-2c1d7a9166724ff683cdffd230910517	Essa descrição não é apresentada no seu sistema. Se você quiser pode utilizá-la para armazenar algum tipo de instrução referente a esse formulário para o seu próprio uso.
+55	1	12	adicione_o_seu_trabalho	Adicione o seu Trabalho	17-3a4ea7f39df24b4194ba11220dd7695e	Essa descrição não é apresentada no seu sistema. Se você quiser pode utilizá-la para armazenar algum tipo de instrução referente a esse formulário para o seu próprio uso.
+\.
+
+
+--
+-- Name: account_emailaddress_email_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY account_emailaddress
+    ADD CONSTRAINT account_emailaddress_email_key UNIQUE (email);
+
+
+--
+-- Name: account_emailaddress_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY account_emailaddress
+    ADD CONSTRAINT account_emailaddress_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: account_emailconfirmation_key_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY account_emailconfirmation
+    ADD CONSTRAINT account_emailconfirmation_key_key UNIQUE (key);
+
+
+--
+-- Name: account_emailconfirmation_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY account_emailconfirmation
+    ADD CONSTRAINT account_emailconfirmation_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_group_name_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_group
+    ADD CONSTRAINT auth_group_name_key UNIQUE (name);
+
+
+--
+-- Name: auth_group_permissions_group_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_group_id_key UNIQUE (group_id, permission_id);
+
+
+--
+-- Name: auth_group_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_group_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_group
+    ADD CONSTRAINT auth_group_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_permission_content_type_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_permission
+    ADD CONSTRAINT auth_permission_content_type_id_key UNIQUE (content_type_id, codename);
+
+
+--
+-- Name: auth_permission_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_permission
+    ADD CONSTRAINT auth_permission_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_groups_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user_groups
+    ADD CONSTRAINT auth_user_groups_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_groups_user_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user_groups
+    ADD CONSTRAINT auth_user_groups_user_id_key UNIQUE (user_id, group_id);
+
+
+--
+-- Name: auth_user_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user
+    ADD CONSTRAINT auth_user_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_user_permissions_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: auth_user_user_permissions_user_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_user_id_key UNIQUE (user_id, permission_id);
+
+
+--
+-- Name: auth_user_username_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY auth_user
+    ADD CONSTRAINT auth_user_username_key UNIQUE (username);
+
+
+--
+-- Name: django_admin_log_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY django_admin_log
+    ADD CONSTRAINT django_admin_log_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_content_type_app_label_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY django_content_type
+    ADD CONSTRAINT django_content_type_app_label_key UNIQUE (app_label, model);
+
+
+--
+-- Name: django_content_type_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY django_content_type
+    ADD CONSTRAINT django_content_type_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_flatpage_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY django_flatpage
+    ADD CONSTRAINT django_flatpage_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_flatpage_sites_flatpage_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY django_flatpage_sites
+    ADD CONSTRAINT django_flatpage_sites_flatpage_id_key UNIQUE (flatpage_id, site_id);
+
+
+--
+-- Name: django_flatpage_sites_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY django_flatpage_sites
+    ADD CONSTRAINT django_flatpage_sites_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: django_session_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY django_session
+    ADD CONSTRAINT django_session_pkey PRIMARY KEY (session_key);
+
+
+--
+-- Name: django_site_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY django_site
+    ADD CONSTRAINT django_site_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: elemento_choices_grupo_permissoes_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY elemento_choices_grupo_permissoes
+    ADD CONSTRAINT elemento_choices_grupo_permissoes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: elemento_choices_todos_permissoes_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY elemento_choices_todos_permissoes
+    ADD CONSTRAINT elemento_choices_todos_permissoes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: elemento_elemento_grupo_permissoes_elemento_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY elemento_elemento_grupo_permissoes
+    ADD CONSTRAINT elemento_elemento_grupo_permissoes_elemento_id_key UNIQUE (elemento_id, choices_grupo_permissoes_id);
+
+
+--
+-- Name: elemento_elemento_grupo_permissoes_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY elemento_elemento_grupo_permissoes
+    ADD CONSTRAINT elemento_elemento_grupo_permissoes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: elemento_elemento_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY elemento_elemento
+    ADD CONSTRAINT elemento_elemento_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: elemento_elemento_slug_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY elemento_elemento
+    ADD CONSTRAINT elemento_elemento_slug_key UNIQUE (slug);
+
+
+--
+-- Name: elemento_elemento_todos_permissoes_elemento_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY elemento_elemento_todos_permissoes
+    ADD CONSTRAINT elemento_elemento_todos_permissoes_elemento_id_key UNIQUE (elemento_id, choices_todos_permissoes_id);
+
+
+--
+-- Name: elemento_elemento_todos_permissoes_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY elemento_elemento_todos_permissoes
+    ADD CONSTRAINT elemento_elemento_todos_permissoes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: relacionamentos_relacionamentos_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY relacionamentos_relacionamentos
+    ADD CONSTRAINT relacionamentos_relacionamentos_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: sistema_sistema_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY sistema_sistema
+    ADD CONSTRAINT sistema_sistema_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: sistema_sistema_slug_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY sistema_sistema
+    ADD CONSTRAINT sistema_sistema_slug_key UNIQUE (slug);
+
+
+--
+-- Name: socialaccount_socialaccount_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY socialaccount_socialaccount
+    ADD CONSTRAINT socialaccount_socialaccount_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: socialaccount_socialaccount_provider_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY socialaccount_socialaccount
+    ADD CONSTRAINT socialaccount_socialaccount_provider_key UNIQUE (provider, uid);
+
+
+--
+-- Name: socialaccount_socialapp_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY socialaccount_socialapp
+    ADD CONSTRAINT socialaccount_socialapp_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: socialaccount_socialapp_sites_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY socialaccount_socialapp_sites
+    ADD CONSTRAINT socialaccount_socialapp_sites_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: socialaccount_socialapp_sites_socialapp_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY socialaccount_socialapp_sites
+    ADD CONSTRAINT socialaccount_socialapp_sites_socialapp_id_key UNIQUE (socialapp_id, site_id);
+
+
+--
+-- Name: socialaccount_socialtoken_app_id_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY socialaccount_socialtoken
+    ADD CONSTRAINT socialaccount_socialtoken_app_id_key UNIQUE (app_id, account_id);
+
+
+--
+-- Name: socialaccount_socialtoken_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY socialaccount_socialtoken
+    ADD CONSTRAINT socialaccount_socialtoken_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: wysiwyg_forms_choice_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY wysiwyg_forms_choice
+    ADD CONSTRAINT wysiwyg_forms_choice_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: wysiwyg_forms_field_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY wysiwyg_forms_field
+    ADD CONSTRAINT wysiwyg_forms_field_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: wysiwyg_forms_form_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY wysiwyg_forms_form
+    ADD CONSTRAINT wysiwyg_forms_form_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: account_emailaddress_email_like; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX account_emailaddress_email_like ON account_emailaddress USING btree (email varchar_pattern_ops);
+
+
+--
+-- Name: account_emailaddress_user_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX account_emailaddress_user_id ON account_emailaddress USING btree (user_id);
+
+
+--
+-- Name: account_emailconfirmation_email_address_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX account_emailconfirmation_email_address_id ON account_emailconfirmation USING btree (email_address_id);
+
+
+--
+-- Name: account_emailconfirmation_key_like; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX account_emailconfirmation_key_like ON account_emailconfirmation USING btree (key varchar_pattern_ops);
+
+
+--
+-- Name: auth_group_name_like; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX auth_group_name_like ON auth_group USING btree (name varchar_pattern_ops);
+
+
+--
+-- Name: auth_group_permissions_group_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX auth_group_permissions_group_id ON auth_group_permissions USING btree (group_id);
+
+
+--
+-- Name: auth_group_permissions_permission_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX auth_group_permissions_permission_id ON auth_group_permissions USING btree (permission_id);
+
+
+--
+-- Name: auth_permission_content_type_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX auth_permission_content_type_id ON auth_permission USING btree (content_type_id);
+
+
+--
+-- Name: auth_user_groups_group_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX auth_user_groups_group_id ON auth_user_groups USING btree (group_id);
+
+
+--
+-- Name: auth_user_groups_user_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX auth_user_groups_user_id ON auth_user_groups USING btree (user_id);
+
+
+--
+-- Name: auth_user_user_permissions_permission_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX auth_user_user_permissions_permission_id ON auth_user_user_permissions USING btree (permission_id);
+
+
+--
+-- Name: auth_user_user_permissions_user_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX auth_user_user_permissions_user_id ON auth_user_user_permissions USING btree (user_id);
+
+
+--
+-- Name: auth_user_username_like; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX auth_user_username_like ON auth_user USING btree (username varchar_pattern_ops);
+
+
+--
+-- Name: django_admin_log_content_type_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX django_admin_log_content_type_id ON django_admin_log USING btree (content_type_id);
+
+
+--
+-- Name: django_admin_log_user_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX django_admin_log_user_id ON django_admin_log USING btree (user_id);
+
+
+--
+-- Name: django_flatpage_sites_flatpage_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX django_flatpage_sites_flatpage_id ON django_flatpage_sites USING btree (flatpage_id);
+
+
+--
+-- Name: django_flatpage_sites_site_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX django_flatpage_sites_site_id ON django_flatpage_sites USING btree (site_id);
+
+
+--
+-- Name: django_flatpage_url; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX django_flatpage_url ON django_flatpage USING btree (url);
+
+
+--
+-- Name: django_flatpage_url_like; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX django_flatpage_url_like ON django_flatpage USING btree (url varchar_pattern_ops);
+
+
+--
+-- Name: django_session_expire_date; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX django_session_expire_date ON django_session USING btree (expire_date);
+
+
+--
+-- Name: django_session_session_key_like; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX django_session_session_key_like ON django_session USING btree (session_key varchar_pattern_ops);
+
+
+--
+-- Name: elemento_elemento_created_by_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX elemento_elemento_created_by_id ON elemento_elemento USING btree (created_by_id);
+
+
+--
+-- Name: elemento_elemento_grupo_permissoes_choices_grupo_permissoes_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX elemento_elemento_grupo_permissoes_choices_grupo_permissoes_id ON elemento_elemento_grupo_permissoes USING btree (choices_grupo_permissoes_id);
+
+
+--
+-- Name: elemento_elemento_grupo_permissoes_elemento_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX elemento_elemento_grupo_permissoes_elemento_id ON elemento_elemento_grupo_permissoes USING btree (elemento_id);
+
+
+--
+-- Name: elemento_elemento_permission_create_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX elemento_elemento_permission_create_id ON elemento_elemento USING btree (permission_create_id);
+
+
+--
+-- Name: elemento_elemento_permission_create_id_like; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX elemento_elemento_permission_create_id_like ON elemento_elemento USING btree (permission_create_id varchar_pattern_ops);
+
+
+--
+-- Name: elemento_elemento_permission_delete_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX elemento_elemento_permission_delete_id ON elemento_elemento USING btree (permission_delete_id);
+
+
+--
+-- Name: elemento_elemento_permission_delete_id_like; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX elemento_elemento_permission_delete_id_like ON elemento_elemento USING btree (permission_delete_id varchar_pattern_ops);
+
+
+--
+-- Name: elemento_elemento_permission_read_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX elemento_elemento_permission_read_id ON elemento_elemento USING btree (permission_read_id);
+
+
+--
+-- Name: elemento_elemento_permission_read_id_like; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX elemento_elemento_permission_read_id_like ON elemento_elemento USING btree (permission_read_id varchar_pattern_ops);
+
+
+--
+-- Name: elemento_elemento_permission_update_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX elemento_elemento_permission_update_id ON elemento_elemento USING btree (permission_update_id);
+
+
+--
+-- Name: elemento_elemento_permission_update_id_like; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX elemento_elemento_permission_update_id_like ON elemento_elemento USING btree (permission_update_id varchar_pattern_ops);
+
+
+--
+-- Name: elemento_elemento_sistema_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX elemento_elemento_sistema_id ON elemento_elemento USING btree (sistema_id);
+
+
+--
+-- Name: elemento_elemento_slug_like; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX elemento_elemento_slug_like ON elemento_elemento USING btree (slug varchar_pattern_ops);
+
+
+--
+-- Name: elemento_elemento_todos_permissoes_choices_todos_permissoes_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX elemento_elemento_todos_permissoes_choices_todos_permissoes_id ON elemento_elemento_todos_permissoes USING btree (choices_todos_permissoes_id);
+
+
+--
+-- Name: elemento_elemento_todos_permissoes_elemento_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX elemento_elemento_todos_permissoes_elemento_id ON elemento_elemento_todos_permissoes USING btree (elemento_id);
+
+
+--
+-- Name: relacionamentos_relacionamentos_created_by_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX relacionamentos_relacionamentos_created_by_id ON relacionamentos_relacionamentos USING btree (created_by_id);
+
+
+--
+-- Name: relacionamentos_relacionamentos_elemento_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX relacionamentos_relacionamentos_elemento_id ON relacionamentos_relacionamentos USING btree (elemento_id);
+
+
+--
+-- Name: relacionamentos_relacionamentos_relates_to_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX relacionamentos_relacionamentos_relates_to_id ON relacionamentos_relacionamentos USING btree (relates_to_id);
+
+
+--
+-- Name: relacionamentos_relacionamentos_relates_to_id_like; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX relacionamentos_relacionamentos_relates_to_id_like ON relacionamentos_relacionamentos USING btree (relates_to_id varchar_pattern_ops);
+
+
+--
+-- Name: relacionamentos_relacionamentos_sistema_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX relacionamentos_relacionamentos_sistema_id ON relacionamentos_relacionamentos USING btree (sistema_id);
+
+
+--
+-- Name: sistema_sistema_created_by_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX sistema_sistema_created_by_id ON sistema_sistema USING btree (created_by_id);
+
+
+--
+-- Name: sistema_sistema_slug_like; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX sistema_sistema_slug_like ON sistema_sistema USING btree (slug varchar_pattern_ops);
+
+
+--
+-- Name: socialaccount_socialaccount_user_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX socialaccount_socialaccount_user_id ON socialaccount_socialaccount USING btree (user_id);
+
+
+--
+-- Name: socialaccount_socialapp_sites_site_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX socialaccount_socialapp_sites_site_id ON socialaccount_socialapp_sites USING btree (site_id);
+
+
+--
+-- Name: socialaccount_socialapp_sites_socialapp_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX socialaccount_socialapp_sites_socialapp_id ON socialaccount_socialapp_sites USING btree (socialapp_id);
+
+
+--
+-- Name: socialaccount_socialtoken_account_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX socialaccount_socialtoken_account_id ON socialaccount_socialtoken USING btree (account_id);
+
+
+--
+-- Name: socialaccount_socialtoken_app_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX socialaccount_socialtoken_app_id ON socialaccount_socialtoken USING btree (app_id);
+
+
+--
+-- Name: wysiwyg_forms_choice_field_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX wysiwyg_forms_choice_field_id ON wysiwyg_forms_choice USING btree (field_id);
+
+
+--
+-- Name: wysiwyg_forms_choice_slug; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX wysiwyg_forms_choice_slug ON wysiwyg_forms_choice USING btree (slug);
+
+
+--
+-- Name: wysiwyg_forms_choice_slug_like; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX wysiwyg_forms_choice_slug_like ON wysiwyg_forms_choice USING btree (slug varchar_pattern_ops);
+
+
+--
+-- Name: wysiwyg_forms_field_form_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX wysiwyg_forms_field_form_id ON wysiwyg_forms_field USING btree (form_id);
+
+
+--
+-- Name: wysiwyg_forms_field_slug; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX wysiwyg_forms_field_slug ON wysiwyg_forms_field USING btree (slug);
+
+
+--
+-- Name: wysiwyg_forms_field_slug_like; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX wysiwyg_forms_field_slug_like ON wysiwyg_forms_field USING btree (slug varchar_pattern_ops);
+
+
+--
+-- Name: wysiwyg_forms_form_created_by_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX wysiwyg_forms_form_created_by_id ON wysiwyg_forms_form USING btree (created_by_id);
+
+
+--
+-- Name: wysiwyg_forms_form_elemento_id; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX wysiwyg_forms_form_elemento_id ON wysiwyg_forms_form USING btree (elemento_id);
+
+
+--
+-- Name: wysiwyg_forms_form_slug; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX wysiwyg_forms_form_slug ON wysiwyg_forms_form USING btree (slug);
+
+
+--
+-- Name: wysiwyg_forms_form_slug_like; Type: INDEX; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE INDEX wysiwyg_forms_form_slug_like ON wysiwyg_forms_form USING btree (slug varchar_pattern_ops);
+
+
+--
+-- Name: account_emailaddress_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY account_emailaddress
+    ADD CONSTRAINT account_emailaddress_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: account_emailconfirmation_email_address_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY account_emailconfirmation
+    ADD CONSTRAINT account_emailconfirmation_email_address_id_fkey FOREIGN KEY (email_address_id) REFERENCES account_emailaddress(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_group_permissions_permission_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT auth_group_permissions_permission_id_fkey FOREIGN KEY (permission_id) REFERENCES auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_groups_group_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY auth_user_groups
+    ADD CONSTRAINT auth_user_groups_group_id_fkey FOREIGN KEY (group_id) REFERENCES auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: auth_user_user_permissions_permission_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY auth_user_user_permissions
+    ADD CONSTRAINT auth_user_user_permissions_permission_id_fkey FOREIGN KEY (permission_id) REFERENCES auth_permission(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: content_type_id_refs_id_d043b34a; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY auth_permission
+    ADD CONSTRAINT content_type_id_refs_id_d043b34a FOREIGN KEY (content_type_id) REFERENCES django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_admin_log_content_type_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY django_admin_log
+    ADD CONSTRAINT django_admin_log_content_type_id_fkey FOREIGN KEY (content_type_id) REFERENCES django_content_type(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_admin_log_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY django_admin_log
+    ADD CONSTRAINT django_admin_log_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: django_flatpage_sites_site_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY django_flatpage_sites
+    ADD CONSTRAINT django_flatpage_sites_site_id_fkey FOREIGN KEY (site_id) REFERENCES django_site(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: elemento_elemento_created_by_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY elemento_elemento
+    ADD CONSTRAINT elemento_elemento_created_by_id_fkey FOREIGN KEY (created_by_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: elemento_elemento_sistema_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY elemento_elemento
+    ADD CONSTRAINT elemento_elemento_sistema_id_fkey FOREIGN KEY (sistema_id) REFERENCES sistema_sistema(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: elemento_elemento_todos_permis_choices_todos_permissoes_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY elemento_elemento_todos_permissoes
+    ADD CONSTRAINT elemento_elemento_todos_permis_choices_todos_permissoes_id_fkey FOREIGN KEY (choices_todos_permissoes_id) REFERENCES elemento_choices_todos_permissoes(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: elemento_id_refs_id_600fb9fa; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY elemento_elemento_todos_permissoes
+    ADD CONSTRAINT elemento_id_refs_id_600fb9fa FOREIGN KEY (elemento_id) REFERENCES elemento_elemento(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: flatpage_id_refs_id_83cd0023; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY django_flatpage_sites
+    ADD CONSTRAINT flatpage_id_refs_id_83cd0023 FOREIGN KEY (flatpage_id) REFERENCES django_flatpage(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: group_id_refs_id_f4b32aac; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY auth_group_permissions
+    ADD CONSTRAINT group_id_refs_id_f4b32aac FOREIGN KEY (group_id) REFERENCES auth_group(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: permission_create_id_refs_slug_280c8352; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY elemento_elemento
+    ADD CONSTRAINT permission_create_id_refs_slug_280c8352 FOREIGN KEY (permission_create_id) REFERENCES elemento_elemento(slug) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: permission_delete_id_refs_slug_280c8352; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY elemento_elemento
+    ADD CONSTRAINT permission_delete_id_refs_slug_280c8352 FOREIGN KEY (permission_delete_id) REFERENCES elemento_elemento(slug) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: permission_read_id_refs_slug_280c8352; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY elemento_elemento
+    ADD CONSTRAINT permission_read_id_refs_slug_280c8352 FOREIGN KEY (permission_read_id) REFERENCES elemento_elemento(slug) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: permission_update_id_refs_slug_280c8352; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY elemento_elemento
+    ADD CONSTRAINT permission_update_id_refs_slug_280c8352 FOREIGN KEY (permission_update_id) REFERENCES elemento_elemento(slug) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: relacionamentos_relacionamentos_created_by_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY relacionamentos_relacionamentos
+    ADD CONSTRAINT relacionamentos_relacionamentos_created_by_id_fkey FOREIGN KEY (created_by_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: relacionamentos_relacionamentos_sistema_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY relacionamentos_relacionamentos
+    ADD CONSTRAINT relacionamentos_relacionamentos_sistema_id_fkey FOREIGN KEY (sistema_id) REFERENCES sistema_sistema(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: sistema_sistema_created_by_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY sistema_sistema
+    ADD CONSTRAINT sistema_sistema_created_by_id_fkey FOREIGN KEY (created_by_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: socialaccount_socialaccount_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY socialaccount_socialaccount
+    ADD CONSTRAINT socialaccount_socialaccount_user_id_fkey FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: socialaccount_socialapp_sites_site_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY socialaccount_socialapp_sites
+    ADD CONSTRAINT socialaccount_socialapp_sites_site_id_fkey FOREIGN KEY (site_id) REFERENCES django_site(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: socialaccount_socialtoken_account_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY socialaccount_socialtoken
+    ADD CONSTRAINT socialaccount_socialtoken_account_id_fkey FOREIGN KEY (account_id) REFERENCES socialaccount_socialaccount(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: socialaccount_socialtoken_app_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY socialaccount_socialtoken
+    ADD CONSTRAINT socialaccount_socialtoken_app_id_fkey FOREIGN KEY (app_id) REFERENCES socialaccount_socialapp(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: socialapp_id_refs_id_e7a43014; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY socialaccount_socialapp_sites
+    ADD CONSTRAINT socialapp_id_refs_id_e7a43014 FOREIGN KEY (socialapp_id) REFERENCES socialaccount_socialapp(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: user_id_refs_id_40c41112; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY auth_user_groups
+    ADD CONSTRAINT user_id_refs_id_40c41112 FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: user_id_refs_id_4dc23c39; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY auth_user_user_permissions
+    ADD CONSTRAINT user_id_refs_id_4dc23c39 FOREIGN KEY (user_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: wysiwyg_forms_field_form_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY wysiwyg_forms_field
+    ADD CONSTRAINT wysiwyg_forms_field_form_id_fkey FOREIGN KEY (form_id) REFERENCES wysiwyg_forms_form(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: wysiwyg_forms_form_created_by_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY wysiwyg_forms_form
+    ADD CONSTRAINT wysiwyg_forms_form_created_by_id_fkey FOREIGN KEY (created_by_id) REFERENCES auth_user(id) DEFERRABLE INITIALLY DEFERRED;
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
