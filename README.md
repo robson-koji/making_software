@@ -81,7 +81,7 @@ Be carefull with the security alerts on running this script. I will document the
 
 To run this script you need to run as sudo from a directory owned by the same user wich runs Apache, because it will use this directory as a temporary directory to create files. After that it will move all the files to the final directory.
 
-/<your inteliform folder>/create_project.pl <id of the system> <your inteliform folder>
+/\<your inteliform folder\>/create_project.pl \<id of the system\> \<your inteliform folder\>
 
 
 If you want to read the concepts behind this project. Go to this paper: 
