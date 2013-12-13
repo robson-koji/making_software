@@ -27,7 +27,6 @@ Loopware is just a name, I will change in the future.
 This website provides a web interface of the making software, where the end user can create his/her own system, just by adding, arranging, removing and editing visual components on a web browser.
 
 I have used some 3rd part packages that I am distributing with my main package.
-
 All of them have their own licenses included in the respective packages.
 - allauth
 - bsct
@@ -36,7 +35,7 @@ All of them have their own licenses included in the respective packages.
 - bootswatch
 - django_admin_bootstrapped
 
-Since it is a Django default application, you can install as usual.
+Since it is a Django standard application, you can install as usual.
 
 I will documment settings file soon.
 

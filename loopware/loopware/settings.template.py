@@ -1,14 +1,12 @@
+# -*- coding: utf-8 -*-
 
 
 # Local configurations
 
-# What is it for?
-AMBIENTE = ''
-
 # This is the Making Software home folder
 # The folder where you unpack Making Software from Github
-# if /home/your_name
-INTELIFORM_PERL_DIR = ''
+# ie /home/your_name if you follow the tutorial to install
+INTELIFORM_PERL_DIR = '/home/your_home'
 
 # You don´t have to change here, unless you have changed the create_projet.pl location
 PERL_CREATE_PROJECT = INTELIFORM_PERL_DIR + '/making_software/making_software_perl/create_project.pl'
@@ -22,7 +20,7 @@ SUBDOMINIO_PROJETOS = '192.168.1.100:8001'
 # It is considered that you are using a web server and WSGI to connect to
 # Making Software Django application
 # This urls are based on your virtual host configuration
-
+# If you follow the tutorial, leave as is:
 VIRTUAL_HOST = '/making_software'
 SESSION_COOKIE_PATH = '/making_software'
 
@@ -33,7 +31,9 @@ LOGIN_URL = VIRTUAL_HOST + '/accounts/login/'
 LOGOUT_URL = VIRTUAL_HOST + '/accounts/logout/'
 
 
-# Folder where your projects are created.
+# Folder where your projects are created
+# I think that it is a good idea to create making_software folder at the /home folder
+# to contain your created projects. But the decision is yours.
 MEDIA_ROOT = '/home/making_software/projetos/'
 MEDIA_URL = '/logos/'
 
@@ -44,7 +44,7 @@ TEMPLATE_DEBUG = DEBUG
 # allauth options.
 # Check allauth if you need help
 ACCOUNT_AUTHENTICATION_METHOD = ("username")
-ACCOUNT_EMAIL_VERIFICATION = ("mandatory")
+#ACCOUNT_EMAIL_VERIFICATION = ("mandatory")
 SOCIALACCOUNT_EMAIL_VERIFICATION = ("none")
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = True
@@ -83,14 +83,18 @@ LANGUAGE_CODE = 'pt-br'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',           # 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '',             # Or path to database file if using sqlite3.
-        'USER': '',             # Not used with sqlite3.
-        'PASSWORD': '',                 # Not used with sqlite3.
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': '',             
+        'USER': '',             
+        'PASSWORD': '',         
 
-        # isso eh muito importante, eh onde estah o socket do postgres instalado por default
+        # Isso eh muito importante, eh onde o socket do postgres foi instalado por default
+        # .s.PGSQL.<porta> - Geralmente a porta eh 5432
+        # Via de regra ele pode estar em /tmp/.s.PGSQL.5432 ou em /var/run/postgresql/.s.PGSQL.5432
+        # dependendo de como foi feita a sua instalação
+        # Configure o parametro "HOST" com o diretorio onde estah o socket.
         # O psycopg2 expects Postgres socket to be in /var/run/postgresql/
-        #http://stackoverflow.com/questions/5500332/cant-connect-the-postgresql-with-psycopg2
+        # http://stackoverflow.com/questions/5500332/cant-connect-the-postgresql-with-psycopg2
         'HOST': '/tmp/',                # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                     # Set to empty string for default. Not used with sqlite3.
     }
@@ -209,7 +213,16 @@ INSTALLED_APPS = (
     'relacionamentos',
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.request',
+    'django.contrib.auth.context_processors.auth',
+    'allauth.account.context_processors.account',
+    'allauth.socialaccount.context_processors.socialaccount'
+)
 
+
+
+"""
 LOGGING = {
     'version': 1,
     #'disable_existing_loggers': True,
@@ -250,11 +263,4 @@ LOGGING = {
         },
     }
 }
-
-TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.core.context_processors.request',
-    'django.contrib.auth.context_processors.auth',
-    'allauth.account.context_processors.account',
-    'allauth.socialaccount.context_processors.socialaccount'
-)
-
+"""
