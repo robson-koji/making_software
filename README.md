@@ -2,11 +2,19 @@ making_software
 ===============
 
 This is a software to make software, where software means a web based system, in both ways.
+With this software the user can deploy his or her own web based system without write a single line of code.
+
 It works only in Linux distributions; and for the moment it has been tested on Debian/Ubuntu only.
 
 Commiting to this project has just started, wait for more documents soon.
 
 This project has two systems, separated layers which work together tied by a database.
+
+Macro happy path diagram
+========================
+When you deploy your system, a completely independent system is created, without any external dependency. It is a 100% pure Python/Django system with it´s own database instance and a unique Apache virtual host appointment.
+
+![Macro Diagram](making_software.png)
 
 
 1st layer 
@@ -50,7 +58,7 @@ All of them have their own licenses included in the respective packages.
 
 
 
-After download this package and unzip it wherever you want, rename the unziped folder to inteliform_perl and follow instructions bellow.
+After download this package and unzip it wherever you want, follow instructions bellow to rightly set paths.
 
 
 Install system module
@@ -79,12 +87,15 @@ You can execute this manualy, it behaves exactly the same.
 
 Be carefull with the security alerts on running this script. I will document them soon.
 
-To run this script you need to run as sudo from a directory owned by the same user wich runs Apache, because it will use this directory as a temporary directory to create files. After that it will move all the files to the final directory.
+To run this script you need to run as sudo from a directory owned by the same user wich runs Apache, because it will use this directory as a temporary directory to create files.
 
-/\<your inteliform folder\>/create_project.pl \<id of the system\> \<your inteliform folder\>
+The outcome will be moved to the final directory.
+
+perl /\<your Making Software home path\>/making_software/making_software_perl/create_project.pl \<id of the system\> \<your Making Software home path\>
 
 
-If you want to read the concepts behind this project. Go to this paper: 
+If you want to read the concepts behind this project. Go to this paper:
+
 http://robsonkoji.blogspot.com.br/2013/11/modeling-making-software.html
 
 
