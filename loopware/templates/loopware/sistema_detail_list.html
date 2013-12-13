@@ -1,0 +1,296 @@
+{% extends 'bsct/base.html' %}
+{% load bscttags %}
+
+{% block BSCT_CONTENT %}
+    <div class="container">
+        <div class="row">        
+            <div class="col-lg-12">
+                <div class="page-header">
+                  <div class="row">
+                      <h1>Informações do sistema</h1>
+                  </div>
+                  <p>Nesta página você tem uma visão geral do seu sistema, e além de visualizar você pode editar e publicar o sistema.<br>
+                  A publicação só pode ser feita após o sistema estar completo, com as sessões criadas e com os campos do formulário adicionados.<br>
+                  </p>
+                </div>
+            <div class="col-lg-8">                
+                <div class="row">
+                      <h3><b>Título:</b> {{object.nome}}</h3>
+                      <h3><b>Subtítulo:</b> {{object.descricao_curta}}</h3>
+                      
+                    {% if sistema_finalizado %}
+                        <p><b>URL do sistema:</b>
+                            <a href  = 'http://{{subdominio_projetos}}/{{ sistema.slug }}/' target="_blank">
+                                http://projetos.inteliform.com.br/{{ sistema.slug }}/
+                            </a>
+                        </p>
+                        <p><b>URL do admin:</b>                 
+                            <a href  = 'http://{{subdominio_projetos}}/{{ sistema.slug }}/administrativo/' target="_blank">
+                                : http://projetos.inteliform.com.br/{{ sistema.slug }}/administrativo/
+                            </a>
+                        </p>
+                    {% endif %}                      
+                </div>
+    
+                <div class="row">
+                    {% block BSCT_DETAIL_ACTIONS %}
+                    {% if object.get_update_url %}
+                        <a class = 'btn btn-info' href  = '{{object.get_update_url}}'>
+                            Editar Sistema
+                        </a>
+                    {% endif %}
+                    {% if object.get_delete_url %}
+                        <a class = 'btn btn-warning' href  = '{{object.get_delete_url}}'>
+                            Apagar Sistema
+                        </a>
+                    {% endif %}
+    
+                        <a class = 'btn btn-danger' href  = 'publicar_confirma/{{object.id}}'>
+                            Publicar Sistema
+                        </a>
+    
+
+                    
+                    {% endblock %}        
+                </div>
+    
+                <!-- Fim Detalhe de objeto -->
+            </div>
+    
+            <div class="col-lg-4">
+            <div class="panel panel-info">
+              <div class="panel-heading">
+                <h3 class="panel-title">Status do sistema</h3>
+              </div>
+              <div class="panel-body">
+                    <table>
+                        <tr>
+                            <td><b>Passo 1/4</b> - Cadastramento </td>
+                            <td> <span class="label label-success"> OK!  </span></td>
+                        </tr>
+                        <tr>
+                            <td><b>Passo 2/4</b> - Criação do sistema </td>
+                            <td> <span class="label label-success"> OK!  </span></td>                        
+                        </tr>
+                        <tr>
+                            <td><b>Passo 3/4</b> - Criação das Sessões </td>
+                            <td> {{sistema_status.elementos|safe}} </td>                        
+                        </tr>
+                        <tr>
+                            <td><b>Passo 4/4</b> - Criação dos formulários </td>
+                            <td> {{sistema_status.fields|safe}} </td>                        
+                        </tr>
+                    </table>
+
+              </div>
+            </div>
+            </div>
+            </div>          
+        </div>
+          
+            <!-- Inicio Listagem de objetos estrangeiros-->    
+
+        <div class="row">        
+          <div class="col-lg-12">
+            <div class="page-header">
+              <div class="row">
+                <h1>Sessões do sistema</h1>
+              </div>
+            </div>
+            
+            <div class="row">
+              <p>
+                Uma sessão é um item de menu do sistema, e possui um formulário que você personaliza com os campos que desejar.<br>
+                Adicione as sessões do seu sistema e adicione os campos do formulário que será gerado automáticamente, para terminar de
+                criar o seu sistema. <br>
+                Após finalizar, basta publicar e divulgar o sistema para os seus usuários.
+              </p>
+              <!--
+                <ul class="nav nav-pills">
+                    <li>
+                        <a href="{{objeto_lista.model.get_create_url }}/{{object.meta.app_label}}/{{object.id}}">Adicionar Sessão</a>
+                        <a href="../elemento/add/{{object.meta.app_label}}/{{object.id}}">Adicionar Sessão</a>
+                    </li>
+                </ul>
+                -->
+                    {% if not objeto_lista %}
+                    <a class = 'btn btn-success' href="../elemento/add/{{object.meta.app_label}}/{{object.id}}">
+                        Adicionar nova sessão ao sistema {{object.nome}}
+                    </a>
+                    {% endif %}
+            </div>
+            <div class="row">
+                <p>&nbsp;</p>
+                {% if objeto_lista %}
+<!--                    <h3>Personalise os formulários do sistema "{{object.nome}}".</h3>-->
+
+
+                <ul class="nav nav-tabs" style="margin-bottom: 15px;">
+                {% for elemento in objeto_lista %}
+                    {% if forloop.first %}
+                        <li class="active"><a href="#{{elemento.id}}" data-toggle="tab">{{elemento.nome}}</a></li>
+                    {% else %}
+                        {% block BSCT_LIST_ITEMS_ITEM %}
+                            <li><a href="#{{elemento.id}}" data-toggle="tab">{{elemento.nome}}</a></li>
+                        {% endblock %}
+                    {% endif %}
+                {% endfor %}
+                </ul>
+
+                <div id="myTabContent" class="tab-content">
+                {% for elemento in objeto_lista %}
+                    {% block BSCT_LIST_ELEMENTOS %}
+                    {% if forloop.first %}
+                        <div class="tab-pane fade in active"" id="{{elemento.id}}">
+                            <table width=100%>
+                                <tr>
+                                    <td><table>
+                                        <tr><td valign="top"><b><nobr>Título:</nobr></b> </td><td>&nbsp;</td><td>{{elemento.nome}}</td></tr>
+                                        <tr><td valign="top"><b><nobr>Subtítulo:</nobr></b> </td><td>&nbsp;</td><td>{{elemento.descricao_curta}}</td></tr>
+                                        <tr><td valign="top"><b><nobr>Descrição:</nobr></b> </td><td>&nbsp;</td><td>{{elemento.descricao_completa|safe}}</td></tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                        <td>&nbsp;
+                                        </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a class = 'btn btn-info' href  = '../elemento/update/{{elemento.id}}/sistema/{{object.id}}'>
+                                            Editar Sessão
+                                        </a>
+                                        <a class = 'btn btn-warning' href  = '../elemento/delete/{{elemento.id}}/sistema/{{object.id}}'>
+                                            Apagar Sessão
+                                        </a>
+                                        <a class = 'btn btn-success' href="../elemento/add/{{object.meta.app_label}}/{{object.id}}">
+                                            Adicionar nova sessão ao sistema {{object.nome}}
+                                        </a>
+                                        
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <h1><br>Formulário da sessão <i>{{elemento.nome}}</i></h1>
+
+                            <p>O formulário é o objeto mais importante do seu sistema, pois é através dele que os seus usuários irão interagir com você.<br>
+                                Defina as informações que você deseja obter dos seus usuários e navegue na caixa do lado direito,
+                                logo abaixo, para acrescentar os campos e editar as configurações do formulário:
+                                <ul>
+                                    <li>Nome e descrição do formulário</li>
+                                    <li>Nome e descrição dos campos</li>
+                                    <li>Tipo do campo</li>
+                                    <li>Descrição e obrigatoriedade</li>
+                                </ul>
+                                Clique e arraste os campos para ordená-los na posição desejada, e após finalizar a edição, salve o formulário na aba de Configurações do Formulário.
+                            </p>
+                            <p>Sempre que houver um campo que seja um nome, título ou semelhante, posicione-o em primeiro no formulário.
+                            O motivo é que quando você fizer relacionamento de Sessões, o campo que irá aparecer no formulário relacionado é o primeiro campo, e 
+                            fica mais inteligivel apresentar os dados desse campo do que apresentar os dados de um campo data, ou select por exemplo.
+                            </p>
+
+                            <!-- IFRAME com Forms, se tiver. -->
+                            {% if elemento.forms %}
+                                {% for form in elemento.forms%}
+                                <iframe width='100%' height='1500' frameborder='0' scrolling='auto'
+                                            marginwidth='0' marginheight='0' vspace='0' hspace='0'
+                                                src='../wysiwyg_forms/{{form.id}}'>
+                                </iframe>
+                                {% endfor %}
+                            <!-- Senao, cria formulario para a sessao. -->
+                            {% else %}
+                                <iframe width='100%' height='1500' frameborder='0' scrolling='auto'
+                                            marginwidth='0' marginheight='0' vspace='0' hspace='0'
+                                                src='../wysiwyg_forms/elemento/{{elemento.id}}/{{elemento.nome}}'>
+                                </iframe>
+                            {% endif %}
+                        </div>
+                        {% else %}                    
+                        <div class="tab-pane fade" id="{{elemento.id}}">
+                            <table width=100%>
+                                <tr>
+                                    <td><table>
+                                        <tr><td valign="top"><b><nobr>Título:</nobr></b> </td><td>&nbsp;</td><td>{{elemento.nome}}</td></tr>
+                                        <tr><td valign="top"><b><nobr>Subtítulo:</nobr></b> </td><td>&nbsp;</td><td>{{elemento.descricao_curta}}</td></tr>
+                                        <tr><td valign="top"><b><nobr>Descrição:</nobr></b> </td><td>&nbsp;</td><td>{{elemento.descricao_completa|safe}}</td></tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                        <td>&nbsp;
+                                        </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <a class = 'btn btn-info' href  = '../elemento/update/{{elemento.id}}/sistema/{{object.id}}'>
+                                            Editar Sessão
+                                        </a>
+                                        <a class = 'btn btn-warning' href  = '../elemento/delete/{{elemento.id}}/sistema/{{object.id}}'>
+                                            Apagar Sessão
+                                        </a>
+                                        <a class = 'btn btn-success' href="../elemento/add/{{object.meta.app_label}}/{{object.id}}">
+                                            <!--Adicionar nova sessão ao sistema {{object.nome}}-->
+                                            Adicionar Sessão
+                                        </a>                                        
+                                        <a class = 'btn btn-danger' href="../relacionamentos/add/{{object.meta.app_label}}/{{object.id}}" target="_blank">
+                                            <!--Adicionar nova sessão ao sistema {{object.nome}}-->
+                                            Relacionar Sessões
+                                        </a>                                        
+                                    </td>
+                                </tr>
+                                <tr>
+                                        <td><small>Para relacionar sessões, uma nova página será aberta para facilitar a navegação.</small>
+                                        </td>
+                                </tr>
+                            </table>
+
+                            <h1><br>Formulário da sessão <i>{{elemento.nome}}</i></h1>
+
+                            <p>O formulário é o objeto mais importante do seu sistema, pois é através dele que os seus usuários irão interagir com você.<br>
+                                Defina as informações que você deseja obter dos seus usuários e navegue na caixa do lado direito,
+                                logo abaixo, para acrescentar os campos e editar as configurações do formulário:
+                                <ul>
+                                    <li>Nome e descrição do formulário</li>
+                                    <li>Nome e descrição dos campos</li>
+                                    <li>Tipo do campo</li>
+                                    <li>Descrição e obrigatoriedade do campo do campo</li>
+                                </ul>
+                                Clique e arraste os campos para ordená-los na posição desejada, e após finalizar a edição, salve o formulário na aba de Configurações do Formulário.
+                            </p>
+                            
+                            <!-- IFRAME com Forms, se tiver. -->
+                            {% if elemento.forms %}
+                                {% for form in elemento.forms%}
+                                <iframe width='100%' height='1500' frameborder='0' scrolling='auto'
+                                            marginwidth='0' marginheight='0' vspace='0' hspace='0'
+                                                src='../wysiwyg_forms/{{form.id}}'>
+                                </iframe>
+                                {% endfor %}
+                            <!-- Senao, cria formulario para a sessao. -->
+                            {% else %}
+                                <iframe width='100%' height='1500' frameborder='0' scrolling='auto'
+                                            marginwidth='0' marginheight='0' vspace='0' hspace='0'
+                                                src='../wysiwyg_forms/elemento/{{elemento.id}}/{{elemento.nome}}'>
+                                </iframe>
+                            {% endif %}
+                        </div>
+                {% endif %}                                  
+                    {% endblock %}
+                    {% endfor %}
+              </div>
+                {% endif %}              
+          </div>
+          </div>
+    </div>
+{% endblock %}          
+
+
+
+
+
+
+
+
+
+
+

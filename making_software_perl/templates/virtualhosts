@@ -1,0 +1,14 @@
+
+
+    WSGIDaemonProcess [% virtualhosts.project_name %]  user=www-data group=www-data
+    WSGIProcessGroup [% virtualhosts.project_name %]
+    WSGIScriptAlias /[% virtualhosts.project_name %] [% virtualhosts.root_folder %]/[% virtualhosts.project_name %]/[% virtualhosts.project_name %]/wsgi.py
+
+    <Directory [% virtualhosts.root_folder %]/[% virtualhosts.project_name %]/[% virtualhosts.project_name %]>
+        Options Includes FollowSymLinks MultiViews
+        <Files wsgi.py>
+                 Order allow,deny
+                Allow from all
+        </Files>
+    </Directory>
+    

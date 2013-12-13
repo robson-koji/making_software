@@ -1,0 +1,93 @@
+{% extends 'bsct/base.html' %}
+ 
+{% load bscttags %}
+
+{% block BSCT_CONTENT %}
+<div class="container">
+
+        <div class="page-header">
+          <div class="row">
+              <h1 id="buttons">{{object.meta.verbose_name}}</h1>
+          </div>
+        </div>
+
+
+
+{% block BSCT_DETAIL_FIELDS %}
+<table class = 'table table-condensed' >
+    <tr>
+        <td> id </td>
+        <td>{{object.id}}</td>
+    </tr>        
+    <tr>
+        <td> Sistema</td>
+        <td> {{object.sistema}}</td>
+    </tr>        
+    <tr>
+        <td> Sessão 1 </td>
+        <td> {{object.elemento}}</td>
+    </tr>        
+    <tr>
+        <td> Relacionamento </td>
+        <td> {{object.get_tipo_relacionamento_display}} </td>
+    </tr>        
+    <tr>
+        <td> Sessão 2 </td>
+        <td> {{object.relates_to}}</td>
+    </tr>
+</table>
+{% endblock %}
+
+
+
+
+
+{% block BSCT_DETAIL_ACTIONS %}
+{% if object.get_update_url %}
+    <a 
+        class = 'btn btn-info'
+        href  = '{{object.get_update_url}}'
+    >
+        Editar
+    </a>
+{% endif %}
+{% if object.get_delete_url %}
+    <a 
+        class = 'btn btn-warning'
+        href  = '{{object.get_delete_url}}'
+    >
+        Apagar
+    </a>
+{% endif %}
+
+{% if object.get_list_url %}
+    <a 
+        class = 'btn'
+        href  = '{{object.get_list_url}}'
+    >
+        Listar todos
+    </a>
+{% endif %}
+
+
+{% comment %}
+Metodo get_related_objects estah definido nos models de cada app.
+Retorna todos os objetos (object_related) que utilizam-no como PK.
+No loop abaixo monta um botao para cada object_related.
+Esse botao direciona para a criacao de novos objetos object_related.
+{% endcomment %}
+
+{% for object_related in object.get_related_objects %}
+    <a 
+        class = 'btn'
+        href  = '/{{ object_related.model.meta.app_label }}/add/{{object.meta.app_label}}/{{object.id}}'
+    >
+        Criar novo ''{{ object_related.model.meta.verbose_name }}''
+    </a>
+
+{% endfor %}    
+
+
+{% endblock %}
+</div>
+{% endblock %}

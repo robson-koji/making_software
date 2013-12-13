@@ -1,0 +1,71 @@
+{% extends 'bsct/base.html' %}
+ 
+{% load bscttags %}
+
+{% block BSCT_CONTENT %}
+<div class="container">
+
+        <div class="page-header">
+          <div class="row">
+              <h1 id="buttons">{{object.meta.verbose_name}}</h1>
+          </div>
+        </div>
+
+
+
+{% block BSCT_DETAIL_FIELDS %}
+<table class = 'table table-condensed' >
+
+{% comment %}
+Metodo get_fields estah definido nos models de cada app.
+{% endcomment %}
+    
+{% for name, value in object.get_fields %}
+    <tr>
+        <td>
+            <b> {{ name }} </b>
+        </td>
+        <td>
+            {{ value }}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
+
+
+
+{% block BSCT_DETAIL_ACTIONS %}
+{% if object.get_update_url %}
+    <a 
+        class = 'btn btn-info'
+        href  = '{{object.get_update_url}}'
+    >
+        Editar
+    </a>
+{% endif %}
+{% if object.get_delete_url %}
+    <a 
+        class = 'btn btn-warning'
+        href  = '{{object.get_delete_url}}'
+    >
+        Apagar
+    </a>
+{% endif %}
+
+{% if object.get_list_url %}
+    <a 
+        class = 'btn'
+        href  = '{{object.get_list_url}}'
+    >
+        Listar todos
+    </a>
+{% endif %}
+
+
+
+
+
+{% endblock %}
+</div>
+{% endblock %}

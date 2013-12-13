@@ -1,0 +1,43 @@
+{% extends 'bsct/fb_app_base.html' %}
+ 
+{% block BSCT_CONTENT %}
+        
+    <div class="container canvas">
+        <h1>  Excluir </h1>
+
+          <div class="col-lg-12">    
+            <form
+                action=""
+                method="post"
+            >
+                {% csrf_token %}
+            
+                {% block BSCT_WARNING %}
+                    {% block BSCT_WARNING_ALERT %}
+                    <p 
+                        class = 'alert alert-warning'
+                    >
+                        Deseja excluir definitivamente: "{{object}}"? 
+                    </p>
+                    {% endblock %}
+            
+                    {% block BSCT_WARNING_OPTS %}
+                    <input 
+                        class = 'btn btn-danger'
+                        type  = 'submit' 
+                        value = 'Sim' 
+                    />
+            
+                    <a
+                        class = 'btn btn-warning'
+                        href = "javascript:history.back(-1);"
+                    >
+                        N&atilde;o
+                    </a>
+                    {% endblock %}
+                {% endblock %}
+            
+            </form>
+          </div>
+    </div>          
+{% endblock %}
