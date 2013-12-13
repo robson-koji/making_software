@@ -1,0 +1,84 @@
+{% extends 'bsct/fb_app_base.html' %}
+ 
+{% load bscttags %}
+
+{% block BSCT_CONTENT %}
+
+
+    <div class="container canvas">
+        <h1>  {{object.meta.verbose_name}} </h1>
+
+        {% block BSCT_DETAIL_FIELDS %}
+          <div class="col-lg-12">
+            <table class = 'table table-condensed' >
+            {% comment %}
+            Metodo get_fields estah definido nos models de cada app.
+            {% endcomment %}
+                
+            {% for name, value in object.get_fields %}
+                <tr>
+                    <td>
+                        <b> {{ name }} </b>
+                    </td>
+                    <td>
+                        {{ value }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+        {% endblock %}
+
+
+        {% block BSCT_DETAIL_ACTIONS %}
+          <div class="col-lg-12">
+            {% if reverso_update %}
+                <a 
+                    class = 'btn btn-info'
+                    href  = {% url reverso_update object.id %}
+                >
+                    Editar
+                </a>
+            {% endif %}
+            {% if reverso_delete %}
+                <a 
+                    class = 'btn btn-warning'
+                    href  = {% url reverso_delete object.id %}
+                >
+                    Apagar
+                </a>
+            {% endif %}
+            
+            {% if reverso_list %}
+                <a 
+                    class = 'btn btn-success'
+                    href  = {% url reverso_list%}
+                >
+                    Listar Todos
+                </a>
+            {% endif %}
+        </div>
+
+
+{% comment %}
+Metodo get_related_objects estah definido nos models de cada app.
+Retorna todos os objetos (object_related) que utilizam-no como PK.
+No loop abaixo monta um botao para cada object_related.
+Esse botao direciona para a criacao de novos objetos object_related.
+
+{% for object_related in object.get_related_objects %}
+    <a 
+        class = 'btn'
+        href  = '/{{ object_related.model.meta.app_label }}/add/{{object.meta.app_label}}/{{object.id}}'
+    >
+        Criar novo ''{{ object_related.model.meta.verbose_name }}''
+    </a>
+
+{% endfor %}    
+{% endcomment %}
+
+
+{% endblock %}
+</div>
+
+{% endblock %}

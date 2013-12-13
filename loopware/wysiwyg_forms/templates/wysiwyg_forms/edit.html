@@ -1,0 +1,46 @@
+{% extends base_template_name %}
+
+{% block content %}
+<div id="DWF-base">
+</div>
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="/static_files/making_software/bootswatch/united/bootstrap.css" media="screen">
+    <link rel="stylesheet" href="/static_files/making_software/bootswatch/bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static_files/making_software/bootswatch/assets/css/bootswatch.min.css">
+    <link rel="stylesheet" href="/static_files/making_software/wysiwyg_forms/css/dwf.css" />
+{% endblock %}
+
+{% block scripts %}
+
+<script type="text/json" id="initial-form">{{ form.as_json|safe }}</script>
+<script type="text/plain" id="save-target">{{ save_target }}</script>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js">
+</script>
+
+{% if debug %}
+
+<script type="text/javascript" src="/static_files/making_software/wysiwyg_forms/js/require.js">
+</script>
+<script type="text/javascript">
+  require.config({
+    baseUrl: '/static_files/making_software/wysiwyg_forms/js'
+  });
+  require(['dwf'], function (dwf) {
+  });
+</script>
+
+{% else %}
+
+<script type="text/javascript" src="/static_files/making_software/wysiwyg_forms/js/dwf.min.js">
+</script>
+<script type="text/javascript">
+  require(['dwf'], function (dwf) {
+  });
+</script>
+
+{% endif %}
+
+{% endblock %}

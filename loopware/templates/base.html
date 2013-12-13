@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{% block head_title %}Making Software{% endblock head_title %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+
+    {% if template %}
+            <link rel="stylesheet" href="/static_files/making_software/bootswatch/{{ request.session.template }}/bootstrap.css" media="screen">
+    {% else %}
+            <link rel="stylesheet" href="/static_files/making_software/bootswatch/united/bootstrap.css" media="screen">
+    {% endif %}
+
+    
+    <link rel="stylesheet" href="/static_files/making_software/bootswatch/bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static_files/making_software/bootswatch/assets/css/bootswatch.min.css">
+        
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="/static_files/making_software/bootswatch/bower_components/bootstrap/assets/js/html5shiv.js"></script>
+      <script src="/static_files/making_software/bootswatch/bower_components/bootstrap/assets/js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+    
+    {% block body %}
+        <body>
+    {% block content %}
+          <div class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+              <div class="navbar-header">
+                <a href="/making_software/" class="navbar-brand">Making Software</a>
+                <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+              </div>
+              <div class="navbar-collapse collapse" id="navbar-main">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                      <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="asdf">Sistemas <span class="caret"></span></a>
+                      <ul class="dropdown-menu" aria-labelledby="asdf">
+                        <li><a tabindex="-1" href="{% url "sistema_list" %}">Listar</a></li>
+                        <li class="divider"></li>
+                        <li><a tabindex="-1" href="{% url "sistema_create" %}">Criar</a></li>
+                      </ul>
+                    </li>
+                </ul>
+
+                <!---
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                      <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="asdf">Relacionamentos <span class="caret"></span></a>
+                      <ul class="dropdown-menu" aria-labelledby="asdf">
+                        <li><a tabindex="-1" href="{% url "relacionamentos_list" %}">Listar</a></li>
+                        <li class="divider"></li>
+                      </ul>
+                    </li>
+                </ul>
+                -->                
+                
+                <ul class="nav navbar-nav navbar-right">
+                  {% if user.is_authenticated %}
+                    <ul class="nav navbar-nav navbar-right">
+                      <li><a href="{% url "account_logout" %}">Logout</a></li>
+                    </ul>
+    
+                  {% else %}
+                    <ul class="nav navbar-nav navbar-right">
+                      <li><a href="{% url "account_login" %}">Login</a></li>
+                    </ul>
+                  {% endif %}
+                </ul>
+      
+              </div>
+            </div>
+          </div>
+          <div class="container">
+            {% if user.is_authenticated %}
+            <small class="nav navbar-nav navbar-right" style="padding-top: 20px">Voc&ecirc; est&aacute; logado como {{ user.username|title }}! </small>
+            {% endif %}
+          </div>    
+    {% endblock content %}
+    <!-- CRUD-->
+    
+    {% block BSCT_MAIN %}
+    
+    {% endblock %}
+        <div class="container"  style="text-align:center; padding-top:25px;" >
+            Nos acompanhe no Facebook: <a href = "http://www.facebook.com/making_software.com.br" target="_blank"> www.facebook.com/inteliform.com.br </a><br>
+            <!--<div class="fb-like" data-href="http://www.facebook.com/inteliform.com.br" data-width="50px" data-colorscheme="light" data-layout="button_count" data-action="like" data-show-faces="false" data-send="false"></div>
+            </div>-->
+        </div>    
+
+        <div id="fb-root"></div>
+        <script>(function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/pt_BR/all.js#xfbml=1";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>    
+    {% endblock body %}
+
+
+    
+    {% block extra_body %}
+    {% endblock extra_body %}
+    <script src="/static_files/making_software/bootswatch/bower_components/jquery/jquery.min.js"></script>
+    <script src="/static_files/making_software/bootswatch/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/static_files/making_software/bootswatch/assets/js/bootswatch.js"></script>        
+  </body>
+</html>

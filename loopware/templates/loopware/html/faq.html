@@ -1,0 +1,137 @@
+{% extends 'bsct/base.html' %}
+{% load bscttags %}
+
+{% block BSCT_CONTENT %}
+    <div class="container">
+        <div class="col-lg-12">
+            <div class="page-header">
+              <div class="row">
+                  <h1>FAQ</h1>
+                  <h2>Perguntas Frequentes</h2>
+              </div>
+            </div>
+            <div class="row">
+                      <ol>
+                      <li><b>O meu sistema fica dentro do InteliForm?</b><br>
+                      Não, o seu sistema é completamente independente do InteliForm. Ele utiliza um subdomínio do InteliForm (https://projetos.inteliform.com.br),
+                      por questões práticas. O seu sistema poderia estar hospedado em qualquer domínio, em qualquer servidor.
+                      </li><br>
+                      
+                      <li><b>Senhas Criptografadas</b><br>
+                      O InteliForm não tem acesso a nenhuma senha dos usuários, elas são armazenadas criptografadas e não são descriptografadas em nenhum momento.
+                      </li><br>
+
+                      <li><b>HTTPS/SSL - O que é isso?</b><br>
+                      HTTPS/SSL significa que toda a comunicação trocada entre o browser que o cliente utiliza para navegar em um sistema
+                      e o servidor que hospeda esse sistema, é criptografada. E caso alguém consiga interceptar a comunicação,
+                      não conseguirá decifra-la justamente porque ela está criptografa.<br>
+                      O seu sistema utiliza uma URL segura(https://projetos/inteliform.com.br/<o seu sistema>). dessa maneira todas as informações<br>
+                      que trafegam entre o seu sistema e o browser do seu usuário é criptografada e ninguem pode acessar.
+                      </li><br>
+
+                      <li><b>Usuário administrativo do seu sistema</b><br>
+                      O admin do seu sistema é você. O seu sistema é gerado com o mesmo usuário que você utiliza no Inteliform.<br>
+                      Porém, se você alterar a senha desse usuário no Inteliform, ela não será alterada no seu sistema, e vice-versa.
+                      Os dois sistemas são 100% independentes.                      
+                      </li><br>
+
+                      <li><b>Primeiro login no meu sistema</b><br>
+                      Quando você publica o seu sistema, você pode se logar no seu sistema com o seu usuário do InteliForm. <br>
+                      Porém existe uma excessão muito importante porque o seu sistema nunca é publicado com login via Facebook. Para você oferecer login via Facebook você
+                      precisa criar o seu sistema, se logar na interface administrativa e habilitar o login via Facebook. E isso só é possível após você criar o seu sistema e
+                      cadastrar o seu sistema como um aplicativo do Facebook, como explicado no item "Login via Facebook".<br>
+                      Portanto se você se cadastrou no InteliForm via login do Facebook, você não vai conseguir se logar no seu sistema via login do Facebook porque ele
+                      não está habilitado quando o sistema é criado.<br>
+                      Para você se logar no seu sistema, clique no menu superior em "Reinicializar Senha" e informe o seu usuário do Facebook que você utilizou para se
+                      cadastrar no InteliForm. Até esse momento, você não possui uma senha porque o InteliForm não armazena senha do Facebook. Esse simplesmente autoriza
+                      os seus usuários via a integração que existe entre o InteliForm e o Facebook. Portanto nesse caso quando você clica em "Reinicializar Senha" você estará
+                      criando uma conta comum para esse usuário. Será enviado um e-mail de confirmação que você receberá e deverá confirmar.
+                      Após a criação do seu usuário, no primeiro login você receberá outro e-mail de confirmação de senha que você também deverá confirmar. E pronto, você
+                      já pode se logar no seu sistema, e utilizá-lo normalmente e habilitar o login via Facebook. <Br>
+                      Se o seu usuário do InteliForm não foi criado pelo Facebook, você não precisará fazer nada disso porque o login é comum e não precisa ser habilitado.
+                      É automático.
+                      </li><br>
+
+                      <li><b>Login via Facebook</b><br>
+                      O login via Facebook é uma facilidade oferecida pelo Facebook para os seus usuários e para os sistemas que são certificados
+                      e que seguem as regras de integração de sistemas.<br>
+                      </li><br>
+
+
+                      <li><b>Login via Facebook no seu sistema</b><br>
+                      Você pode incluir o login via Facebook no seu sistema. Esse procedimento leva aproximadamente 5 minutos para um profissional
+                      que conheça bem o processo de integração, mas pode ser complexo para quem não tem experiência com isso.<br>
+
+                        Para publicar o seu aplicativo de cadastro no Facebook você precisa estar registrado como desenvolvedor no <b>Facebook Developers</b>, 
+                        onde você deve prencher os dados solicitados com as suas preferências, e para as questõs abaixo, informar os seguintes dados:
+                      
+                      <ul>
+                        <li>App Domains: projetos.inteliform.com.br</li>
+                        <li>Site com login do Facebook: http://projetos.inteliform.com.br/<seu sistema>/accounts/login/</li>
+                        <li>URL: http://projetos.inteliform.com.br/<seu sistema>/</li>
+                        <li>Secure Canvas URL: https://projetos.inteliform.com.br/<seu sistema>/</li>
+                        <li>Page Tab URL: http://projetos.inteliform.com.br/<seu sistema>/</li>
+                        <li>Secure Page Tab URL: https://projetos.inteliform.com.br/<seu sistema>/</li>
+                      </ul>
+                        Anote o "App ID" e o "App Secret" do seu aplicativo gerado no Facebook Developer e cadastre-os na interface administrativa do seu sistema.<br>
+
+                        Para adicionar o seu aplicativo na sua fanpage, ou para divulgar para outras pessoas instalarem o seu aplicativo nas suas páginas, basta seguir a instrução do item "Adding an App to a Page", disponível no link https://developers.facebook.com/docs/appsonfacebook/pagetabs/                     
+                      </li><br>
+                      
+                      <li><b>Se eu quiser o código do meu sistema gerado no InteliForm, eu posso adquiri-lo?</b><br>
+                      Não, o nosso modelo de negócios utiliza o InteliForm como gerador de sistemas e a oferta do serviço de manutenção do seu sistema.
+                      </li><br>
+                      
+                      <li><b>Acesso aos dados do seu sistema</b><br>
+                      Na interface administrativa você tem acesso aos dados que os seus usuários cadastram no seu sistema.
+                      E você pode fazer o download desses dados para backup ou para fazer análise em planilhas de texto.
+                      </li><br>
+                      
+                      <li><b></b><br>
+                      </li><br>
+                      
+                      <li><b></b><br>
+                      </li><br>
+                      <ol>
+            </div>
+            
+
+            
+            <div class="row">
+              <div class="col-lg-12">
+                <h2>Adicionais</h2>
+                <p>
+                Você pode contratar serviços adicionais para personalizar ainda mais o seu sistema.
+                <ul>
+                  <li>
+                      Utilizar o domínio do seu portal no seu sistema InteliForm para ele ficar com o nome do seu domínio. <br>
+                      Por exemplo: http://meusistema.minhaempresa.com.br 
+                  </li>
+                  <li>
+                      Utilizar certificado digital e criar um domínio seguro para o seu sistema (SSL).<br>
+                      Por exemplo: https://meusistema.minhaempresa.com.br
+                  </li>
+                  <li>Desenvolver um template para que o seu sistema utilize a mesma a identidade visual do seu portal.</li>
+                </ul>
+                </p>
+                <p>
+                Tudo isso é possível porque o seu sistema é completamente independente.  
+                Para a sua segurança, o seu sistema não compartilha nenhum tipo de dado com outros sistemas, e possui uma instância única de banco de dados para manter total isolamento e segurança das suas informações.
+                </p>
+              </div>
+            </div>              
+          </div>
+        
+                <h2>&nbsp;</h2>
+        
+                <div class="alert alert-dismissable alert-danger">
+                  <strong>Compatível com todos os browsers</strong> 
+
+                  <br>Exceto Internet Explorer, que não segue os padrões definidos pela indústria, mercado,
+                  comunidade de desenvolvedores e orgãos que estebelecem os padrões das tecnologias utilizadas na Internet.
+                </div>
+                <p>&nbsp;</p>        
+        </div>
+
+            
+{% endblock %}          

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+
+    {% block BSCT_MAIN %}
+
+    {% if messages %}
+    <div>
+      <strong>Mensagens:</strong>
+      <ul>
+	{% for message in messages %}
+	<li>{{message}}</li>
+	{% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+
+
+    <div align="center">
+        {% block ALLAUTH_CONTENT %}
+        {% endblock %}
+    </div>
+
+    {% endblock %}

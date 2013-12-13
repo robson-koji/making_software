@@ -1,0 +1,135 @@
+{% extends 'bsct/base.html' %}
+ 
+{% load bscttags %}
+
+{% block BSCT_CONTENT %}
+    
+    <div class="container">
+        <div class="page-header">
+          <div class="row">
+            <div class="col-lg-12">
+                <h1>  {{ acao }} {% get_verbose_name form.instance %}</h1>
+                <p>{{textos.app_desc|safe}}</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="row">
+            <table>
+
+            </table>
+
+            
+        <div class="row">
+          <div class="col-lg-8">
+            <form 
+                action  = ''
+                method  = 'post' 
+                class   = 'form-inline' 
+                enctype = 'multipart/form-data' 
+            >
+                {% csrf_token %}
+            
+                <div class = 'well' >
+            
+                    {% block BSCT_FORM_FIELDS %}
+                        
+
+            <table width=100% class="table">
+            {% if textos.template %}
+                <tr>
+                    <td><b>Template:</b></td>
+                    <td>
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-warning">Template</button>
+                          <button type="button" class="btn btn-warning dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+                          <ul class="dropdown-menu">
+                            <li><a href="/making_software/sistema/mudar_template/amelia">Amelia</a></li>
+                            <li><a href="/making_software/sistema/mudar_template/cerulean">Cerulean</a></li>
+                            <li><a href="/making_software/sistema/mudar_template/cosmo">Cosmo</a></li>
+                            <li><a href="/making_software/sistema/mudar_template/cyborg">Cyborg</a></li>
+                            <li><a href="/making_software/sistema/mudar_template/flatly">Flatly</a></li>
+                            <li><a href="/making_software/sistema/mudar_template/journal">Journal</a></li>
+                            <li><a href="/making_software/sistema/mudar_template/readable">Readable</a></li>
+                            <li><a href="/making_software/sistema/mudar_template/simplex">Simplex</a></li>
+                            <li><a href="/making_software/sistema/mudar_template/slate">Slate</a></li>
+                            <li><a href="/making_software/sistema/mudar_template/spacelab">Spacelab</a></li>
+                            <li><a href="/making_software/sistema/mudar_template/united">United</a></li>
+                          </ul>
+                        </div>
+                        <div><p></p></div>
+                        <div class="alert alert-dismissable alert-info">
+                          <strong>Defina o visual do seu sistema!</strong><br>
+                                    Quando você seleciona o template para o seu sistema essa informação é armazenada,
+                                    e o seu sistema utilizará o visual do template que você escolher!<br>
+                                    O template do InteliForm é sempre o mesmo, mas o do seu sistema será o template que você definir aqui.<br>
+                                    Não se preocupe se ao navegar pelo InteliForm o seu template não for apresentado.
+                                    Uma vez salvo, é ele que será utilizado no seu sistema quando você publicá-lo!
+                        </div>                         
+                    </td>
+                </tr>
+            {% endif %}                
+                    {{ form.as_table }}
+            </table>
+                    {% endblock %}
+            
+                </div>
+            
+                <div class='actions'>
+                    {% block BSCT_FORM_ACTIONS %}
+                    <input
+                        value = 'Salvar'
+                        type  = 'submit' 
+                        class = 'btn btn-success' 
+                    />
+            
+                    {% if form.instance.get_list_url %}
+                    {% endif %}
+                        <a 
+                            class = 'btn btn-warning' 
+                            href = "javascript:history.back(-1);"
+                            
+                        >
+                            Voltar
+                        </a>
+                    
+                    {% endblock %}
+                </div>
+            </form>
+         </div>
+
+            <div class="col-lg-4" style="padding-top:0px;">
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Status do sistema</h3>
+                  </div>
+                  <div class="panel-body">
+                    <table>
+                        <tr>
+                            <td><b>Passo 1/4</b> - Cadastramento </td>
+                            <td> <span class="label label-success"> OK!  </span></td>
+                        </tr>
+                        <tr class="success">
+                            <td><b>Passo 2/4</b> - Criação do sistema </td>
+                            <td> <span class="label label-success"> OK!  </span></td>                        
+                        </tr>
+                        <tr>
+                            <td><b>Passo 3/4</b> - Criação das Sessões </td>
+                            <td> <span class="label label-danger"> NOK!  </span></td>                        
+                        </tr>
+                        <tr>
+                            <td><b>Passo 4/4</b> - Criação dos formulários </td>
+                            <td> <span class="label label-danger"> NOK!  </span></td>                        
+                        </tr>
+                    </table>
+                  </div>
+                </div>                
+            </div>
+            
+            
+        </div>
+  
+</div>
+
+                
+{% endblock %}

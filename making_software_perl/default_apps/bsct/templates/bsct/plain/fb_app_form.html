@@ -1,0 +1,59 @@
+{% extends 'bsct/fb_app_base.html' %}
+ 
+{% load bscttags %}
+
+{% block BSCT_CONTENT %}
+    
+    <div class="container canvas">
+        <h1>{% get_verbose_name form.instance %}</h1>
+        <p><b>{{textos.subtitulo|safe}}</b></p>
+        
+          <div class="col-lg-12">
+            <p>{{textos.app_desc|safe}}</p>
+            <form 
+                action  = ''
+                method  = 'post' 
+                class   = 'form-inline' 
+                enctype = 'multipart/form-data' 
+            >
+                {% csrf_token %}
+            
+                <div class = 'well' >
+            
+                    {% block BSCT_FORM_FIELDS %}
+            <table width=100% class="table">
+                    {{ form.as_table }}
+            </table>
+                    {% endblock %}
+            
+                </div>
+            
+                <div class='well'>
+                    <center>
+                    {% block BSCT_FORM_ACTIONS %}
+                    <input
+                        value = 'Salvar'
+                        type  = 'submit' 
+                        class = 'btn btn-success' 
+                    />
+            
+                    {% if form.instance.get_list_url %}
+                    {% endif %}
+                        <a 
+                            class = 'btn btn-warning' 
+                            href = "javascript:history.back(-1);"
+                            
+                        >
+                            Voltar
+                        </a>
+                    
+                {% endblock %}
+                </center>
+                </div>
+            
+            </form>
+        </div>
+</div>
+
+                
+{% endblock %}

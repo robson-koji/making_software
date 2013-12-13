@@ -1,0 +1,109 @@
+{% extends 'bsct/base.html' %}
+{% load bscttags %}
+
+{% block BSCT_CONTENT %}
+    <div class="container">
+        <div class="col-lg-12">
+            <div class="page-header">
+              <div class="row">
+                  <h1>Making Software</h1>
+                  <h2>Criação do sistema: {{ sistema.nome }} </h2>
+              </div>
+            </div>
+            <div class="row">
+            </div>
+
+            <div class="row">
+              <div class="col-lg-8">
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">O sistema <i>"{{ sistema.nome }}"</i> foi criado com sucesso.</h3>
+                  </div>
+                  <div class="panel-body">
+                      <p>
+                      Confira as informações abaixo. Se não conseguir acessar o seu sistema entre em contato conosco.
+                      <ul>
+                      <li>URL do sistema: <a href="http://{{subdominio_projetos}}/{{ sistema.slug }}/" target="_blank">http://{{subdominio_projetos}}/{{ sistema.slug }}/</a> </li>
+                      <li>URL da interface administrativa: <a href="http://{{subdominio_projetos}}/{{ sistema.slug }}/administrativo/" target="_blank">http://{{subdominio_projetos}}/{{ sistema.slug }}/administrativo/</a> </li>
+                      </ul>
+                      O seu usuário do Making Software foi copiado para o seu sistema, portanto você conseguirá se logar no sistema com as mesmas credenciais de acesso. <br>
+                      Porém, se você alterar a sua senha em um sistema ela não será alterada no outro sistema, porque eles são totalmente independentes.
+                      </p>
+                  </div>
+                <div align='center'>
+                    <a class = 'btn btn-success' href="{% url 'sistema_detail'  sistema.id %}">
+                        Voltar e continuar editando
+                    </a>
+                    <p>&nbsp;</p>
+                </div>
+
+                </div>
+
+              </div>
+
+            </div>
+        
+            <div class="row">
+              <div class="col-lg-8">
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Facebook App</h3>
+                  </div>
+                  <div class="panel-body">
+                      <p>Para publicar o seu aplicativo de cadastro no Facebook você precisa estar registrado como desenvolvedor.<br>
+                        Acesse a URL <a href="https://developers.facebook.com/apps/" target="_blank">Facebook Developers</a>. <br>
+                        Você deve prencher os dados com as suas preferências, e quando solicitado informar os seguintes dados:
+                      </p>
+                      <p>
+                      <ul>
+                          <li>App Domains: <b>{{subdominio_projetos}}</b></li>
+                          <li>Site com login do Facebook: <b>http://{{subdominio_projetos}}/{{ sistema.slug }}/accounts/login/</b></li>
+                          <li>URL: <b>http://{{subdominio_projetos}}/{{ sistema.slug }}/</b></li>
+                          <li>Secure Canvas URL: <b>https://{{subdominio_projetos}}/{{ sistema.slug }}/</b></li>
+                          <li>Page Tab URL: <b>http://{{subdominio_projetos}}/{{ sistema.slug }}/</b></li>
+                          <li>Secure Page Tab URL: <b>https://{{subdominio_projetos}}/{{ sistema.slug }}/</b></li>
+                      </ul>
+                      </p>
+                      <p>Anote o "App ID" e o "App Secret" do seu aplicativo gerado no Facebook Developer e
+                      cadastre-os na <a href="http://{{subdominio_projetos}}/{{ sistema.slug }}/administrativo/" target="_blank">interface administrativa</a> do seu sistema.
+                      </p>
+                      <p>
+                        Para adicionar o seu aplicativo na sua fanpage, ou para divulgar para outras pessoas instalarem o seu aplicativo nas suas páginas,
+                        basta seguir a instrução do item "Adding an App to a Page", disponível no link https://developers.facebook.com/docs/appsonfacebook/pagetabs/
+                      </p>
+                      <p>
+                        É isso, já é possível você ter o seu sistema personalizado, e o seu aplicativo do Facebook publicado como uma aba da sua Fan Page no Facebook!
+                      </p>
+                  </div>
+                  <div class="progress-animated">
+                    <div class="progress progress-striped active">
+                      <div class="progress-bar progress-bar-success" style="width: 100%"></div>
+                    </div>
+                  </div>                  
+                </div>
+              </div>
+
+            {% if ambiente == 'DEV' %}
+            <div class="row">
+              <div class="col-lg-8">
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Checklist</h3>
+                  </div>
+                  <div class="panel-body">
+                      <p>{{ result|safe }}</p>
+                  </div>
+                  <div class="progress-animated">
+                    <div class="progress progress-striped active">
+                      <div class="progress-bar progress-bar-success" style="width: 100%"></div>
+                    </div>
+                  </div>                  
+                </div>
+              </div>
+            {% endif %}          
+            </div>
+          </div>
+        </div>
+
+            
+{% endblock %}          

@@ -1,0 +1,39 @@
+- model: projetos_5.projetos_5
+  pk: 1
+  fields:
+    created_by: 1
+    titulo: Projeto xyz
+    descricao_do_projeto: Desenvolvimento de software para blá, blá, blá 
+    stakeholders: Sujeito X, Fulano Y, Sicrano Z
+    data_de_inicio: 2013-10-10
+    data_prevista_de_finalizacao: 2014-01-20
+    
+- model: projetos_5.projetos_5
+  pk: 3
+  fields:
+    created_by: 1
+    titulo: Projeto ABC
+    descricao_do_projeto: Desenvolvimento de software para exterminar políticos brasileiros corruptos.
+    stakeholders: População brasileira
+    data_de_inicio: 2013-10-15
+    data_prevista_de_finalizacao: 2200-10-20
+    
+- model: projetos_5.projetos_5
+  pk: 3
+  fields:
+    created_by: 1
+    titulo: Máquina de desentortar bananas
+    descricao_do_projeto: Desenvolvimento de máquinas para desentortar bananas.
+    stakeholders: Nenhum
+    data_de_inicio: 2050-07-08
+    data_prevista_de_finalizacao: 2150-10-18
+    
+- model: projetos_5.projetos_5
+  pk: 4
+  fields:
+    created_by: 1
+    titulo: Projeto Alô
+    descricao_do_projeto: Projeto que visa desenvolver um sistema para medir a qualidade dos serviços dos provedores de acesso de Internet.
+    stakeholders: Palhaços em geral
+    data_de_inicio: 2013-12-20
+    data_prevista_de_finalizacao: 2015-10-18  

@@ -1,0 +1,112 @@
+{% extends 'bsct/base.html' %}
+{% load bscttags %}
+
+{% block BSCT_CONTENT %}
+    <div class="container">
+        <div class="row">        
+        {% if sistema_finalizado %}
+            <div class="col-lg-12">
+                <div class="page-header">
+                  <div class="row">
+                      <h1>Publicar sistema <i>"{{sistema.nome}}"</i></h1>
+                  </div>
+                  <p>Parabéns! Se você chegou até aqui é porque você finalizou a criação do seu sistema.<br>
+                  Antes de publicá-lo, leia com atenção o aviso abaixo.
+                  </p>
+                </div>
+            </div>
+            <div class="col-lg-8">
+              <div class="alert alert-dismissable alert-danger">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Atenção!!!</h3>
+                  </div>
+                  <div class="panel-body">
+                    SE VOCÊ ESTÁ PUBLICANDO UM SISTEMA QUE JÁ EXISTE, TODOS OS DADOS SERÃO APAGADOS E TODOS OS USUÁRIOS SERÃO EXCLUÍDOS!!! <BR>
+                    ANTES DE PUBLICAR O SISTEMA, FAÇA O BACKUP DE TODOS OS DADOS EXISTENTES E
+                    AVISE TODOS OS SEUS USUÁRISO DE QUE O SEU SISTEMA SERÁ REINICIALIZADO DO ZERO!!! <BR>
+                  </div>
+                </div>
+                
+                    <center>
+                    
+                    <div class="row">
+                        {% block BSCT_DETAIL_ACTIONS %}
+                            <a class = 'btn btn-warning' href  = '../publicar/{{sistema.id}}'>
+                                Publicar Sistema
+                            </a>
+                            <a class = 'btn btn-success' href = "javascript:history.back(-1);" >
+                                Voltar
+                            </a>                            
+                        {% endblock %}        
+                    </div>
+                    <p>&nbsp;</p>
+                    <b>Se você publicar o sistema, todos os dados existentes no sistema "{{sistema.nome}}" <br>serão excluídos definitivamente e o sistema será recriado novamente.</b>
+                    </center>
+                    <!-- Fim Detalhe de objeto -->
+              </div>
+        {% else %}
+            <div class="col-lg-12">
+                <div class="page-header">
+                  <div class="row">
+                      <h1>Publicar sistema <i>"{{sistema.nome}}"</i></h1>
+                  </div>
+                </div>
+            </div>                
+            <div class="col-lg-8">
+                <div class="alert alert-dismissable alert-warning">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">O sistema ainda não está pronto!</h3>
+                  </div>
+                  <div class="panel-body">
+                    Você ainda não acabou de configurar o seu sistema.
+                    Volte para a etapa anterior e finalize-o.
+                  </div>
+                </div>
+                <center>
+                    <a class = 'btn btn-success' href = "javascript:history.back(-1);" >
+                        Voltar
+                    </a>                            
+                </center>              
+            </div>
+        {% endif %}
+            <div class="col-lg-4" style="padding-top:0px;">
+                <div class="panel panel-info">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Status do sistema</h3>
+                  </div>
+                  <div class="panel-body">
+                    <table>
+                        <tr>
+                            <td><b>Passo 1/4</b> - Cadastramento </td>
+                            <td> <span class="label label-success"> OK!  </span></td>
+                        </tr>
+                        <tr>
+                            <td><b>Passo 2/4</b> - Criação do sistema </td>
+                            <td> <span class="label label-success"> OK!  </span></td>                        
+                        </tr>
+                        <tr>
+                            <td><b>Passo 3/4</b> - Criação das Sessões </td>
+                            <td> {{sistema_status.elementos|safe}} </td>                        
+                        </tr>
+                        <tr>
+                            <td><b>Passo 4/4</b> - Criação dos formulários </td>
+                            <td> {{sistema_status.fields|safe}} </td>                        
+                        </tr>
+                    </table>
+                  </div>
+                </div>                
+            </div>                
+        </div>
+    </div>
+{% endblock %}          
+
+
+
+
+
+
+
+
+
+
+
