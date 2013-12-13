@@ -1,6 +1,0 @@
-Revision history for Perl extension Sistema.
-
-0.01  Tue Sep 10 10:32:23 2013
-	- original version; created by h2xs 1.23 with options
-		-AX -n Sistema
-
