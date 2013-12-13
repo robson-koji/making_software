@@ -104,4 +104,4 @@ Para navegar, clique nos itens do menu acima.'\
 class SistemaForm(ModelForm):
     class Meta:
         model = Sistema
-        exclude = ('created_by')
+        exclude = ('created_by',)
