@@ -9,7 +9,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     url(  r'^(?i)sistema/', include( 'sistema.urls' ) ),    
     url(  r'^(?i)elemento/', include( 'elemento.urls' ) ),
-    url(  r'^(?i)relacionamentos/', include( 'relacionamentos.urls' ) ),
+    #url(  r'^(?i)relacionamentos/', include( 'relacionamentos.urls' ) ),
     
     # Se digitar o raiz da app, cai na pagina de instrucoes
     url(  r'^$', TemplateView.as_view(template_name="loopware/html/inicio.html")),

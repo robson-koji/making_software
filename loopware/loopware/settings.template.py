@@ -12,8 +12,9 @@ INTELIFORM_PERL_DIR = '/home/your_home'
 PERL_CREATE_PROJECT = INTELIFORM_PERL_DIR + '/making_software/making_software_perl/create_project.pl'
 
 # This is the domain/subdmain to deploy created systems
-# Change to suit your needs
-SUBDOMINIO_PROJETOS = '192.168.1.100:8001'
+# You need to set this on your web server config file.
+# You can set an specific port or anything that suit your needs
+SUBDOMINIO_PROJETOS = 'localhost:8001'
 
 
 # Django settings for Making Software project.
@@ -33,7 +34,7 @@ LOGOUT_URL = VIRTUAL_HOST + '/accounts/logout/'
 
 # Folder where your projects are created
 # I think that it is a good idea to create making_software folder at the /home folder
-# to contain your created projects. But the decision is yours.
+# to contain your created projects. But you can choose your preference.
 MEDIA_ROOT = '/home/making_software/projetos/'
 MEDIA_URL = '/logos/'
 
@@ -121,11 +122,15 @@ USE_TZ = True
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/var/www/example.com/static/"
-STATIC_ROOT = '/var/www/static_files/making_software'
+# For development environment a specific URL is set on urls.py.
+# For production environment, set as stated here:
+# https://docs.djangoproject.com/en/1.2/howto/static-files/
+#STATIC_ROOT = '/var/www/static_files/making_software'
 
 # URL prefix for static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
-STATIC_URL = '/static_files/making_software/'
+# Same as above for development environment
+#STATIC_URL = '/static_files/making_software/'
 
 
 # Additional locations of static files
@@ -191,7 +196,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
+#    'django.contrib.staticfiles',
     
     'django.contrib.flatpages',
     
