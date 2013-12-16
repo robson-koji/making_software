@@ -8,9 +8,6 @@
 # ie /home/your_name if you follow the tutorial to install
 INTELIFORM_PERL_DIR = '/home/your_home'
 
-
-
-
 # You don´t have to change here, unless you have changed the create_projet.pl location
 PERL_CREATE_PROJECT = INTELIFORM_PERL_DIR + '/making_software/making_software_perl/create_project.pl'
 
@@ -125,7 +122,7 @@ USE_TZ = True
 # Static files location for development environment.
 # For production, disable the static_files entry in urls.py,
 # and config and enable the settings bellow
-STATIC_DOC_ROOT = INTELIFORM_PERL_DIR + '/making_software/static_files/'
+STATIC_DOC_ROOT = INTELIFORM_PERL_DIR + '/making_software/static_files/making_software'
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
