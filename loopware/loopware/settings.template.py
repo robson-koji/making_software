@@ -224,7 +224,7 @@ INSTALLED_APPS = (
     
     'sistema',
     'elemento',
-    'relacionamentos',
+    #'relacionamentos',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
