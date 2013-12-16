@@ -18,15 +18,19 @@ SUBDOMINIO_PROJETOS = 'localhost:8001'
 
 
 # Django settings for Making Software project.
-# It is considered that you are using a web server and WSGI to connect to
-# Making Software Django application
-# This urls are based on your virtual host configuration
+# This urls are based on your virtual host configuration if
+# you are using a web server and WSGI to connect to Making Software Django application
 # If you follow the tutorial, leave as is:
-VIRTUAL_HOST = '/making_software'
+VIRTUAL_HOST = ''
 SESSION_COOKIE_PATH = '/making_software'
+ADMIN_MEDIA_PREFIX = ''
+LOGIN_REDIRECT_URL = VIRTUAL_HOST + '/sistema/add/'
 
-ADMIN_MEDIA_PREFIX = VIRTUAL_HOST + '/admin/'
-LOGIN_REDIRECT_URL = VIRTUAL_HOST + '/flat/instrucoes/'
+
+# Change this for production environment
+#VIRTUAL_HOST = '/making_software'
+#ADMIN_MEDIA_PREFIX = VIRTUAL_HOST + '/admin/'
+#LOGIN_REDIRECT_URL = VIRTUAL_HOST + '/flat/instrucoes/'
 
 LOGIN_URL = VIRTUAL_HOST + '/accounts/login/'
 LOGOUT_URL = VIRTUAL_HOST + '/accounts/logout/'
@@ -85,8 +89,8 @@ LANGUAGE_CODE = 'pt-br'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': '',             
-        'USER': '',             
+        'NAME': 'loopware',             
+        'USER': 'postgres',             
         'PASSWORD': '',         
 
         # Isso eh muito importante, eh onde o socket do postgres foi instalado por default
@@ -96,7 +100,7 @@ DATABASES = {
         # Configure o parametro "HOST" com o diretorio onde estah o socket.
         # O psycopg2 expects Postgres socket to be in /var/run/postgresql/
         # http://stackoverflow.com/questions/5500332/cant-connect-the-postgresql-with-psycopg2
-        'HOST': '/tmp/',                # Set to empty string for localhost. Not used with sqlite3.
+        'HOST': '/var/run/postgresql/',                # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                     # Set to empty string for default. Not used with sqlite3.
     }
 }
