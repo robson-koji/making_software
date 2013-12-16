@@ -206,7 +206,6 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
 #    'django.contrib.staticfiles',
-    
     'django.contrib.flatpages',
     
     'allauth',
@@ -219,7 +218,6 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     
     'wysiwyg_forms',
-    
     'bsct',
     
     'sistema',
