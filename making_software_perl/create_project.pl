@@ -1014,7 +1014,8 @@ sub SetFakeData{
 
     # Inserindo grupos
     system ("/bin/mkdir -p $dir_definitivo/$project_name/fixtures/");
-    my @fake_yaml = ('fake_groups.yaml', 'fake_papeis.yaml', 'fake_conhecimentos.yaml', 'fake_tecnologias.yaml', 'fake_projetos.yaml');
+    my @fake_yaml; 
+    #my @fake_yaml = ('fake_groups.yaml', 'fake_papeis.yaml', 'fake_conhecimentos.yaml', 'fake_tecnologias.yaml', 'fake_projetos.yaml');
     
     foreach (@fake_yaml){
         system("cp $making_software_home/making_software/making_software_perl/templates/fake/$_ $dir_definitivo/$project_name/fixtures/");
