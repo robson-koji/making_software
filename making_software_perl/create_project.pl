@@ -99,11 +99,19 @@ print ">>> System physically moved<br>\n";
 &SetFakeData($project_name); #Django's auth system superuser
 print ">>> Mock data for tests set<br>\n";
 
-&ConfigApache($project_name);
+
+&Runserver($project_name);
 print ">>> Webserver is set, up and running<br>\n";
+
+#&ConfigApache($project_name);
+#print ">>> Webserver is set, up and running<br>\n";
 
 exit;
 
+sub Runserver{
+    my ($project_name) = @_;
+    system("python $dir_definitivo/$project_name/manage.py runserver localhost:8001");
+}    
 
 
 #
