@@ -73,7 +73,10 @@ sub GetApp{
 
     my @elementos;
     foreach (@$elementos){
-        my $app_name = "_".$_->{id}."_".$_->{nome};
+        # Due to elemento models inheritance.
+        my $id_field_name = 'extendmodels_ptr_id';
+        
+        my $app_name = "_".$_->{$id_field_name}."_".$_->{nome};
     
         # somente caracteres ascii
         $app_name =~ s/[^!-~\s]//g;
@@ -84,7 +87,7 @@ sub GetApp{
         $_->{app_name} = $app_name;
         
         # Insere forms na referencia de array dos elementos
-        my $forms = &RecuperaForm($self, $_->{id});
+        my $forms = &RecuperaForm($self, $_->{$id_field_name});
         $_->{forms} = $forms;
         
         push @elementos, $_ if $forms;

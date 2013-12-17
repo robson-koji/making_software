@@ -14,13 +14,13 @@ DB_HOST = '[% settings.hash_config.postgres_host %]'
 # Configuracoes para rodar com WSGI em Virtualhosts no Apache
 #MEDIA_URL = 'http://192.168.0.1/gallery/media/'
 #ADMIN_MEDIA_PREFIX = '/gallery/admin_media/'
-SESSION_COOKIE_PATH = '/[% settings.project_name %]'
-LOGIN_REDIRECT_URL = '/[% settings.project_name %]/flat/fb_app/instrucoes/'
-LOGIN_URL = '/[% settings.project_name %]/accounts/login/'
-LOGOUT_URL = '/[% settings.project_name %]/accounts/logout/'
+SESSION_COOKIE_PATH = '/'
+LOGIN_REDIRECT_URL = '/flat/fb_app/instrucoes/'
+LOGIN_URL = '/accounts/login/'
+LOGOUT_URL = '/accounts/logout/'
 MEDIA_ROOT = '[% settings.hash_config.ultimate_dir %]/[% settings.project_name %]/media/'
-MEDIA_URL = '/[% settings.project_name %]/media/'
-URL_ROOT = '/[% settings.project_name %]/'
+MEDIA_URL = '/media/'
+URL_ROOT = '/'
 
 
 ADMINS = ()
@@ -105,7 +105,7 @@ INSTALLED_APPS = (
 # Para utilizar o Django Guardian
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend', # this is default
-    'guardian.backends.ObjectPermissionBackend',
+    #'guardian.backends.ObjectPermissionBackend',
 )
 # Para utilizar o Django Guardian
 ANONYMOUS_USER_ID = -1
