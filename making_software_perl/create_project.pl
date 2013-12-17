@@ -110,7 +110,7 @@ exit;
 
 sub Runserver{
     my ($project_name) = @_;
-    system("python $dir_definitivo/$project_name/manage.py runserver localhost:8001");
+    system("python $dir_definitivo/$project_name/manage.py runserver localhost:8001 &");
 }    
 
 
