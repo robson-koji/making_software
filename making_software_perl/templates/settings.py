@@ -84,7 +84,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     #'django.contrib.admindocs',
 
-    'fb_iframe', # Para nao dar pau de CSRF no FB
+    #'fb_iframe', # Para nao dar pau de CSRF no FB
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
