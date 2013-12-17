@@ -66,7 +66,7 @@
 
             
             
-
+            {% comment %}
             {% if object_list.model.get_create_url %}
             <div class = 'span4'>
             <a class = 'btn btn-primary' href  = '{{object_list.model.get_create_url }}'>
@@ -74,6 +74,8 @@
             </a>
             </div>
             {% endif %}
+            {% endcomment %}
+
             {% endblock %}
             
             {% block BSCT_LIST_PAGINATION %}

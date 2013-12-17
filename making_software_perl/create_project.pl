@@ -451,7 +451,7 @@ sub StartApps{
                        
         # Em caso de relacionamentos M2M, essa sub deixa soh um para nao dar pau na criacao
         # das tabelas. Cria soh de um lado.
-        $relacionamentos = &TrataM2M($relacionamentos, $_, \@manytomany) if @$relacionamentos;
+        $relacionamentos = &TrataM2M($relacionamentos, $_, \@manytomany) if $relacionamentos;
 
         if ($forms) {
             # Primeiro inicializar as aplicacoes

@@ -7,8 +7,8 @@ from django.contrib.auth.models import Group
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import resolve
 
-from guardian.mixins import PermissionRequiredMixin
-from guardian.shortcuts import assign_perm
+#from guardian.mixins import PermissionRequiredMixin
+#from guardian.shortcuts import assign_perm
 from django.views import generic
 
 from bsct.views import *
