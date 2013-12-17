@@ -1,0 +1,79 @@
+/* Variables.less
+ * Variables to customize the look and feel of Bootstrap
+ * ----------------------------------------------------- */
+
+
+// Links
+@linkColor:         #3b5998;
+@linkColorHover:    #3b5998;
+
+// Grays
+@black:             #000;
+@grayDark:          #333;
+@gray:              #666;
+@grayLight:         #999;
+@grayLighter:       #e2e2e2;
+@grayWhite:         #f2f2f2;
+@white:             #fff;
+
+// Accent Colors
+@blue:              #627aad;
+@blueDark:          #3b5998;
+@blueLight:         #d4dae8;
+@blueLighter:       #eceff6;
+@greenDark:         #2C5115;
+@green:             #3B6E22;
+@greenLight:        #69A74E;
+@red:               #dd3c10;
+@redLight:          #ffebe8;
+@yellow:            #e2c822;
+@yellowLight:       #fff9d7;
+@orange:            #f89406; /*unmodified*/
+@pink:              #c3325f; /*unmodified*/
+@purple:            #7a43b6; /*unmodified*/
+
+// Baseline grid
+@basefont:          11px;
+@baseline:          14px;
+
+// Griditude
+// Modify the grid styles in mixins.less
+@gridColumns:       12;
+@gridColumnWidth:   25px;
+@gridGutterWidth:   20px;
+@extraSpace:        (@gridGutterWidth * 2); // For our grid calculations
+@siteWidth:         (@gridColumns * @gridColumnWidth) + (@gridGutterWidth * (@gridColumns - 1));
+
+
+// Color Scheme
+// Use this to roll your own color schemes if you like (unused by Bootstrap by default)
+@baseColor:         @blue;                  // Set a base color
+@complement:        spin(@baseColor, 180);  // Determine a complementary color
+@split1:            spin(@baseColor, 158);  // Split complements
+@split2:            spin(@baseColor, -158);
+@triad1:            spin(@baseColor, 135);  // Triads colors
+@triad2:            spin(@baseColor, -135);
+@tetra1:            spin(@baseColor, 90);   // Tetra colors
+@tetra2:            spin(@baseColor, -90);
+@analog1:           spin(@baseColor, 22);   // Analogs colors
+@analog2:           spin(@baseColor, -22);
+
+
+// form borders
+@formBorderRadius:  0px;
+@btnBorderRadius:   0px;
+@formBorderColor:   @blueLight;
+
+// alert/block-alert borders
+@alertBorderRadius: 0px;
+
+// pills/tabs borders
+@pillsBorderRadius: 15px;
+@tabsBorderRadius:  2px;
+
+// More variables coming soon:
+// - @basefont to @baseFontSize
+// - @baseline to @baseLineHeight
+// - @baseFontFamily
+// - @primaryButtonColor
+// - anything else? File an issue on GitHub
