@@ -1,0 +1,4 @@
+include README.rst
+include MANIFEST.in
+recursive-include fb_iframe *.py
+recursive-exclude example_fb_iframe *
