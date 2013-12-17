@@ -51,12 +51,12 @@ apache_instance => 'apache2',
 
 # For each system created, Making Software make the first request in order to not receive
 # an apache error, due to reload.
-subdomain_projetos => 'http://local_ip:port/',
+subdomain_projetos => 'http://localhost:8001',
 
 
 # This is the domain that will be used in the Django site table.
 # Maybe it can use the same variable defined above.
-domain => 'local_ip:port',
+domain => 'http://localhost:8001',
 
 
 # This is a weird behavior that shall be debuged.
