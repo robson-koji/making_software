@@ -45,7 +45,7 @@ sub db_connection {
             }
         }
     }
-    $self->{'dbh_making_software'} = DBI->connect("dbi:Pg:dbname=loopware;host=$config{postgres_host}",
+    $self->{'dbh_making_software'} = DBI->connect("dbi:Pg:dbname=making_software;host=$config{postgres_host}",
                             $config{postgres_user},$config{postgres_pwd}, {AutoCommit => 0, RaiseError => 1});
 }
 
