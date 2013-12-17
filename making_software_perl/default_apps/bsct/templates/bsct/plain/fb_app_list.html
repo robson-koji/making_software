@@ -63,13 +63,15 @@
 
             
             
-
+            {% comment %}
             {% if object_list.model.get_create_url %}
             <div class = 'span4'>
             <a class = 'btn btn-primary' href  = '{{object_list.model.get_create_url }}'>
                 Cadastrar novo(a) <i>"{% get_verbose_name object_list.model %}"</i> 
             </a>
             </div>
+            {% endcomment %}
+            
             {% endif %}
             {% endblock %}
             
