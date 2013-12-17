@@ -53,7 +53,7 @@ class RedirectAuthenticatedUserMixin(object):
 class LoginView(RedirectAuthenticatedUserMixin, FormView):
     form_class = LoginForm
     template_name = "account/login.html"
-    #success_url = '/paginas/boasvindas/'
+    success_url = '/flat/bem-vindo/'
     redirect_field_name = "next"
 
     def form_valid(self, form):
@@ -65,8 +65,11 @@ class LoginView(RedirectAuthenticatedUserMixin, FormView):
         my_success_url = reverse_lazy(self.kwargs['my_success_url'])
         ret = (get_next_redirect_url(self.request,
                                      self.redirect_field_name)
-               #or self.success_url)
-               or my_success_url)
+               
+               # Comuta abaixo para valer para o codigo aberto ou codigo fechado
+               
+               or self.success_url)
+               #or my_success_url)
         return ret
 
     def get_context_data(self, **kwargs):

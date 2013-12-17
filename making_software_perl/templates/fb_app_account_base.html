@@ -27,7 +27,10 @@
                 {% if user.is_authenticated %}
                   <li><a href="{% url 'fb_app_account_change_password' %}">Alterar Senha</a></li>
                   <li><a href="{% url 'fb_app_account_logout' %}">Sair</a></li>
+                {% comment%}
                   <li><b><a href="/[% base.slug %]/fb_app">Voltar</a></b></li>
+                {% endcomment%}
+                  <li><b><a href="/fb_app">Voltar</a></b></li>
                 {% else %}
                   <li><a href="{% url 'fb_app_account_login' %}">Entrar</a></li>
                   <li><a href="{% url 'fb_app_account_signup' %}">Cadastrar</a></li>
