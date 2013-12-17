@@ -22,14 +22,13 @@ SUBDOMINIO_PROJETOS = 'localhost:8001'
 # you are using a web server and WSGI to connect to Making Software Django application
 # If you follow the tutorial, leave as is:
 VIRTUAL_HOST = ''
-SESSION_COOKIE_PATH = '/making_software'
-ADMIN_MEDIA_PREFIX = ''
+SESSION_COOKIE_PATH = '/'
 LOGIN_REDIRECT_URL = VIRTUAL_HOST + '/sistema/add/'
 
 
 # Change this for production environment
 #VIRTUAL_HOST = '/making_software'
-#ADMIN_MEDIA_PREFIX = VIRTUAL_HOST + '/admin/'
+ADMIN_MEDIA_PREFIX = VIRTUAL_HOST + '/admin/'
 #LOGIN_REDIRECT_URL = VIRTUAL_HOST + '/flat/instrucoes/'
 
 LOGIN_URL = VIRTUAL_HOST + '/accounts/login/'
@@ -53,9 +52,9 @@ ACCOUNT_AUTHENTICATION_METHOD = ("username")
 SOCIALACCOUNT_EMAIL_VERIFICATION = ("none")
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = True
-ACCOUNT_EMAIL_REQUIRED =True
-ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 3
-ACCOUNT_SIGNUP_PASSWORD_VERIFICATION = True
+#ACCOUNT_EMAIL_REQUIRED =True
+#ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 3
+#ACCOUNT_SIGNUP_PASSWORD_VERIFICATION = True
 
 
 EMAIL_HOST = 'localhost'
@@ -89,7 +88,7 @@ LANGUAGE_CODE = 'pt-br'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'loopware',             
+        'NAME': 'making_software',             
         'USER': 'postgres',             
         'PASSWORD': '',         
 
@@ -125,7 +124,7 @@ USE_TZ = True
 
 # Static files location for development environment.
 # For production, disable the static_files entry in urls.py,
-# and config and enable the settings bellow
+# and config and enable the setting bellow
 STATIC_DOC_ROOT = INTELIFORM_PERL_DIR + '/making_software/static_files/making_software'
 
 # Absolute path to the directory static files should be collected to.
@@ -137,10 +136,10 @@ STATIC_DOC_ROOT = INTELIFORM_PERL_DIR + '/making_software/static_files/making_so
 # https://docs.djangoproject.com/en/1.2/howto/static-files/
 #STATIC_ROOT = '/var/www/static_files/making_software'
 
-# URL prefix for static files.
+# URL prefix for Admin Site static files.
 # Example: "http://example.com/static/", "http://static.example.com/"
 # Same as above for development environment
-#STATIC_URL = '/static_files/making_software/'
+STATIC_URL = '/static_files/making_software/'
 
 
 # Additional locations of static files
