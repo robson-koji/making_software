@@ -893,6 +893,7 @@ sub SyncDB{
     #print "Sincronizando DB<br>\n";
     # o "echo no" eh para responder a pergunta de criacao de usuario master.
     #system ("/usr/bin/python echo no | $temp_dir/$project_name/manage.py syncdb");
+    system ("chmod -R 755 $temp_dir/$project_name/manage.py");
     system ("/usr/bin/python $esdruxulo $temp_dir/$project_name/manage.py syncdb");
     ##system ("/usr/bin/python $temp_dir/$project_name/manage.py syncdb");
 }

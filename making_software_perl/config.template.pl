@@ -63,6 +63,6 @@ domain => 'local_ip:port',
 # When executing the Django command "manage.py syncdb", a question requires an answer to
 # create or not a master user.
 # Some environments need the "echo no" answer, while other require an empty answer.
-# So select the best for you use.
+# Select the best the case.
 esdruxulo => 'echo no |',
 

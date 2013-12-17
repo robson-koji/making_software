@@ -1,5 +1,5 @@
 ALLOWED_HOSTS = ['[% settings.hash_config.domain %]']
-DEBUG = [% settings.hash_config.debug %] 
+DEBUG = True
 
 EMAIL_HOST = '[% settings.hash_config.EMAIL_HOST %]' 
 EMAIL_PORT = '[% settings.hash_config.EMAIL_PORT %]' 
@@ -68,7 +68,7 @@ ROOT_URLCONF = '[% settings.project_name %].urls'
 WSGI_APPLICATION = '[% settings.project_name %].wsgi.application'
 
 TEMPLATE_DIRS = (
-    '[% settings.hash_config.ultimate_dir %]/[% settings.project_name %]/templates/'
+    ('[% settings.hash_config.ultimate_dir %]/[% settings.project_name %]/templates/'),
 )
 
 INSTALLED_APPS = (
@@ -93,7 +93,7 @@ INSTALLED_APPS = (
 
     #'wysiwyg_forms',
     'bsct',
-    'guardian',
+    #'guardian',
 
     [% FOREACH app = settings.apps %]
         [% NEXT UNLESS app.forms %]
