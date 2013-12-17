@@ -99,6 +99,7 @@ sub GetApp{
     
 sub RecuperaRelacionamentos{
     my ($self, $sistema, $elemento) = @_;
+    return;
     
     my $query = "SELECT * FROM relacionamentos_relacionamentos WHERE sistema_id = ? AND elemento_id = ? OR elemento_id is NULL";
 
@@ -156,6 +157,7 @@ sub RecuperaPermissoes_de_Grupos{
    
    
 sub RecuperaPermissoes_de_Todos{
+    return;
     my ($self, $elemento_id) = @_;
     
     my $query = "SELECT * FROM elemento_elemento_todos_permissoes WHERE elemento_id = ?";
