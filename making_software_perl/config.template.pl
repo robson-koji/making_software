@@ -15,7 +15,8 @@ making_software_perl_dir => '/home/your_name',
 # temp file during creation of the systems. Or you can just leave the original
 # folder used by the Apache user to serve files, like /var/www.
 #temp_dir => '/var/www',
-temp_dir => '/blablabla',
+temp_dir => '/var/www',
+
 
 
 # Folder to deploy the code of the created system.
@@ -29,7 +30,7 @@ django_admin => '/usr/bin/django-admin',
 
 # Postgres´ socket folder.
 # /var/run/postgresql/.s.PGSQL.5432 or /tmp or elsewhere
-postgres_host => '/tmp',
+postgres_host => '/var/run/postgresql/',
 
 
 # Password to connect to postgres.
