@@ -4,10 +4,10 @@ Install Guide - Portuguese only
 
 <b>Manual de instalação</b><br>
 PDF:<br>
-https://github.com/fortinbras/making_software/raw/master/Manual-Instalacao-TXT-PT_BR.txt
+https://github.com/fortinbras/making_software/raw/master/Manual-Instalacao-PDF-PT_BR.pdf
 
 TXT (caso você não tenha um leitor de PDF no seu servidor:<br>
-https://github.com/fortinbras/making_software/raw/master/Manual-Instalacao-PDF-PT_BR.txt
+https://github.com/fortinbras/making_software/raw/master/Manual-Instalacao-TXT-PT_BR.txt
 
 
 Making Software
