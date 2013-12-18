@@ -6,7 +6,7 @@ Install Guide - Portuguese only
 PDF:<br>
 https://github.com/fortinbras/making_software/raw/master/Manual-Instalacao-PDF-PT_BR.pdf
 
-TXT (caso você não tenha um leitor de PDF no seu servidor:<br>
+TXT (caso você não tenha um leitor de PDF no seu servidor):<br>
 https://github.com/fortinbras/making_software/raw/master/Manual-Instalacao-TXT-PT_BR.txt
 
 
@@ -16,7 +16,7 @@ Making Software
 This is a software to make software, where software means a web based system, in both ways.<br>
 With this software the user can deploy his or her own web based system without write a single line of code.
 
-It works only in Linux distributions; and for the moment it has been tested on Debian/Ubuntu only.
+It works only in Linux distributions; and for the moment it has been tested on Ubuntu and Slackware only.
 
 This project has two systems, separated layers which work together tied by a database.
 
