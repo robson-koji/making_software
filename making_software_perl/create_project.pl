@@ -44,7 +44,7 @@ my $apache_instance = $config{apache_instance};
 my $subdomain_projetos = $config{subdomain_projetos}; 
 my $domain = $config{domain};
 my $virtual_host_string = $config{virtual_host_string};
-my $esdruxulo = $config{esdruxulo};
+my $echo = $config{echo};
 
 
 # Sistema
@@ -902,7 +902,7 @@ sub SyncDB{
     # o "echo no" eh para responder a pergunta de criacao de usuario master.
     #system ("/usr/bin/python echo no | $temp_dir/$project_name/manage.py syncdb");
     system ("chmod -R 755 $temp_dir/$project_name/manage.py");
-    system ("/usr/bin/python $esdruxulo $temp_dir/$project_name/manage.py syncdb");
+    system ("/usr/bin/python $echo $temp_dir/$project_name/manage.py syncdb");
     ##system ("/usr/bin/python $temp_dir/$project_name/manage.py syncdb");
 }
 

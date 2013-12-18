@@ -3,20 +3,19 @@
 # In this case you have to fill the file hosts.pl and set the name of each file according to it´s environment.
 
 
+# For development environment, created systems will be temporarily deployed at
+# the sama making_software_perl directory.
+# If you have installed Making Software at your home dir, set you name here.
+temp_dir => '/home/your_name/making_software/making_software_perl',
 
-# Full path to making_software folder.
-# The folder where you open making_sofware package.
-# ie your home: '/home/your_name'
-making_software_perl_dir => '/home/your_name',
 
-
-# Apache user (www-data) executes create_project.pl
-# You can create an specific folder owned by Apache user (www-data) to hold
-# temp file during creation of the systems. Or you can just leave the original
-# folder used by the Apache user to serve files, like /var/www.
+# For production environment or an environment with Apache.
+# Apache user (www-data) executes create_project.pl. In order to allow
+# Apache to create folder, you can create an specific folder owned by Apache
+# user (www-data) to hold temp file during creation of the systems.
+# Or you can just leave the original folder used by the Apache user to serve files,
+# like /var/www.
 #temp_dir => '/var/www',
-temp_dir => '/var/www',
-
 
 
 # Folder to deploy the code of the created system.
@@ -46,7 +45,7 @@ postgres_pwd => '',
 # by Making Software, since the webserver is reloaded each time a system is created.
 # If you have other system, like Making Software itself running at this same instance,
 # it will stop on each realod of the web server.
-apache_instance => 'apache2',
+#apache_instance => 'apache2',
 
 
 # For each system created, Making Software make the first request in order to not receive
@@ -64,5 +63,5 @@ domain => 'http://localhost:8001',
 # create or not a master user.
 # Some environments need the "echo no" answer, while other require an empty answer.
 # Select the best the case.
-esdruxulo => 'echo no |',
+echo => 'echo no |',
 
