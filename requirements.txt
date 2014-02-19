@@ -1,0 +1,6 @@
+#solving the requirements with pip... the version was not specified, please report bugs =]
+
+pip install Django
+pip install psycopg2
+
+#there are some perl dependencies, but not specified here - read the doc.
