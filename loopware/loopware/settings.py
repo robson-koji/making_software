@@ -1,12 +1,15 @@
 # -*- coding: utf-8 -*-
 
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+import os
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 # Local configurations
 
 # Making Software home folder
 # The folder where you unpack Making Software from Github
 # ie /home/your_name if you follow the tutorial to install
-INTELIFORM_PERL_DIR = '/home/your_home'
+INTELIFORM_PERL_DIR = '/home/robson/projetos'
 
 # You don´t have to change here, unless you have changed the create_projet.pl location
 PERL_CREATE_PROJECT = INTELIFORM_PERL_DIR + '/making_software/making_software_perl/create_project.pl'
