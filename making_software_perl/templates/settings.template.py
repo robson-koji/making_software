@@ -1,3 +1,7 @@
+
+import os
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+
 ALLOWED_HOSTS = ['[% settings.hash_config.domain %]']
 DEBUG = True
 
@@ -39,9 +43,15 @@ ACCOUNT_SIGNUP_PASSWORD_VERIFICATION = True
 SOCIALACCOUNT_AUTO_SIGNUP =True
 
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, '[% settings.db_name %].sqlite3'),
+    }
+}
 
 
-
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -56,6 +66,8 @@ DATABASES = {
         'PORT': '',                     # Set to empty string for default. Not used with sqlite3.
     }
 }
+"""
+
 STATIC_URL = '/static_files/making_software/'
 STATICFILES_DIRS = (
     '/[% settings.hash_config.ultimate_dir %]/[% settings.project_name %]/static_files',

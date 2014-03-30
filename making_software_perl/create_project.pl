@@ -37,9 +37,8 @@ else{
 my $temp_dir = $config{temp_dir};
 my $dir_definitivo = $config{ultimate_dir};
 my $django_admin = $config{django_admin};
-my $postgres_host = $config{postgres_host};
-my $postgres_pwd = $config{postgres_pwd};
-my $postgres_user = $config{postgres_user};
+
+
 my $apache_instance = $config{apache_instance};
 my $subdomain_projetos = $config{subdomain_projetos}; 
 my $domain = $config{domain};
@@ -52,13 +51,33 @@ my $sistema = Sistema->new("$projeto_id", $making_software_home);
 my $project_name = $sistema->ProjectName();
 my @elementos_organizados =  (sort { $a->{posicao_menu} <=> $b->{posicao_menu} } @{$sistema->{elementos}});# sort menu as set by user
 
+&CriaProjeto($project_name);
+print ">>> Project has been created<br>\n";
+
+# Database configuration
+my $database = $config{database};
+my $db_pwd = $config{db_pwd};
+my $db_user = $config{db_user};
+my $postgres_host = $config{postgres_host}; # if postgres
+
+my $dbh_projeto;
+if ($config{database} eq 'postgres') {
+    $dbh_projeto = DBI->connect("dbi:Pg:dbname=making_software;host=$config{postgres_host}",
+                        $config{db_user},$config{db_pwd}, {AutoCommit => 0, RaiseError => 1});
+}
+elsif ($config{database} eq 'sqlite') {
+    $dbh_projeto = DBI->connect( "dbi:SQLite:$making_software_home/making_software/making_software_perl/$project_name/$project_name\.sqlite3",
+                                {AutoCommit => 0, RaiseError => 1}) || die "Cannot connect: $DBI::errstr";
+    
+}
+
+
 
 # Call functions to create the system.
 &CriaDB($project_name);
 print ">>> Database has been created<br>\n";
 
-&CriaProjeto($project_name);
-print ">>> Project has been created<br>\n";
+
 
 &CopiaDefaultApps($project_name);
 print ">>> Default apps get cloned<br>\n";
@@ -87,14 +106,22 @@ print ">>> Applications added to the project<br>\n";
 &SyncDB($project_name);
 print ">>> Database has been synchronized once again<br>\n";
 
+
+
+&MvDirDefinitivo($project_name); # Move projeto para dir definitivo
+print ">>> System physically moved<br>\n";
+
+
+
+
 &Edita_tabela_django_site($sistema, $project_name);
 print ">>> Site has been created<br>\n";
 
 &CriaPgsEstaticas($project_name);
 print ">>> Static pages have been created<br>\n";
 
-&MvDirDefinitivo($project_name); # Move projeto para dir definitivo
-print ">>> System physically moved<br>\n";
+
+
 
 &SetFakeData($project_name); #Django's auth system superuser
 print ">>> Mock data for tests set<br>\n";
@@ -327,8 +354,8 @@ sub EditaSettings_py{
                                     allowed_hosts =>  '', 
                                     email_host =>  '', 
                                     db_name =>  $project_name, 
-                                    db_user =>  $postgres_user, 
-                                    db_pass =>  $postgres_pwd,
+                                    db_user =>  $db_user, 
+                                    db_pass =>  $db_user,
                                     postgres_host => $postgres_host,
                                     project_name =>  $project_name, 
                                     secret_key => $original_settings_py_data->{secret_key},
@@ -338,7 +365,7 @@ sub EditaSettings_py{
                                   }
                     };
         
-        my $template_local = "$making_software_home/making_software/making_software_perl/templates/settings.py";
+        my $template_local = "$making_software_home/making_software/making_software_perl/templates/settings.template.py";
         my $template = Template->new(ABSOLUTE => 1,);
         $template->process($template_local, $vars, \$output)
             || die "Template process failed: ", $template->error(), "\n";
@@ -898,7 +925,7 @@ sub SyncDB{
     my ($project_name) = @_;
 
     ## syncdb
-    #print "Sincronizando DB<br>\n";
+    print "------------------->Sincronizando DB<br>\n";
     # o "echo no" eh para responder a pergunta de criacao de usuario master.
     #system ("/usr/bin/python echo no | $temp_dir/$project_name/manage.py syncdb");
     system ("chmod -R 755 $temp_dir/$project_name/manage.py");
@@ -954,12 +981,8 @@ sub Edita_tabela_django_site{
 #
 sub CriaDB{
     my ($project_name) = @_;
-    use DBI;
-    use Error qw(:try);
 
-    print "\n\n\n $postgres_user \t $project_name \n\n\n";
-    my $dbh_projeto = DBI->connect("DBI:Pg: ;host=$postgres_host",
-                                            $postgres_user, $postgres_pwd, {RaiseError => 1});   
+    #print "\n\n\n $db_user \t $project_name \n\n\n";
     
     #print "Excluindo DB<br>\n";
     $dbh_projeto->do( qq(DROP DATABASE IF EXISTS $project_name) );
@@ -973,12 +996,12 @@ sub CriaDB{
 
 sub SetFakeData{
     my ($project_name) = @_;
-    use DBI;
-    use Error qw(:try);
 
-    my $dbh_projeto = DBI->connect("DBI:Pg:dbname=$project_name ;host=$postgres_host",
-                                            $postgres_user, $postgres_pwd, {RaiseError => 1});    
+    # This is a connection to the database of the created system, not to making_software
+    my $dbh_projeto = DBI->connect( "dbi:SQLite:$dir_definitivo/$project_name/$project_name\.sqlite3",
+                                {AutoCommit => 0, RaiseError => 1}) || die "Cannot connect: $DBI::errstr";
     
+        
     my @username = ('bbb','ccc');
     
     foreach(@username){
@@ -987,7 +1010,8 @@ sub SetFakeData{
 
     sub Cadastra{
         my ($username) = @_;
-        my $senha = 'pbkdf2_sha256$10000$WMdA9sv15M7q$ublzLqjA/OqPwBwENrdLqtqUTNQffywLAYFHNCYJMuw=' ;
+        my $senha = 'pbkdf2_sha256$12000$lzLDvZFDRE37$oHn4BBIfNtn+n3IIZcgrR9w7sRyuvHx7zH7gsvG01kk='; # 123456
+        #my $senha = 'pbkdf2_sha256$10000$WMdA9sv15M7q$ublzLqjA/OqPwBwENrdLqtqUTNQffywLAYFHNCYJMuw=' ;
                 
         $sistema->{usuario}->{first_name} = "asdf" ; 
         $sistema->{usuario}->{last_name} = "asdf"; 
@@ -1009,13 +1033,14 @@ sub SetFakeData{
                                     $sistema->{usuario}->{last_name},
                                     $sistema->{usuario}->{email},
                                     $sistema->{usuario}->{is_staff},
-                                    $sistema->{usuario}->{is_active},
+                                    1,
+                                    #$sistema->{usuario}->{is_active},
                                     $sistema->{usuario}->{date_joined});
            $sth->finish;
         }
         else {
-           #print "Cannot connect to Postgres server: $DBI::errstr\n";
-           #print " db connection failed<br>\n";
+           print "Cannot connect to Database server: $DBI::errstr\n";
+           print " db connection failed<br>\n";
         }
     }
 
@@ -1035,11 +1060,6 @@ sub SetFakeData{
 
 sub SetSuperUser{
     my ($project_name) = @_;
-    use DBI;
-    use Error qw(:try);
-
-    my $dbh_projeto = DBI->connect("DBI:Pg:dbname=$project_name ;host=$postgres_host",
-                                            $postgres_user, $postgres_pwd, {RaiseError => 1});    
     
     $sistema->{usuario}->{first_name} = " " unless $sistema->{usuario}->{first_name}; 
     $sistema->{usuario}->{last_name} = " " unless $sistema->{usuario}->{last_name}; 
@@ -1056,14 +1076,18 @@ sub SetSuperUser{
 	   my $sth = $dbh_projeto->prepare($query);
 	   $sth->execute($sistema->{usuario}->{password},
                                 $sistema->{usuario}->{last_login},
-                                $sistema->{usuario}->{is_superuser},
+                                1,
+                                #$sistema->{usuario}->{is_superuser},
                                 $sistema->{usuario}->{username},
                                 $sistema->{usuario}->{first_name},
                                 $sistema->{usuario}->{last_name},
                                 $sistema->{usuario}->{email},
-                                $sistema->{usuario}->{is_staff},
-                                $sistema->{usuario}->{is_active},
+                                1,
+                                1,
+                                #$sistema->{usuario}->{is_staff},
+                                #$sistema->{usuario}->{is_active},
                                 $sistema->{usuario}->{date_joined});
+	   $sth->finish;
        
        my $query_set_site = "INSERT INTO django_site (domain, name) VALUES (?, ?)" ;
 	   my $sth_set_site = $dbh_projeto->prepare($query_set_site);
@@ -1073,8 +1097,8 @@ sub SetSuperUser{
 	   $sth_set_site->finish;
     }
 	else {
-	   #print "Cannot connect to Postgres server: $DBI::errstr\n";
-	   #print " db connection failed<br>\n";
+	   print "Cannot connect to Database server: $DBI::errstr\n";
+	   print " db connection failed<br>\n";
 	}
 }
 
@@ -1084,6 +1108,11 @@ sub CriaPgsEstaticas{
     my $boas_vindas = $sistema->{atributos}->{boas_vindas};
     my $instrucoes = $sistema->{atributos}->{instrucoes};
     
+    # This is a connection to the database of the created system, not to making_software
+    my $dbh_projeto = DBI->connect( "dbi:SQLite:$dir_definitivo/$project_name/$project_name\.sqlite3",
+                                {AutoCommit => 0, RaiseError => 1}) || die "Cannot connect: $DBI::errstr";
+    
+    
     # Criando duas paginas
     &GravaFlatPages($project_name, '/fb_app/bem-vindo/',$boas_vindas, 'flatpages/fb_app_default.html' );
     &GravaFlatPages($project_name, '/fb_app/instrucoes/',$instrucoes, 'flatpages/fb_app_default.html' );        
@@ -1092,20 +1121,21 @@ sub CriaPgsEstaticas{
 
     sub GravaFlatPages{
         my ($project_name, $url, $conteudo, $template_name) = @_;
-        use DBI;
-        use Error qw(:try);
     
         my $enable_comments = 0;
         #my $template_name = '';
         my $registration_required = 0;
         $registration_required = 1 if $url eq '/instrucoes/';
 
-        my $dbh_projeto = DBI->connect("DBI:Pg:dbname=$project_name ;host=$postgres_host",
-                                            $postgres_user, $postgres_pwd, {RaiseError => 1});    
-        
-        my $query = "INSERT INTO django_flatpage (url, title, content, enable_comments, template_name, registration_required )
-                        VALUES (?, ?, ?, ?, ?, ?) RETURNING id";
+        # RETURNING id doesn´t work on sqlite. This is a workaround.
+        my $query;
+        $query = "INSERT INTO django_flatpage (url, title, content, enable_comments, template_name, registration_required )
+                        VALUES (?, ?, ?, ?, ?, ?) RETURNING id" unless $database eq 'sqlite';
 
+        $query = "INSERT INTO django_flatpage (url, title, content, enable_comments, template_name, registration_required )
+                        VALUES (?, ?, ?, ?, ?, ?)";
+
+                        
         my $query2 = "INSERT INTO django_flatpage_sites(flatpage_id, site_id) VALUES (?, ?)";
     
     
@@ -1113,9 +1143,18 @@ sub CriaPgsEstaticas{
             # Primeiro cria registro na tabela flatpage
             my $sth = $dbh_projeto->prepare($query);
             $sth->execute( $url, $sistema->{atributos}->{nome}, $conteudo, 0, $template_name, $registration_required);
+            
+            
+            my $flatpage_id;
+
+            # Se foi no Postgres e tem o returning id, vai funcionar assim.            
             my $id = $sth->fetchrow_hashref();
-            my $flatpage_id = $id->{"id"};
-        	$sth->finish;           
+            $flatpage_id = $id->{"id"};
+        	
+            # Se nao funcionou acima, funciona aqui. Essa func eh para o sqlite recuperar o ultimo id inserido.
+            $flatpage_id = $dbh_projeto->func('last_insert_rowid') unless $flatpage_id;
+            
+            $sth->finish;           
         
             # Depois cria registro na tabela de relacionamento flatpage_id x site_id
             # Atencao no SITE_ID cravado como 1
@@ -1124,8 +1163,8 @@ sub CriaPgsEstaticas{
             $sth2->finish;           
         }
         else {
-           #print "Cannot connect to Postgres server: $DBI::errstr\n";
-           #print " db connection failed<br>\n";
+           print "Cannot connect to Database server: $DBI::errstr\n";
+           print " db connection failed<br>\n";
         }
         return 1;
     }    

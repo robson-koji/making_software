@@ -27,18 +27,6 @@ ultimate_dir => '/home/making_software/projects',
 django_admin => '/usr/bin/django-admin',
 
 
-# Postgres´ socket folder.
-# /var/run/postgresql/.s.PGSQL.5432 or /tmp or elsewhere
-postgres_host => '/var/run/postgresql/',
-
-
-# Password to connect to postgres.
-postgres_user => 'postgres',
-
-
-# Password to connect to postgres.
-postgres_pwd => '',
-
 
 # Instance of Apache that will contain the systems created by Making Software.
 # It is highly recommended to use one an specific instance for the systems created
@@ -64,4 +52,24 @@ domain => 'http://localhost:8001',
 # Some environments need the "echo no" answer, while other require an empty answer.
 # Select the best the case.
 echo => 'echo no |',
+
+
+### DATABASE ###
+
+# Set the database you will use.
+# Possible values are 'postgres' and 'sqlite'
+database => 'sqlite',
+
+# Password to connect to postgres.
+db_user => 'db_user',
+
+
+# Password to connect to postgres.
+db_pwd => 'db_pwd',
+
+
+# If you select postgres, set Postgres´ socket folder.
+# /var/run/postgresql/.s.PGSQL.5432, /tmp or elsewhere
+postgres_host => '/var/run/postgresql/',
+
 
