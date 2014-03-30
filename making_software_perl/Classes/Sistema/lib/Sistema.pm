@@ -1,3 +1,10 @@
+# This module creates the class for the system to be created.
+# It collects data from the database, feed by the front end. 
+# create_project.pl instanciates this class to manipulate data to the
+# physical creation of the Django system on the disk.
+
+
+
 package Sistema;
 
 use 5.010001;
@@ -21,8 +28,6 @@ sub new {
 	return $self;
 }
 
-
-
 #
 ## Metodos de classe
 #
@@ -45,9 +50,16 @@ sub db_connection {
             }
         }
     }
-    $self->{'dbh_making_software'} = DBI->connect("dbi:Pg:dbname=making_software;host=$config{postgres_host}",
-                            $config{postgres_user},$config{postgres_pwd}, {AutoCommit => 0, RaiseError => 1});
+    if ($config{database} eq 'postgres') {
+        $self->{'dbh_making_software'} = DBI->connect("dbi:Pg:dbname=making_software;host=$config{postgres_host}",
+                            $config{db_user},$config{db_pwd}, {AutoCommit => 0, RaiseError => 1});
+    }
+    elsif ($config{database} eq 'sqlite') {
+        $self->{'dbh_making_software'} = DBI->connect("dbi:SQLite:dbname=$making_software_dir/making_software/loopware/making_software.sqlite3","","");        
+    }
 }
+
+
 
 # Na inicializacao jah define o objeto a ser trabalhado, nao fazendo sentido portanto
 # criar uma classe Sistema.
