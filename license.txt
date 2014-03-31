@@ -1,0 +1,23 @@
+making_software is a system that has two main components, and use some third part packages.
+
+
+Third part packages
+===================
+Third part packages shall be used under their licenses.
+
+
+
+making_software components
+==========================
+
+loopware component 
+This is the Django layer of the making_software, it is licensed under the "Artistic License" and can be found in it's own license file in the Loopware package.
+
+making_software_perl component
+This is the Perl layer of the making_software, it is licensed under the LGPL, and can be found in it's own license file in the making_software perl package.
+
+
+
+script
+======
+install.sh script is free for all, public domain.
