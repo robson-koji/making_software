@@ -84,10 +84,14 @@ TIME_ZONE = 'America/Sao_Paulo'
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'pt-br'
 
+
+import os
+PROJECT_DIR = os.path.abspath(os.path.dirname(__file__))
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.path.join(PROJECT_DIR, 'making_software.sqlite3'),
     }
 }
 
