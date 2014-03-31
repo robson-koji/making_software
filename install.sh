@@ -1,5 +1,12 @@
 #!/bin/sh
 
+#
+##
+### Configure settings.py
+### At the moment configuring only making_software's path at settings.py
+##
+#
+
 # Get the path to this script, and by consequence, to making_software too.
 SCRIPT_PATH="$( cd "$(dirname "$0")" ; pwd -P )"
 
@@ -41,4 +48,15 @@ echo "$ULTIMATE_SETTINGS_CONTENT" | cat - $ULTIMATE_SETTINGS_FILE> temp && mv te
 
 
 
+#
+##
+### Install Ddjango Requirements
+##
+#
 
+# Gets pip path to install Django requirments 
+PIP_PATH=`/usr/bin/which pip`
+echo $PIP_PATH
+
+# Install Django requirements
+$PIP_PATH install -r /home/robson/projetos/making_software/loopware/requirements.txt 
