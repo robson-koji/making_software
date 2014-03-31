@@ -46,7 +46,7 @@ allauth.old
 #settings_production.py
 #faq.html
 #extend_models.py
-#loopware/loopware/settings.py
+loopware/loopware/settings.py
 
 
 

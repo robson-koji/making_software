@@ -1,13 +1,3 @@
-# -*- coding: utf-8 -*-
-
-
-# Local configurations
-
-# Making Software home folder
-# The folder where you unpack Making Software from Github
-# ie /home/your_name if you follow the tutorial to install
-INTELIFORM_PERL_DIR = '/home/your_home'
-
 # You don´t have to change here, unless you have changed the create_projet.pl location
 PERL_CREATE_PROJECT = INTELIFORM_PERL_DIR + '/making_software/making_software_perl/create_project.pl'
 
