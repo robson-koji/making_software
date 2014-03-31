@@ -1,0 +1,135 @@
+##########################################################
+#                                                        #
+#  NAO DAH PARA USAR WILDCARD QUE NAO SEJA NA EXTENSAO.  #
+#  QUER DIZER, EU NAO SEI COMO.                          #
+#  ENTAO COLOCA O NOME INTEIRO.                          #
+#                                                        #
+##########################################################
+
+
+
+#
+## Exclui os diretorios codigo_aberto.git e codigo_fechado.git
+#
+*.git
+
+#
+## Exclui do diretorio making_software_perl
+#
+**.bkp**
+leiame.txt
+#.gitignore
+config.pl
+config_devel.pl
+
+# Excluir no hook
+#config_prod.pl
+#hosts.pl
+#*.pl
+
+
+
+#
+## Exclui do diretorio loopware
+#
+#/loopware/
+/relacionamentos
+**.log
+**.bkp**
+**settings_development.py
+*.sqlite3
+allauth.new
+allauth.old
+
+
+# Excluir no hook
+#settings_production.py
+#faq.html
+#extend_models.py
+#loopware/loopware/settings.py
+
+
+
+#
+## Exclui do Perl
+#
+# default do https://github.com/github/gitignore/tree/master
+/blib/
+/.build/
+_build/
+cover_db/
+inc/
+Build
+!Build/
+Build.bat
+.last_cover_stats
+/Makefile
+/Makefile.old
+/MANIFEST.bak
+/META.yml
+/META.json
+/MYMETA.*
+nytprof.out
+/pm_to_blib
+*.o
+*.bs
+
+
+
+
+#
+## Exclui do Python
+#
+# default do https://github.com/github/gitignore/tree/master# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+
+# C extensions
+*.so
+
+# Distribution / packaging
+bin/
+build/
+develop-eggs/
+
+# Precisa deixar habilitado para incluir o diretorio dist/ do bootstrap
+#dist/
+eggs/
+# Precisa deixar habilitado para incluir o diretorio lib/ do Perl
+#lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+.tox/
+.coverage
+.cache
+nosetests.xml
+coverage.xml
+
+# Translations
+*.mo
+
+# Mr Developer
+.mr.developer.cfg
+.project
+.pydevproject
+
+# Rope
+.ropeproject
+
+# Django stuff:
+*.log
+*.pot
+
+# Sphinx documentation
+docs/_build/
