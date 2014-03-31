@@ -59,4 +59,4 @@ PIP_PATH=`/usr/bin/which pip`
 echo $PIP_PATH
 
 # Install Django requirements
-$PIP_PATH install -r /home/robson/projetos/making_software/loopware/requirements.txt 
+$PIP_PATH install -r "$SCRIPT_PATH/loopware/requirements.txt" 
