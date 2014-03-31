@@ -1,8 +1,7 @@
-
 Install Guide - Portuguese only
 ===============================
 
-<b>Manual de instalação</b><br>
+<b>Manual de instalação (EM PORTUGUÊS SOMENTE PARA INSTALAÇÃO COM POSTGRES)</b><br>
 PDF:<br>
 https://github.com/fortinbras/making_software/raw/master/Manual-Instalacao-PDF-PT_BR.pdf
 
