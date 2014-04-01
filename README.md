@@ -1,12 +1,10 @@
-Install Guide - Portuguese only
-===============================
+Install Guide
+=============
 
-<b>Manual de instalação (EM PORTUGUÊS SOMENTE PARA INSTALAÇÃO COM POSTGRES)</b><br>
-PDF:<br>
-https://github.com/fortinbras/making_software/raw/master/Manual-Instalacao-PDF-PT_BR.pdf
-
-TXT (caso você não tenha um leitor de PDF no seu servidor):<br>
-https://github.com/fortinbras/making_software/raw/master/Manual-Instalacao-TXT-PT_BR.txt
+Follow this document to install making_software.
+It will drive you to the default installation with sqlite database.
+This is the Django layer install instructions. Perl layer instructions to come.
+https://github.com/fortinbras/making_software/blob/master/install-guide-EN.txt
 
 
 Making Software
