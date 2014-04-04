@@ -25,7 +25,7 @@ INTELIFORM_PERL_DIR = '$PARENT_DIR'\n
 #echo $OPENING_STRING
 
 # Get the path to the django settings.py template file
-#echo "$SCRIPT_PATH/loopware/loopware/settings.template.py"
+echo "$SCRIPT_PATH/loopware/loopware/settings.template.py"
 SETTINGS_PATH="$SCRIPT_PATH/loopware/loopware/settings.template.py"
 
 # Get the content of the django settings.py template file
@@ -53,6 +53,9 @@ echo "$ULTIMATE_SETTINGS_CONTENT" | cat - $ULTIMATE_SETTINGS_FILE> temp && mv te
 ### Install Ddjango Requirements
 ##
 #
+
+# Need to check wether pip is installed or not
+# If not: apt-get install python-pip
 
 # Gets pip path to install Django requirments 
 PIP_PATH=`/usr/bin/which pip`
