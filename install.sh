@@ -28,8 +28,7 @@ OPENING_STRING="# -*- coding: utf-8 -*- \n\n
 # Making Software home folder 
 # The folder where you unpack Making Software from Github 
 # ie /home/your_name if you follow the tutorial to install
-INTELIFORM_PERL_DIR = '$PARENT_DIR'\n 
-"
+INTELIFORM_PERL_DIR = '$PARENT_DIR'
 #echo $OPENING_STRING
 
 # Get the path to the django settings.py template file
@@ -45,7 +44,7 @@ SETTINGS_TEMPLATE_FILE=`cat $SETTINGS_PATH`
 ULTIMATE_SETTINGS_CONTENT="$OPENING_STRING $SETTINGS_TEMPLATE_FILE"
 
 # Create the settings.py file
-touch "$SCRIPT_PATH/loopware/loopware/settings.py"
+echo '' >  "$SCRIPT_PATH/loopware/loopware/settings.py"
 
 # Handle the path to the ultimante settings.py file
 ULTIMATE_SETTINGS_FILE="$SCRIPT_PATH/loopware/loopware/settings.py"
