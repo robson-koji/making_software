@@ -1,5 +1,7 @@
 #!/bin/sh
 
+if [ ! -e $(python -c 'from distutils.sysconfig import get_makefile_filename as m; print m()') ]; then echo "Required python-devel is not installed. Aborting! Check how to install python-devel on your Operating System before proceed."; fi
+
 command -v virtualenv >/dev/null 2>&1 || { echo "Virtualenv not found. Aborting!
 It is recommeded to run this program in a virtualenv, check how to install on your Operating System.
 But if you want to install this program and all required packages on your root filesystem comment out this line inside this script and execute it again." >&2; exit 1; }
