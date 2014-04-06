@@ -3,10 +3,13 @@
 # In this case you have to fill the file hosts.pl and set the name of each file according to it´s environment.
 
 
+
 # For development environment, created systems will be temporarily deployed at
 # the sama making_software_perl directory.
 # If you have installed Making Software at your home dir, set you name here.
-temp_dir => '/home/your_name/making_software/making_software_perl',
+# temp_dir => '/home/your_name/making_software/making_software_perl',
+# temp_dir => '/home/making_software/tmp',
+
 
 
 # For production environment or an environment with Apache.
@@ -24,7 +27,7 @@ ultimate_dir => '/home/making_software/projects',
 
 
 # This is the Django binary that starts Django projects
-django_admin => '/usr/bin/django-admin',
+#django_admin => '/usr/bin/django-admin',
 
 
 
