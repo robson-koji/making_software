@@ -1,10 +1,10 @@
 #!/bin/sh
 
-comsdflkjasçdflkjasçdlfkjasçdlfkjaçdslfkjasçdlkfjaçlskdjfaçlksjdfmand -v virtualenv >/dev/null 2>&1 || { echo "Virtualenv not found. Aborting!\n
-It is recommeded to run this program in a virtualenv, check how to install on your Operating System.\n
+command -v virtualenv >/dev/null 2>&1 || { echo "Virtualenv not found. Aborting!
+It is recommeded to run this program in a virtualenv, check how to install on your Operating System.
 But if you want to install this program and all required packages on your root filesystem comment out this line inside this script and execute it again." >&2; exit 1; }
 
-command -v pip >/dev/null 2>&1 || { echo "PIP not found. Aborting!\n
+command -v pip >/dev/null 2>&1 || { echo "PIP not found. Aborting!
 I require pip but it's not installed. Check how to install pip on your Operating System and after you install pip, execute this script again." >&2; exit 1; }
 
 
