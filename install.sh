@@ -100,3 +100,11 @@ echo $PIP_PATH
 
 # Install Django requirements
 $PIP_PATH install -r "$SCRIPT_PATH/loopware/requirements.txt" 
+
+
+#
+## Running making_software
+#
+
+
+$SCRIPT_PATH/loopware/manage.py runserver

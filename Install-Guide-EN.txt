@@ -1,7 +1,5 @@
 This is a very straight to the point install guide for the making_software.
 
-
-
 1. Virtualenv
 It is not mandatory, but recommended. Not only because it is a good practice, but it turns easy the install process.
 Go anywhere in you filesystem and type mkvirtualenv making_software
@@ -26,14 +24,24 @@ Open your browser and go to http://localhost:8000
 
 
 4. Install the Perl layer of the making_software
-You should install Perl layer with sudo or root user, depending on your distribution.
-Execute ./install_perl_layer.sh
-If everything went fine you can deploy your created systems by typing ./create_project.pl <id of project> <making_software_home_dir>
+You have to install Perl layer with sudo or root user, depending on your Linux distribution.
+Run ./install_perl_layer.sh
 
 
+5. Create and deploy systems.
+If everything went fine you can create some systems. Open your browser, and point to localhost:8000
+Deploy your created systems by typing ./create_project.pl <id of project> <making_software_home_dir>
+You can access your created system on your brower at localhost port 8001. If port 8001 is being used, kill the processo listening on that port and run create_project.pl again.
 
 
-** For Centos 6 users - You need to install CPAN before run install_perl_layer.sh. Just run the command 'yum install cpan'
+Obs:
+1. You should install PIL or PILLOW in order to run making_software, since it has an image upload field. 
+	Installing this componentes varies a lot from different Linux distributions because many image libs are required.
+	Check your SO for informations.
+
+2. For Centos 6 users - You need to install CPAN before run install_perl_layer.sh. Just run the command 'yum install cpan'
+
+3. You must run first install.sh and after install_perl_layer.sh, because the first one configures some data for the second one.
 
 
 
