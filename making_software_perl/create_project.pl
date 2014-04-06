@@ -7,18 +7,28 @@ use Sistema;
 use Template;
 use Sys::Hostname;
 use HTML::Entities;
+#use File::Basename;
 
+use Cwd qw(cwd);
+
+my $path = cwd($0);
+$path .= '/';
 
 # $making_software_home - location of making_software_perl
 # It is used to find the configuration files hosts.pl and config.pl
 # And is used to find all the templates that ultimate create the system.
 my ($projeto_id, $making_software_home) = @ARGV;
 
+# Getting home folder automatically
+
+#$making_software_home = $path;
+
+
 my $host = hostname; # Get local hostname
 my %config; # Get configuration file
-my %hosts = do "$making_software_home/making_software/making_software_perl/hosts.pl"; # Get configured hosts if any
 my $prod;
 
+my %hosts = do "$making_software_home/making_software/making_software_perl/hosts.pl"; # Get configured hosts if any
 unless (%hosts){
     %config = do "$making_software_home/making_software/making_software_perl/config.pl";    
 }
@@ -30,7 +40,6 @@ else{
         }
     }
 }
-
 
 # Set environment variables
 # They can get direct from the hash %config
@@ -88,7 +97,7 @@ print ">>> Settings has been edited<br>\n";
 &SyncDB($project_name);
 print ">>> Database is synchronized<br>\n";
 
-&SetSuperUser($project_name); #Django's auth system superuser
+&SetSuperUser($project_name, $dbh_projeto); #Django's auth system superuser
 print ">>> Admin user has been created<br>\n";
 
 &StartApps($project_name); # Inicializa arquivos de configuracao
@@ -106,26 +115,17 @@ print ">>> Applications added to the project<br>\n";
 &SyncDB($project_name);
 print ">>> Database has been synchronized once again<br>\n";
 
-
-
 &MvDirDefinitivo($project_name); # Move projeto para dir definitivo
 print ">>> System physically moved<br>\n";
-
-
-
 
 &Edita_tabela_django_site($sistema, $project_name);
 print ">>> Site has been created<br>\n";
 
-&CriaPgsEstaticas($project_name);
+&CriaPgsEstaticas($project_name, $dbh_projeto);
 print ">>> Static pages have been created<br>\n";
 
-
-
-
-&SetFakeData($project_name); #Django's auth system superuser
+&SetFakeData($project_name, $dbh_projeto); #Django's auth system superuser
 print ">>> Mock data for tests set<br>\n";
-
 
 &Runserver($project_name);
 print ">>> Webserver is set, up and running<br>\n";
@@ -995,21 +995,21 @@ sub CriaDB{
 }
 
 sub SetFakeData{
-    my ($project_name) = @_;
+    my ($project_name, $dbh_projeto) = @_;
 
     # This is a connection to the database of the created system, not to making_software
-    my $dbh_projeto = DBI->connect( "dbi:SQLite:$dir_definitivo/$project_name/$project_name\.sqlite3",
+    $dbh_projeto = DBI->connect( "dbi:SQLite:$dir_definitivo/$project_name/$project_name\.sqlite3",
                                 {AutoCommit => 0, RaiseError => 1}) || die "Cannot connect: $DBI::errstr";
     
         
     my @username = ('bbb','ccc');
     
     foreach(@username){
-        &Cadastra($_);
+        &Cadastra($_, $dbh_projeto);
     }
 
     sub Cadastra{
-        my ($username) = @_;
+        my ($username, $dbh_projeto) = @_;
         my $senha = 'pbkdf2_sha256$12000$lzLDvZFDRE37$oHn4BBIfNtn+n3IIZcgrR9w7sRyuvHx7zH7gsvG01kk='; # 123456
         #my $senha = 'pbkdf2_sha256$10000$WMdA9sv15M7q$ublzLqjA/OqPwBwENrdLqtqUTNQffywLAYFHNCYJMuw=' ;
                 
@@ -1059,7 +1059,7 @@ sub SetFakeData{
 
 
 sub SetSuperUser{
-    my ($project_name) = @_;
+    my ($project_name, $dbh_projeto) = @_;
     
     $sistema->{usuario}->{first_name} = " " unless $sistema->{usuario}->{first_name}; 
     $sistema->{usuario}->{last_name} = " " unless $sistema->{usuario}->{last_name}; 
@@ -1104,23 +1104,23 @@ sub SetSuperUser{
 
 
 sub CriaPgsEstaticas{
-    my ($project_name) = @_;
+    my ($project_name, $dbh_projeto) = @_;
     my $boas_vindas = $sistema->{atributos}->{boas_vindas};
     my $instrucoes = $sistema->{atributos}->{instrucoes};
     
     # This is a connection to the database of the created system, not to making_software
-    my $dbh_projeto = DBI->connect( "dbi:SQLite:$dir_definitivo/$project_name/$project_name\.sqlite3",
+    $dbh_projeto = DBI->connect( "dbi:SQLite:$dir_definitivo/$project_name/$project_name\.sqlite3",
                                 {AutoCommit => 0, RaiseError => 1}) || die "Cannot connect: $DBI::errstr";
     
     
     # Criando duas paginas
-    &GravaFlatPages($project_name, '/fb_app/bem-vindo/',$boas_vindas, 'flatpages/fb_app_default.html' );
-    &GravaFlatPages($project_name, '/fb_app/instrucoes/',$instrucoes, 'flatpages/fb_app_default.html' );        
-    &GravaFlatPages($project_name, '/bem-vindo/',$boas_vindas, '');
-    &GravaFlatPages($project_name, '/instrucoes/', $instrucoes, '');
+    &GravaFlatPages($dbh_projeto, $project_name, '/fb_app/bem-vindo/',$boas_vindas, 'flatpages/fb_app_default.html' );
+    &GravaFlatPages($dbh_projeto, $project_name, '/fb_app/instrucoes/',$instrucoes, 'flatpages/fb_app_default.html' );        
+    &GravaFlatPages($dbh_projeto, $project_name, '/bem-vindo/',$boas_vindas, '');
+    &GravaFlatPages($dbh_projeto, $project_name, '/instrucoes/', $instrucoes, '');
 
     sub GravaFlatPages{
-        my ($project_name, $url, $conteudo, $template_name) = @_;
+        my ($dbh_projeto, $project_name, $url, $conteudo, $template_name) = @_;
     
         my $enable_comments = 0;
         #my $template_name = '';

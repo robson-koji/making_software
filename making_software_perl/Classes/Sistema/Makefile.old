@@ -11,10 +11,12 @@
 
 #   MakeMaker Parameters:
 
-#     AUTHOR => q[Koji <rbsnkjmr@>gmail.com]
+#     ABSTRACT_FROM => q[lib/Sistema.pm]
+#     AUTHOR => q[Robson <robson@>]
 #     BUILD_REQUIRES => {  }
 #     NAME => q[Sistema]
 #     PREREQ_PM => {  }
+#     VERSION_FROM => q[lib/Sistema.pm]
 
 # --- MakeMaker post_initialize section:
 
@@ -53,11 +55,11 @@ DIRFILESEP = /
 DFSEP = $(DIRFILESEP)
 NAME = Sistema
 NAME_SYM = Sistema
-VERSION = 
+VERSION = undef
 VERSION_MACRO = VERSION
-VERSION_SYM = 
+VERSION_SYM = undef
 DEFINE_VERSION = -D$(VERSION_MACRO)=\"$(VERSION)\"
-XS_VERSION = 
+XS_VERSION = undef
 XS_VERSION_MACRO = XS_VERSION
 XS_DEFINE_VERSION = -D$(XS_VERSION_MACRO)=\"$(XS_VERSION)\"
 INST_ARCHLIB = blib/arch
@@ -145,7 +147,7 @@ FULLEXT = Sistema
 BASEEXT = Sistema
 PARENT_NAME = 
 DLBASE = $(BASEEXT)
-VERSION_FROM = 
+VERSION_FROM = lib/Sistema.pm
 OBJECT = 
 LDFROM = $(OBJECT)
 LINKTYPE = dynamic
@@ -251,7 +253,7 @@ RCS_LABEL = rcs -Nv$(VERSION_SYM): -q
 DIST_CP = best
 DIST_DEFAULT = tardist
 DISTNAME = Sistema
-DISTVNAME = Sistema-
+DISTVNAME = Sistema-undef
 
 
 # --- MakeMaker macro section:
@@ -472,10 +474,10 @@ metafile : create_distdir
 	$(NOECHO) $(ECHO) Generating META.yml
 	$(NOECHO) $(ECHO) '--- #YAML:1.0' > META_new.yml
 	$(NOECHO) $(ECHO) 'name:               Sistema' >> META_new.yml
-	$(NOECHO) $(ECHO) 'version:            ' >> META_new.yml
+	$(NOECHO) $(ECHO) 'version:            undef' >> META_new.yml
 	$(NOECHO) $(ECHO) 'abstract:           ~' >> META_new.yml
 	$(NOECHO) $(ECHO) 'author:' >> META_new.yml
-	$(NOECHO) $(ECHO) '    - Koji <rbsnkjmr@>gmail.com' >> META_new.yml
+	$(NOECHO) $(ECHO) '    - Robson <robson@>' >> META_new.yml
 	$(NOECHO) $(ECHO) 'license:            unknown' >> META_new.yml
 	$(NOECHO) $(ECHO) 'distribution_type:  module' >> META_new.yml
 	$(NOECHO) $(ECHO) 'configure_requires:' >> META_new.yml
@@ -758,9 +760,9 @@ testdb_static :: testdb_dynamic
 # --- MakeMaker ppd section:
 # Creates a PPD (Perl Package Description) for a binary distribution.
 ppd :
-	$(NOECHO) $(ECHO) '<SOFTPKG NAME="$(DISTNAME)" VERSION="">' > $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) '<SOFTPKG NAME="$(DISTNAME)" VERSION="undef">' > $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '    <ABSTRACT></ABSTRACT>' >> $(DISTNAME).ppd
-	$(NOECHO) $(ECHO) '    <AUTHOR>Koji &lt;rbsnkjmr@&gt;gmail.com</AUTHOR>' >> $(DISTNAME).ppd
+	$(NOECHO) $(ECHO) '    <AUTHOR>Robson &lt;robson@&gt;</AUTHOR>' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '    <IMPLEMENTATION>' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <ARCHITECTURE NAME="i486-linux-gnu-thread-multi-5.10" />' >> $(DISTNAME).ppd
 	$(NOECHO) $(ECHO) '        <CODEBASE HREF="" />' >> $(DISTNAME).ppd

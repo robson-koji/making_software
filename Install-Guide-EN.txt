@@ -30,3 +30,10 @@ You should install Perl layer with sudo or root user, depending on your distribu
 Execute ./install_perl_layer.sh
 If everything went fine you can deploy your created systems by typing ./create_project.pl <id of project> <making_software_home_dir>
 
+
+
+
+** For Centos 6 users - You need to install CPAN before run install_perl_layer.sh. Just run the command 'yum install cpan'
+
+
+

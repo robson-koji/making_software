@@ -55,7 +55,7 @@ sub db_connection {
                             $config{db_user},$config{db_pwd}, {AutoCommit => 0, RaiseError => 1});
     }
     elsif ($config{database} eq 'sqlite') {
-        $self->{'dbh_making_software'} = DBI->connect("dbi:SQLite:dbname=$making_software_dir/making_software/loopware/making_software.sqlite3","","");        
+        $self->{'dbh_making_software'} = DBI->connect("dbi:SQLite:dbname=$making_software_dir/making_software/loopware/loopware/making_software.sqlite3","","");        
     }
 }
 
