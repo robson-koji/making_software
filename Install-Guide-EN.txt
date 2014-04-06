@@ -1,0 +1,32 @@
+This is a very straight to the point install guide for the making_software.
+
+
+
+1. Virtualenv
+It is not mandatory, but recommended. Not only because it is a good practice, but it turns easy the install process.
+Go anywhere in you filesystem and type mkvirtualenv making_software
+And after your virtual environment has been created type workon making_software
+
+2. Git
+You have to have Git installed on your computer to get the code.  
+git clone https://github.com/fortinbras/making_software.git
+
+3. Install the Django layer of the making_software
+After download the code from Git, go to the making_software folder and execute ./install.sh.
+This step will execute some tasks:
+Install requirements.txt
+Edit settings.py
+
+3.a - Load database
+Go to making_software/loopware folder and type ./manage.py syncdb.
+
+3.b - Run Django’s http server
+If all runs as expected, making_software has been installed. Run the server typing ./manage.py runserver
+Open your browser and go to http://localhost:8000
+
+
+4. Install the Perl layer of the making_software
+You should install Perl layer with sudo or root user, depending on your distribution.
+Execute ./install_perl_layer.sh
+If everything went fine you can deploy your created systems by typing ./create_project.pl <id of project> <making_software_home_dir>
+
