@@ -107,4 +107,5 @@ $PIP_PATH install -r "$SCRIPT_PATH/loopware/requirements.txt"
 #
 
 
+$SCRIPT_PATH/loopware/manage.py syncdb
 $SCRIPT_PATH/loopware/manage.py runserver
