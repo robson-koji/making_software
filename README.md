@@ -4,7 +4,7 @@ Install Guide
 Follow this document to install making_software. <Br>
 It will drive you to the default installation with sqlite database.<Br>
 This document has instructions to install both layers, Django and Perl. If you have doubts, send a message please.
-https://github.com/fortinbras/making_software/blob/master/install-guide-EN.txt
+https://github.com/fortinbras/making_software/blob/master/Install-Guide-EN.txt
 
 
 Making Software
